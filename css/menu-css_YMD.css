@@ -1,0 +1,49 @@
+@media screen and (min-width: 768px) {
+/*臺頭字體 抬頭寬為固定圖片*/
+a{text-decoration:none;}
+.menu ul li {display:block;
+	padding-top:2px;margin-bottom:5px;
+	background: url(../images/zakladka.png) top left no-repeat;
+	list-style:none;overflow:visible;}
+
+.menu ul li a {display:block;height:34px;;
+	margin-top:0px;padding-top:10px;padding-left:35px;
+	font-size:30px;color:#82846f;outline:none;}
+.menu ul li .active {background:url(../images/on.png) top right no-repeat;}
+
+
+.menu ul li .inactive {background:url(../images/off.png) top right no-repeat;}
+.menu ul li ul {display:none; margin-top:10px;margin-bottom:20px; }
+.menu ul li ul li ul {margin-bottom:5px;}
+.menu ul li ul li {display:block;background:none;
+	font-size:12px;list-style:circle;color:#000000;
+	margin-bottom:0px;margin-top:10px;padding-top:0px;
+	padding-bottom:0px;padding-left:1px;margin-left:35px;}
+/*內容字體*/
+.menu ul li ul li a {background:none;font-size:20px;height:20px;color:#000000;padding-left:0px; }
+}
+
+@media screen and (max-width: 768px) {
+.menu ul li {display:block;
+	padding-top:2px;margin-bottom:5px;
+	background: url(../images/zakladka.png) top left no-repeat;
+	list-style:none;overflow:visible;}
+
+.menu ul li a {display:block;height:34px; 
+	margin-top:0px;padding-top:10px;padding-left:35px;
+	font-size:18px;color:#82846f;outline:none;}
+.menu ul li .active {background:url(../images/on.png) top right no-repeat;}
+
+
+.menu ul li .inactive {background:url(../images/off.png) top right no-repeat;}
+.menu ul li ul {display:none; margin-top:10px;margin-bottom:20px; }
+.menu ul li ul li ul {margin-bottom:5px;}
+.menu ul li ul li {display:block;background:none;
+	font-size:12px;list-style:circle;color:#000000;
+	margin-bottom:0px;margin-top:10px;padding-top:0px;
+	padding-bottom:0px;padding-left:1px;margin-left:15px;}
+/*內容字體*/
+.menu ul li ul li a {background:none;font-size:15px;height:30px;color:#000000;padding-left:0px; }
+
+
+}

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>福住建設股份有限公司</title>
+    <link href="css/bootstrap1.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link href="css/bxslider.css" rel="stylesheet">
+    <link href="css/style-cloud.css" rel="stylesheet">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bxslider.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/bootstrap.js"></script>
+  </head>
+<body>
+
+<div>
+<header>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+            <a href="javascript:;"><img  src="images/logo.png" class="logo" alt="福住建設公司"/></a>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-nav-c">
+            <li class="dropdown"><a href="cloud-index.html">雲端資料庫系統</a>
+              <a href="javascript:;" id="app_menudown" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-menu-down btn-xs"></span></a>
+                <ul class="dropdown-menu nav_small" role="menu">
+                  <li><a href="javascript:;">相片影音檔</a></li>
+                  <li><a href="javascript:;">合約資料</a></li>
+                  <li><a href="iso-index.html">ISO工務表單</a></li>
+                  <li><a href="safty-index.html">安衛查驗表</a></li>
+                  <li><a href="quality-index.html">品質改善表</a></li>
+                  <li><a href="casefile.php">工程資料</a></li>
+                  <li><a href="javascript:;">施工圖說</a></li>
+                  <li><a href="javascript:;">施工日誌</a></li>
+                  <li><a href="javascript:;">收發文資料</a></li>
+                  <li><a href="javascript:;">估驗計價</a></li>
+                </ul>
+            </li>      
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+</header>
+</div>
+
+<div class="product_bg">
+  <div class="container">    
+    <div class="row">
+      <div>
+        <br><br><br>
+      </div>
+        <!--md=電腦 mm=手機 共12格 -->
+      <div class="col-xs-12 col-sm-12 col-md-12">
+       <form action="qualitysave.php" method="post" autocomplete="off">
+        <div class="product_index">
+          <diV>
+                  <table class="New" class="col-sm-4 col-md-12 col-mm-12" >
+                    <tbody >
+                      <tr>
+                        <td>工程編號：<br/>
+                          <input autocomplete="off" name="No" required="" type="text" />
+                          </td>
+                        <td>工程名稱：<!--秀出資料庫內容 --></td>
+                      </tr>
+                      <tr>
+                        <td>本單編號：<!--想自動輸出-->
+                        <br/><input autocomplete="off" name="No" required="" type="text" /><!-- 顯示mysql row+1 --></td>
+                        <td>改善確認：<br/><select name="how">
+                        <option ></option>
+                        <option >已改善</option>
+                        <option >未改善</option>
+                        <option >未合格</option>
+                        </select></td>
+                      </tr>
+                      <tr>
+                        <td>查驗日期：<br><input  type="date" required name="today"></td>
+                        <td>改善期限：<br><input  type="date" required name="someday">前</td>
+                      </tr>
+                      <tr>
+                        <td>查驗位置：<br><input type="text" required autocomplete="off" name="No" />樓
+                        <br><input type="text" required autocomplete="off" name="No" />(其他備註)</td>
+                        <td>缺失廠商：<br><select name="how">
+                        <option value="Taipei">紀錄照片</option>
+                        <option value="Taoyuan">11</option>
+                        <option value="Hsinchu">11</option>
+                        <option value="Miaoli">11</option>
+                        </select></td>
+                      <tr>
+                        <td>現況說明：<br><textarea rows="3" required name="speak" cols="25"></textarea></td>
+                        <td>改善建議：<br><textarea rows="3" name="feedback" cols="25"></textarea></td>
+                      </tr>
+                      <tr>
+                        <td>施工現況<!--插入圖片-->
+                        <img id="output" required width="100%" style="display:none">
+                        <input type="file" onchange="openFile(event)">
+                          <script type="text/javascript">
+                                      function openFile(event){
+                                        var input = event.target; //取得上傳檔案
+                                        var reader = new FileReader(); //建立FileReader物件
+                                        reader.readAsDataURL(input.files[0]); //以.readAsDataURL將上傳檔案轉換為base64字串
+                                        reader.onload = function(){ //FileReader取得上傳檔案後執行以下內容
+                                        var dataURL = reader.result; //設定變數dataURL為上傳圖檔的base64字串
+                                        $('#output').attr('src', dataURL).show(); //將img的src設定為dataURL並顯示
+                                        };
+                                      }
+                            </script></td>
+                      </tr>
+                    </tbody>
+                    </table>
+                    </div>
+              <br>
+              <div style="font-size:25px;" class="col-sm-4 col-md-12 col-mm-12"> 
+              <button type="submit" class="button button-block" name="save" />確定送出</button>
+              <a href="quality-index.html"><span style="float: right;" >回上一頁</span></div>
+       </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <footer>
+    <div class="copyright">
+      <a href="https://goo.gl/62oaHV" target="_blank">地址：台北市中山區龍江路五十九號一樓</a>
+      <br>電話：(02)2752-1313 &nbsp;傳真：(02)2752-1310&nbsp;
+      <p class="copyright_p">CopyRight 2017 All Right Reserved 福住建設公司</p>
+    </div>
+  </footer>
+
+    <script src="js/jquery.smoove.min.js"></script>
+    <script>$('.product_head,.product_img,.process,.about_left,.about_img,.news_head,.news_index').smoove({offset:'10%'});</script>
+  <nav class="navbar navbar-default navbar-fixed-bottom footer_nav">
+
+          <div class="foot_nav"><a href="tel:0227521313">
+          <span class="glyphicon glyphicon-phone btn-lg" aria-hidden="true"></span>致電</a>
+          </div>
+          <div class="foot_nav" aria-hidden="true" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="glyphicon glyphicon-th-list btn-lg"></span>分類</div>
+          <div class="foot_nav">
+            <a id="gototop" href="javascript:;">
+            <span class="glyphicon glyphicon-circle-arrow-up btn-lg" aria-hidden="true"></span>回頂部</a>
+          </div>
+  </nav>
+
+    <link rel="stylesheet" type="text/css" href="css/online.css" />
+
+<div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_tqq"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a href="javascript:;" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+</div>
+<script type="text/javascript" src="js/jia.js" charset="utf-8"></script>
+
+                   <div class="arrowPanel">
+                        <div class="arrow01"></div>
+                        <div class="arrow02"></div>
+                   </div>
+
+         
+    <script type="text/javascript" src="js/online.js"></script>
+  </body>
+</html><script type="text/javascript">
+var winHeight=200;
+var timer=null;
+function show(){
+    document.getElementById("popWin").style.display="block"; 
+    timer=setInterval("lift(5)",2);
+} 
+function hid(){
+        timer=setInterval("lift(-5)",2);
+} 
+function lift(n) { 
+    var w=document.getElementById("popWin"); 
+    var h=parseInt(w.style.height||w.currentStyle.height);
+    if (h<winHeight && n>0 || h>1 && n<0){
+        w.style.height=(h+n).toString()+"px"; 
+    } 
+    else
+        {
+        w.style.display=(n>0?"block":"none");
+                clearInterval(timer);
+    } 
+} 
+window.onload=function(){ 
+        setTimeout("show()",1000);
+} 
+</script>
