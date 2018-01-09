@@ -3,18 +3,25 @@
     if ($_GET['success'] == '1') {
         echo '<div class="alert alert-info" role="alert">註冊成功</div>';
     }
+    if ($_GET['error'] == '1') {
+        echo '<div class="alert alert-danger" role="alert">註冊失敗</div>';
+    }
 ?>
 <div>
     <div class="box-center">
         註冊頁面
         <form action='/model/user.php' method='post'>
             <label>
-                帳號:
+                員工編號:
                 <input type="text" name="acc">
             </label>
             <label>
                 密碼：
                 <input type="password" name="ps">
+            </label>
+            <label>
+                Email：
+                <input type="email" name="email">
             </label>
             <label>
                 註冊類型：
