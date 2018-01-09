@@ -1,5 +1,17 @@
 <?php
     error_reporting(E_ERROR | E_WARNING | E_PARSE);
-    if ($_GET['page'] == 'register') {
-        require_once './page/register.php';
+    if (!empty($_COOKIE['userId']) && !empty($_COOKIE['role'])) {
+        $role = $_COOKIE['role'];
+        if ($role == 1) {
+            require_once './page/admin.php';
+        } else {
+            require_once './page/report.php';
+        }
+    } else {
+        if ($_GET['page'] == 'register') {
+            require_once './page/register.php';
+        }
+        if ($_GET['page'] == 'login') {
+            require_once './page/login.php';
+        }
     }

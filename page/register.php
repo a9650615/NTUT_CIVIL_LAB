@@ -8,9 +8,13 @@
     }
 ?>
 <div>
+    <a href="?page=register">註冊</a>
+    <a href="?page=login">登入</a>
+</div>
+<div>
     <div class="box-center">
         註冊頁面
-        <form action='/model/user.php' method='post'>
+        <form action='/model/user.php?action=register' method='post'>
             <label>
                 員工編號:
                 <input type="text" name="acc">
