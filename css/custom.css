@@ -1,0 +1,10 @@
+.product_bg {
+    margin-top: 100px;
+    min-height: 500px;
+}
+
+.box-center {
+    width: 300px;
+    margin: auto;
+    padding: 10px;
+}
