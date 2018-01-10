@@ -3,7 +3,11 @@
     if (!empty($_COOKIE['userId']) && !empty($_COOKIE['role'])) {
         $role = $_COOKIE['role'];
         if ($role == 1) {
-            require_once './page/admin.php';
+            if ($_GET['page'] == 'create_quality') {
+                require_once './page/quality-create.php';
+            }
+            else
+                require_once './page/admin.php';
         } else {
             require_once './page/report.php';
         }

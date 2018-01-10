@@ -1,6 +1,6 @@
 <?php include './component/header.php'; ?>
 工程項目列表
-<a href="?page=create">建立</a>
+<a href="?page=create_quality">建立</a>
 <table class="table">
 <thead>
     <tr>
