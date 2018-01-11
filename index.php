@@ -1,5 +1,8 @@
 <?php
-    error_reporting(E_ERROR | E_WARNING | E_PARSE);
+    // error_reporting(E_ERROR | E_WARNING | E_PARSE);
+    // error_reporting(E_ALL);
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
     if (!empty($_COOKIE['userId']) && !empty($_COOKIE['role'])) {
         $role = $_COOKIE['role'];
         if ($role == 1) {
