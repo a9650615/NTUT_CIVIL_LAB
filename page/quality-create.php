@@ -3,27 +3,27 @@
     <div class="row">
         <!--md=電腦 mm=手機 共12格 -->
       <div class="col-xs-12 col-sm-12 col-md-12">
-        <form action="qualitysave.php" method="post" autocomplete="off">
+        <form action="/model/quality_list.php?action=create" method="post" enctype="multipart/form-data">
             <div class="product_index">
                 <table class="New">
                     <tbody>
                         <tr>
                             <td>工程編號：<br/>
-                            <input autocomplete="off" name="no" required="" type="text" />
+                            <input autocomplete="off" name="no" required type="text" />
                             </td>
                             <td>
                                 工程名稱：<!--秀出資料庫內容 -->
-                                <input autocomplete="off" name="name" required="" type="text" />
+                                <input autocomplete="off" name="name" required type="text" />
                             </td>
                         </tr>
                         <tr>
                             <td>本單編號：<!--想自動輸出-->
-                            <br/><input autocomplete="off" name="order" required="" type="text" /><!-- 顯示mysql row+1 --></td>
+                            <br/><input autocomplete="off" name="order" required type="text" /><!-- 顯示mysql row+1 --></td>
                             <td>改善確認：<br/>
                             <select name="status">
-                                <option>未改善</option>
-                                <option>已改善</option>
-                                <option>未合格</option>
+                                <option value="0">未改善</option>
+                                <option value="1">已改善</option>
+                                <option value="2">未合格</option>
                             </select></td>
                         </tr>
                         <tr>
@@ -32,7 +32,7 @@
                         </tr>
                         <tr>
                             <td>查驗位置：<br><input type="text" required autocomplete="off" name="floor" />樓
-                            <br><input type="text" required autocomplete="off" name="other" />(其他備註)</td>
+                            <br><input type="text" autocomplete="off" name="other" />(其他備註)</td>
                             <td>
                                 缺失廠商：<br>
                                 <select name="how">
@@ -49,7 +49,7 @@
                         <tr>
                             <td>施工現況<!--插入圖片-->
                                 <img id="output" required width="100%" style="display:none" />
-                                <input type="file" onchange="openFile(event)" />
+                                <input type="file" name="image" onchange="openFile(event)" />
                                 <script type="text/javascript">
                                         function openFile(event){
                                             var input = event.target; //取得上傳檔案
