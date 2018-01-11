@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
   <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>福住建設股份有限公司</title>
@@ -13,7 +13,6 @@
     <script src="js/common.js"></script>
     <script src="js/bootstrap.js"></script>
   <!--下拉選單引入-->
-  <meta charset="utf-8">
   <script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
   <script type="text/javascript" src="js/menu_min.js"></script>
   <script type="text/javascript">

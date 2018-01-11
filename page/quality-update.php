@@ -1,50 +1,52 @@
 <?php include './component/header.php'; ?>
+<?php
+    include './model/sql.php';
+    $sql = mysqli_query($conn, "SELECT * FROM quality_list WHERE ID={$_GET['id']}");
+    $data = $sql->fetch_assoc();
+?>
 <div class="container">    
     <div class="row">
         <!--md=電腦 mm=手機 共12格 -->
       <div class="col-xs-12 col-sm-12 col-md-12">
-        <form action="/model/quality_list.php?action=create" method="post" enctype="multipart/form-data">
+        <form action="/model/quality_list.php?action=update" method="post" enctype="multipart/form-data">
             <div class="product_index">
                 <table class="New">
                     <tbody>
                         <tr>
-                            <td>工程編號：<br/>
-                            <input autocomplete="off" name="no" required type="text" />
+                            <td>工程編號：<?=$data['No']?><br/>
                             </td>
                             <td>
-                                工程名稱：<!--秀出資料庫內容 -->
-                                <input autocomplete="off" name="name" required type="text" />
+                                工程名稱：<?=$data['name']?><!--秀出資料庫內容 -->
                             </td>
                         </tr>
                         <tr>
-                            <td>本單編號：<!--想自動輸出-->
-                            <br/><input autocomplete="off" name="order" required type="text" /><!-- 顯示mysql row+1 --></td>
-                            <td>改善確認：<br/>
-                            <select name="status">
-                                <option value="0">未改善</option>
-                                <option value="1">已改善</option>
-                                <option value="2">未合格</option>
-                            </select></td>
+                            <td>本單編號：<?=$data['order_id']?><!--想自動輸出-->
+                            <br/><!-- 顯示mysql row+1 --></td>
+                            <td>改善確認：
+                            <?php
+                                if ($data['status'] == 0) {
+                                    echo "未改善";
+                                } else if ($data['status'] == 1) {
+                                    echo "已改善";
+                                } else {
+                                    echo "未合格";
+                                }
+                            ?>
+                            </td>
                         </tr>
                         <tr>
-                            <td>查驗日期：<br><input  type="date" required name="check_date"></td>
-                            <td>改善期限：<br><input  type="date" required name="resolve_date">前</td>
+                            <td>查驗日期：<?=$data['check_date']?></td>
+                            <td>改善期限：<?=$data['resolve_date']?><br>前</td>
                         </tr>
                         <tr>
-                            <td>查驗位置：<br><input type="text" required autocomplete="off" name="floor" />樓
-                            <br><input type="text" autocomplete="off" name="other" />(其他備註)</td>
+                            <td>查驗位置：<?=$data['floor']?>樓
+                            <br>(其他備註)<?=$data['now_status']?></td>
                             <td>
-                                缺失修正方式：<br>
-                                <select name="how">
-                                    <option value="Taipei">紀錄照片</option>
-                                    <option value="Taoyuan">11</option>
-                                    <option value="Hsinchu">11</option>
-                                    <option value="Miaoli">11</option>
-                                </select>
+                                缺失修正方式：
                             </td>
                         <tr>
-                            <td>現況說明：<br><textarea rows="3" required name="now_status" cols="25"></textarea></td>
-                            <td>改善建議：<br><textarea rows="3" name="feedback" cols="25"></textarea></td>
+                            <td>現況說明：<?=$data['now_status']?></td>
+                            <td>改善建議：<?=$data['feedback']?></td>
                         </tr>
                         <tr>
                             <td>施工現況<!--插入圖片-->
@@ -68,7 +70,7 @@
             </div>
             <br>
             <div style="font-size:25px;" class="col-sm-4 col-md-12 col-mm-12"> 
-                <button type="submit" class="button button-block" name="save" />確定送出</button>
+                <button type="submit" class="button button-block" name="save" />確定更新</button>
                 <a href="?page="><span style="float: right;" >回上一頁</span>
             </div>
         </form>

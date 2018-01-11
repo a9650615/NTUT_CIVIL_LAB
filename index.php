@@ -12,7 +12,12 @@
             else
                 require_once './page/admin.php';
         } else {
-            require_once './page/report.php';
+            if ($_GET['page'] == 'update_quality') {
+                require_once './page/quality-update.php';
+            }
+            else {
+                require_once './page/report.php';
+            }
         }
     } else {
         if ($_GET['page'] == 'register') {
