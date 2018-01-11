@@ -18,17 +18,19 @@ foreach ($keys as $key) {
 
 if ($has_all_data && $_GET['action'] == 'create') {
     $target_dir = "../upload_space/";
-    $target_file = $target_dir . basename($_FILES["image"]["name"]);
     $uploadOk = 1;
-    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    $imageFileType = strtolower(pathinfo($_FILES["image"]["name"],PATHINFO_EXTENSION));
+    // $target_file = $target_dir . basename($_FILES["image"]["name"]);
+    $file_name = md5(microtime()) .'.'. $imageFileType;
+    $target_file = $target_dir . $file_name;
     if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
         // echo "The file ". basename( $_FILES["image"]["name"]). " has been uploaded.";
     } else {
         // echo "Sorry, there was an error uploading your file.";
     }
     $sql = mysqli_query($conn, "INSERT INTO 
-    quality_list(`No`, `name`, `order_id`, `status`, `check_date`, `resolve_date`, `floor`, `other`, `now_status`, `feedback`)
-    VALUES ('{$_POST['no']}', '{$_POST['name']}', '{$_POST['order']}', '{$_POST['status']}', '{$_POST['check_date']}', '{$_POST['resolve_date']}', '{$_POST['floor']}', '{$_POST['other']}', '{$_POST['now_status']}', '{$_POST['feedback']}')
+    quality_list(`No`, `name`, `order_id`, `status`, `check_date`, `resolve_date`, `floor`, `other`, `now_status`, `feedback`, `now_image`)
+    VALUES ('{$_POST['no']}', '{$_POST['name']}', '{$_POST['order']}', '{$_POST['status']}', '{$_POST['check_date']}', '{$_POST['resolve_date']}', '{$_POST['floor']}', '{$_POST['other']}', '{$_POST['now_status']}', '{$_POST['feedback']}', '{$file_name}')
     ");
     // Check if image file is a actual image or fake image
     // $check = getimagesize($_FILES["image"]["tmp_name"]);

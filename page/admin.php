@@ -11,6 +11,7 @@
     <tr>
         <th>工程名稱</th>
         <th>狀態</th>
+        <th>編輯</th>
     </tr>
 </thead>
 <tbody>
@@ -25,6 +26,9 @@
             <tr>
                 <td><?=$data['name']?></td>
                 <td><?=$status?></td>
+                <td>
+                    <a href="">刪除</a>
+                </td>
             </tr>
             <?
         }
