@@ -4,8 +4,8 @@
     // error_reporting(E_ALL);
     ini_set('display_errors', 1);
     if ($_GET['page'] == 'logout') {
-        setcookie('role', '');
-        setcookie('userId', '');
+        setcookie('role', '', time()+3600*24, '/', $_SERVER['SERVER_NAME']);
+        setcookie('userId', '', time()+3600*24, '/', $_SERVER['SERVER_NAME']);
         header('Location: /');
     }
     else
