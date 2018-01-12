@@ -25,7 +25,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>本單編號：<!--想自動輸出--><input autocomplete="off" name="order" readonly required type="text" value="<?=$data['order_id']?>" /><!-- 顯示mysql row+1 --></td>
+                            <td>本單編號：<!--想自動輸出--><input autocomplete="off" name="order" readonly required type="text" value="<?=$_GET['id']?$data['order_id']:uniqid(rand())?>" /><!-- 顯示mysql row+1 --></td>
                             <td>改善確認：<br/>
                             <select name="status">
                                 <option value="0" <?=($data['status']=='0')?"selected":""?>>未改善</option>
