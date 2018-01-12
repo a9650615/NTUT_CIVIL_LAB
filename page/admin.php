@@ -1,11 +1,27 @@
 <?php include './component/header.php'; ?>
 <?php
     include './model/sql.php';
-    $sql = mysqli_query($conn, "SELECT * FROM quality_list ORDER BY ID DESC");
+    $sql_string = "SELECT * FROM quality_list";
+    if ((string) $_GET['filter'] != '') {
+        $sql_string = $sql_string . " WHERE status='{$_GET['filter']}'";
+    }
+    $sql = mysqli_query($conn, $sql_string);
 ?>
 <div>
-    工程項目列表
+    <h4 style="display: inline-block;">工程項目列表</h4>
     <a href="?page=create_quality">建立</a>
+    <div>
+        <form method="get" actions="?">
+            篩選 : 
+            <select name="filter">
+                <option></option>
+                <option value="0" <?=$_GET['filter']=='0'?"selected":""?>>未改善</option>
+                <option value="1" <?=$_GET['filter']=='1'?"selected":""?>>已改善</option>
+                <option value="2" <?=$_GET['filter']=='2'?"selected":""?>>未合格</option>
+            </select>
+            <input type="submit" value="篩選" />
+        </form>
+    </div>
     <table class="table" style="margin:auto;">
         <thead>
             <tr>
