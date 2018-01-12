@@ -1,4 +1,12 @@
 <?php include './component/header.php'; ?>
+<?php
+    include './model/sql.php';
+    $data = array();
+    if ($_GET['id']) {
+        $sql = mysqli_query($conn, "SELECT * FROM quality_list WHERE ID={$_GET['id']}");
+        $data = $sql->fetch_assoc();
+    }
+?>
 <div class="container">    
     <div class="row">
         <!--md=電腦 mm=手機 共12格 -->
@@ -9,11 +17,11 @@
                     <tbody>
                         <tr>
                             <td>工程編號：<br/>
-                            <input autocomplete="off" name="no" required type="text" />
+                            <input autocomplete="off" name="no" required type="text" value="<?=$data['No']?>" />
                             </td>
                             <td>
                                 工程名稱：<!--秀出資料庫內容 -->
-                                <input autocomplete="off" name="name" required type="text" />
+                                <input autocomplete="off" name="name" required type="text" value="<?=$data['name']?>" />
                             </td>
                         </tr>
                         <tr>
@@ -27,12 +35,12 @@
                             </select></td>
                         </tr>
                         <tr>
-                            <td>查驗日期：<br><input  type="date" required name="check_date"></td>
-                            <td>改善期限：<br><input  type="date" required name="resolve_date">前</td>
+                            <td>查驗日期：<br><input value="<?=$data['check_date']?>" type="date" required name="check_date"></td>
+                            <td>改善期限：<br><input value="<?=$data['resolve_date']?>" type="date" required name="resolve_date">前</td>
                         </tr>
                         <tr>
-                            <td>查驗位置：<br><input type="text" required autocomplete="off" name="floor" />樓
-                            <br><input type="text" autocomplete="off" name="other" />(其他備註)</td>
+                            <td>查驗位置：<br><input type="text" value="<?=$data['floor']?>" required autocomplete="off" name="floor" />樓
+                            <br><input value="<?=$data['other']?>" type="text" autocomplete="off" name="other" />(其他備註)</td>
                             <td>
                                 缺失修正方式：<br>
                                 <select name="how">
@@ -43,8 +51,8 @@
                                 </select>
                             </td>
                         <tr>
-                            <td>現況說明：<br><textarea rows="3" required name="now_status" cols="25"></textarea></td>
-                            <td>改善建議：<br><textarea rows="3" name="feedback" cols="25"></textarea></td>
+                            <td>現況說明：<br><textarea rows="3" required name="now_status" cols="25"><?=$data['now_status']?></textarea></td>
+                            <td>改善建議：<br><textarea rows="3" name="feedback" cols="25"><?=$data['feedback']?></textarea></td>
                         </tr>
                         <tr>
                             <td>施工現況<!--插入圖片-->

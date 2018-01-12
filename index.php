@@ -9,6 +9,9 @@
             if ($_GET['page'] == 'create_quality' || $_GET['page'] == 'update_quality') {
                 require_once './page/quality-create.php';
             }
+            else if ($_GET['page'] == 'check_status') {
+                require_once './page/check-page.php';
+            }
             else
                 require_once './page/admin.php';
         } else {

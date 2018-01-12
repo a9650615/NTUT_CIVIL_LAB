@@ -5,6 +5,7 @@
     if ((string) $_GET['filter'] != '') {
         $sql_string = $sql_string . " WHERE status='{$_GET['filter']}'";
     }
+    $sql_string = $sql_string . " ORDER BY ID DESC";
     $sql = mysqli_query($conn, $sql_string);
 ?>
 <div>
@@ -26,7 +27,7 @@
         <thead>
             <tr>
                 <th>工程名稱</th>
-                <th>狀態<span style="float:right;">* (改善現況已更新)</span></th>
+                <th width="30%">狀態<span style="float:right;">* (改善現況已更新)</span></th>
                 <th>編輯</th>
             </tr>
         </thead>
@@ -44,7 +45,7 @@
                         <td><?=$status?>
                         <?php
                             if ($data['resolve_image'] != "")
-                            echo "*";
+                                echo "<span style='color:red;'>*</span><a href='?page=check_status&id={$data['ID']}'>檢查</a>";
                         ?>
                         </td>
                         <td>
