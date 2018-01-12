@@ -6,7 +6,7 @@
     if (!empty($_COOKIE['userId']) && !empty($_COOKIE['role'])) {
         $role = $_COOKIE['role'];
         if ($role == 1) {
-            if ($_GET['page'] == 'create_quality') {
+            if ($_GET['page'] == 'create_quality' || $_GET['page'] == 'update_quality') {
                 require_once './page/quality-create.php';
             }
             else
