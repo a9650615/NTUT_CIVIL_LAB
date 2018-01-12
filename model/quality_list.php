@@ -60,4 +60,14 @@ if ($has_all_data && !empty($_GET['id']) && $_GET['action'] == 'update') {
     $page = "update_quality&id={$_GET['id']}";
 }
 
+if ($_GET['action'] == 'check_status' && !empty($_GET['id'])) {
+    if ($_GET['data'] == 'success') {
+        $status = 1;
+    } else {
+        $status = 2;
+    }
+    $sql = mysqli_query($conn, "UPDATE quality_list SET status='{$status}' WHERE ID='{$_GET['id']}'");
+    $page = "check_status&id={$_GET['id']}";
+}
+
 header("Location: /?page={$page}");
