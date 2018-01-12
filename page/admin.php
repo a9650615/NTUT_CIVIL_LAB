@@ -44,7 +44,7 @@
                         <td><?=$data['name']?></td>
                         <td><?=$status?>
                         <?php
-                            if ($data['resolve_image'] != "" && $data['status'] == 2)
+                            if ($data['resolve_image'] != "" && ($data['status'] == 0 || $data['status'] == 2))
                                 echo "<span style='color:red;'>*</span><a href='?page=check_status&id={$data['ID']}'>檢查</a>";
                         ?>
                         </td>
