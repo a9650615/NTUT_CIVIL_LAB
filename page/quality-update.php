@@ -63,6 +63,11 @@
                                 <img id="output" src="upload_space/<?=$data['resolve_image']?>" style="max-width:100%;" />
                                 <?php
                             }
+                            else {
+                                ?>
+                                <img id="output" style="max-width:100%;" />
+                                <?php
+                            }
                         ?>
                         <input type="file" name="image" onchange="openFile(event)" />
                         <script type="text/javascript">

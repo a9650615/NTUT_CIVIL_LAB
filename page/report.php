@@ -1,8 +1,12 @@
 <?php include './component/header.php'; ?>
 <?php
     include './model/sql.php';
-    $sql = mysqli_query($conn, "SELECT * FROM quality_list ORDER BY ID DESC");
+    $sql = mysqli_query($conn, "SELECT * FROM (SELECT order_id, ID as user_id FROM `user` WHERE ID={$_COOKIE['userId']}) u INNER JOIN quality_list ON quality_list.No = u.order_id 
+    ORDER BY ID DESC");
 ?>
+<div style="text-align: right;">
+    <a href="?page=logout">登出</a>
+</div>
 <table class="table" style="margin:auto;">
 <thead>
     <tr>
