@@ -1,8 +1,7 @@
 <?php include './component/header.php'; ?>
 <?php
     include './model/sql.php';
-    $sql = mysqli_query($conn, "SELECT * FROM quality_list");
-    $lists = $sql->fetch_assoc();
+    $sql = mysqli_query($conn, "SELECT * FROM quality_list ORDER BY ID DESC");
 ?>
 <table class="table" style="margin:auto;">
 <thead>
