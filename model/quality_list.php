@@ -91,4 +91,8 @@ if ($_GET['action'] == 'check_status' && !empty($_GET['id'])) {
     $page = "check_status&id={$_GET['id']}";
 }
 
+if ($_GET['action'] == 'delete' && $_GET['id']) {
+    $sql = mysqli_query($conn, "DELETE FROM quality_list WHERE ID='{$_GET['id']}'");
+}
+
 header("Location: /?page={$page}");

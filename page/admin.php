@@ -51,7 +51,7 @@
                         </td>
                         <td>
                             <a href="?page=update_quality&id=<?=$data['ID']?>">編輯</a>
-                            <a href="">刪除</a>
+                            <a href="model/quality_list.php?action=delete&id=<?=$data['ID']?>">刪除</a>
                         </td>
                     </tr>
                     <?
