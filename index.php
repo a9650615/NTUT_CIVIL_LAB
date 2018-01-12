@@ -3,6 +3,12 @@
     // error_reporting(E_ALL);
     // error_reporting(E_ALL);
     ini_set('display_errors', 1);
+    if ($_GET['page'] == 'logout') {
+        setcookie('role', '');
+        setcookie('userId', '');
+        header('Location: /');
+    }
+    else
     if (!empty($_COOKIE['userId']) && !empty($_COOKIE['role'])) {
         $role = $_COOKIE['role'];
         if ($role == 1) {
@@ -26,7 +32,7 @@
         if ($_GET['page'] == 'register') {
             require_once './page/register.php';
         }
-        if ($_GET['page'] == 'login') {
+        if ($_GET['page'] == 'login' || $_GET['page'] == '') {
             require_once './page/login.php';
         }
     }

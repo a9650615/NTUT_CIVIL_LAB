@@ -11,6 +11,7 @@
 <div>
     <h4 style="display: inline-block;">工程項目列表</h4>
     <a href="?page=create_quality">建立</a>
+    <a href="?page=logout" style="float:right;">登出</a>
     <div>
         <form method="get" actions="?">
             篩選 : 

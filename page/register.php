@@ -16,23 +16,27 @@
         註冊頁面
         <form action='/model/user.php?action=register' method='post'>
             <label>
-                員工編號:
-                <input type="text" name="acc">
+                帳號:
+                <input type="text" name="acc" required>
             </label>
             <label>
                 密碼：
-                <input type="password" name="ps">
+                <input type="password" name="ps" required>
             </label>
             <label>
                 Email：
-                <input type="email" name="email">
+                <input type="email" name="email" required>
             </label>
             <label>
                 註冊類型：
-                <select name="role">
+                <select name="role" id="role">
                     <option value='1'>審核者</option>
                     <option value='2'>監管者</option>
                 </select>
+            </label>
+            <label id="No" style="display:none">
+                工程編號：
+                <input type="text" name="order_id" id="order_id">
             </label>
             <div>
                 <input type="submit" value="送出" />
@@ -40,4 +44,15 @@
         </form>
     </div>
 </div>
+<script>
+    document.getElementById('role').onchange = function(e) {
+        if (e.target.value == 2) {
+            document.getElementById('No').style='display:block'
+            document.getElementById('order_id').required = true;
+        } else {
+            document.getElementById('No').style='display:none'
+            document.getElementById('order_id').required = false;
+        }
+    }
+</script>
 <?php include './component/footer.php'; ?>

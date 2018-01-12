@@ -25,7 +25,11 @@ foreach ($keys as $key) {
 
 if ($_GET['action'] == 'register' && $has_all_data == true) {
     $ps = md5($_POST['ps']);
-    if (mysqli_query($conn, "INSERT INTO user(`acc`, `ps`, `email`, `role`) VALUES('{$_POST['acc']}','{$ps}', '{$_POST['email']}','{$_POST['role']}')")) {
+    $sql = "INSERT INTO user(`acc`, `ps`, `email`, `role`) VALUES('{$_POST['acc']}','{$ps}', '{$_POST['email']}','{$_POST['role']}')";
+    if ($_POST['role'] == 2) {
+        $sql = "INSERT INTO user(`acc`, `ps`, `email`, `role`, `order_id`) VALUES('{$_POST['acc']}','{$ps}', '{$_POST['email']}','{$_POST['role']}', '{$_POST['order_id']}')";
+    }
+    if (mysqli_query($conn, $sql)) {
         // echo "success";
     } else {
         // echo 'error'.mysqli_error($conn);
