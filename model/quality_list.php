@@ -8,17 +8,19 @@ switch ($_GET['action']) {
     case 'create':
         $keys = array('no', 'name', 'order' , 'check_date', 'resolve_date', 'floor', 'now_status', 'feedback');
         break;
+    case 'update':
+        $keys = array('image');
+        break;
 }
 
 foreach ($keys as $key) {
-    if (empty($_POST[$key])) {
+    if (empty($_POST[$key]) && empty($_FILES[$key])) {
         $has_all_data = false;
     }
 }
 
 if ($has_all_data && $_GET['action'] == 'create') {
     $target_dir = "../upload_space/";
-    $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($_FILES["image"]["name"],PATHINFO_EXTENSION));
     // $target_file = $target_dir . basename($_FILES["image"]["name"]);
     $file_name = md5(microtime()) .'.'. $imageFileType;
@@ -41,6 +43,21 @@ if ($has_all_data && $_GET['action'] == 'create') {
     //     echo "File is not an image.";
     //     $uploadOk = 0;
     // }
+}
+
+if ($has_all_data && !empty($_GET['id']) && $_GET['action'] == 'update') {
+    $target_dir = "../upload_space/";
+    $imageFileType = strtolower(pathinfo($_FILES["image"]["name"],PATHINFO_EXTENSION));
+    // $target_file = $target_dir . basename($_FILES["image"]["name"]);
+    $file_name = md5(microtime()) .'.'. $imageFileType;
+    $target_file = $target_dir . $file_name;
+    if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+        // echo "The file ". basename( $_FILES["image"]["name"]). " has been uploaded.";
+        $sql = mysqli_query($conn, "UPDATE quality_list SET resolve_image='{$file_name}' WHERE ID='{$_GET['id']}'");
+    } else {
+        // echo "Sorry, there was an error uploading your file.";
+    }
+    $page = "update_quality&id={$_GET['id']}";
 }
 
 header("Location: /?page={$page}");

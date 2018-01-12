@@ -4,7 +4,7 @@
     $sql = mysqli_query($conn, "SELECT * FROM quality_list");
     $lists = $sql->fetch_assoc();
 ?>
-<table class="table">
+<table class="table" style="margin:auto;">
 <thead>
     <tr>
         <th>工程名稱</th>
@@ -29,7 +29,7 @@
                         if ($data['status'] != 1)
                         {
                             ?>
-                            <a href="?page=update_quality">更新狀態</a>
+                            <a href="?page=update_quality&id=<?=$data['ID']?>">更新狀態</a>
                             <?
                         }
                     ?>
