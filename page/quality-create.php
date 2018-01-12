@@ -56,7 +56,17 @@
                         </tr>
                         <tr>
                             <td>施工現況<!--插入圖片-->
-                                <img id="output" required width="100%" style="display:none" />
+                                <?php
+                                    if ($data['now_image']) {
+                                        ?>
+                                        <img id="output" required width="100%" src="upload_space/<?=$data['now_image']?>" />
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <img id="output" required width="100%" style="display:none" />
+                                        <?php
+                                    }
+                                ?>
                                 <input type="file" name="image" onchange="openFile(event)" />
                                 <script type="text/javascript">
                                         function openFile(event){
