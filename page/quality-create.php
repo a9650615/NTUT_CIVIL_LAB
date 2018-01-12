@@ -11,7 +11,7 @@
     <div class="row">
         <!--md=電腦 mm=手機 共12格 -->
       <div class="col-xs-12 col-sm-12 col-md-12">
-        <form action="/model/quality_list.php?action=create" method="post" enctype="multipart/form-data">
+        <form action="/model/quality_list.php?action=<?=($_GET['id'])?"edit":"create"?>&id=<?=$_GET['id']?>" method="post" enctype="multipart/form-data">
             <div class="product_index">
                 <table class="New">
                     <tbody>
@@ -25,13 +25,12 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>本單編號：<!--想自動輸出-->
-                            <br/><input autocomplete="off" name="order" required type="text" /><!-- 顯示mysql row+1 --></td>
+                            <td>本單編號：<!--想自動輸出--><input autocomplete="off" name="order" readonly required type="text" value="<?=$data['order_id']?>" /><!-- 顯示mysql row+1 --></td>
                             <td>改善確認：<br/>
                             <select name="status">
-                                <option value="0">未改善</option>
-                                <option value="1">已改善</option>
-                                <option value="2">未合格</option>
+                                <option value="0" <?=($data['status']=='0')?"selected":""?>>未改善</option>
+                                <option value="1" <?=($data['status']=='1')?"selected":""?>>已改善</option>
+                                <option value="2" <?=($data['status']=='2')?"selected":""?>>未合格</option>
                             </select></td>
                         </tr>
                         <tr>
