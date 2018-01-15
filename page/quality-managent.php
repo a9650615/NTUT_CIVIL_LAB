@@ -4,6 +4,11 @@
     $sql_string = "SELECT * FROM quality_list";
     if ((string) $_GET['filter'] != '') {
         $sql_string = $sql_string . " WHERE status='{$_GET['filter']}'";
+        if ($_GET['name']) {
+            $sql_string = $sql_string . " name='{$_GET['name']}'";
+        }
+    } else if ((string) $_GET['name'] != '') {
+        $sql_string = $sql_string . " WHERE name='{$_GET['name']}'";
     }
     $sql_string = $sql_string . " ORDER BY ID DESC";
     $sql = mysqli_query($conn, $sql_string);
@@ -44,7 +49,7 @@
                         $status = "未合格";
                     ?>
                     <tr>
-                        <td><?=$data['name']?></td>
+                        <td><a href="?name=<?=$data['name']?>"><?=$data['name']?></a></td>
                         <td><span style="width:100px;"><?=$data['check_date']?></span>/<span style="width:100px;"><?=$data['resolve_date']?></span></td>
                         <td><?=$status?>
                         <?php
