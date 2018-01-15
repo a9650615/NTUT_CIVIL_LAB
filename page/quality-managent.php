@@ -12,6 +12,7 @@
     }
     $sql_string = $sql_string . " ORDER BY ID DESC";
     $sql = mysqli_query($conn, $sql_string);
+    $row_count = mysqli_num_rows($sql);
 ?>
 <div>
     <h4 style="display: inline-block;">工程項目列表</h4>
@@ -21,6 +22,7 @@
     <a href="/">上一頁</a>
     <div>
         <form method="get" actions="?">
+            <input type="hidden" value="quality" name="page" />
             篩選 : 
             <select name="filter">
                 <option value="">全部</option>
@@ -30,6 +32,9 @@
             </select>
             <input type="submit" value="篩選" />
         </form>
+    </div>
+    <div class="alert alert-info" style="width: 80%; margin: auto; margin-top: 10px;" role="alert">
+        共 <?=$row_count?> 筆資料
     </div>
     <table class="table" style="margin:auto;">
         <thead>

@@ -3,10 +3,14 @@
     include './model/sql.php';
     $sql = mysqli_query($conn, "SELECT * FROM (SELECT order_id, ID as user_id FROM `user` WHERE ID={$_COOKIE['userId']}) u INNER JOIN quality_list ON quality_list.No = u.order_id 
     ORDER BY ID DESC");
+    $row_count = mysqli_num_rows($sql);
 ?>
 <a href="/">上一頁</a>
 <div style="text-align: right;">
     <a href="?page=logout">登出</a>
+</div>
+<div class="alert alert-info" style="width: 80%; margin: auto; margin-top: 10px;" role="alert">
+    共 <?=$row_count?> 筆資料
 </div>
 <table class="table" style="margin:auto;">
 <thead>
