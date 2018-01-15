@@ -16,7 +16,7 @@
         <form method="get" actions="?">
             篩選 : 
             <select name="filter">
-                <option></option>
+                <option value="">全部</option>
                 <option value="0" <?=$_GET['filter']=='0'?"selected":""?>>未改善</option>
                 <option value="1" <?=$_GET['filter']=='1'?"selected":""?>>已改善</option>
                 <option value="2" <?=$_GET['filter']=='2'?"selected":""?>>未合格</option>
@@ -28,8 +28,10 @@
         <thead>
             <tr>
                 <th>工程名稱</th>
-                <th width="30%">狀態<span style="float:right;">* (改善現況已更新)</span></th>
-                <th>編輯</th>
+                <th>查驗日期/改善期限</th>
+                <th width="20%">狀態<span style="float:right;">*(已更新)</span></th>
+                <th>是否逾期</th>
+                <th>閱覽</th>
             </tr>
         </thead>
         <tbody>
@@ -43,6 +45,7 @@
                     ?>
                     <tr>
                         <td><?=$data['name']?></td>
+                        <td><span style="width:100px;"><?=$data['check_date']?></span>/<span style="width:100px;"><?=$data['resolve_date']?></span></td>
                         <td><?=$status?>
                         <?php
                             if ($data['resolve_image'] != "" && ($data['status'] == 0 || $data['status'] == 2))
@@ -50,8 +53,20 @@
                         ?>
                         </td>
                         <td>
-                            <a href="?page=update_quality&id=<?=$data['ID']?>">編輯</a>
-                            <a href="model/quality_list.php?action=delete&id=<?=$data['ID']?>">刪除</a>
+                            <?php
+                                if (strtotime($data['resolve_date']) < time()) {
+                                    echo '是';
+                                }
+                                else 
+                                {
+                                    echo '否';
+                                }
+                            ?>
+                        </td>
+                        <td>
+                            <!--<a href="?page=update_quality&id=<?=$data['ID']?>">編輯</a>
+                            <a href="model/quality_list.php?action=delete&id=<?=$data['ID']?>">刪除</a>-->
+                            <a href="?page=quality_view&id=<?=$data['ID']?>">閱覽</a>
                         </td>
                     </tr>
                     <?

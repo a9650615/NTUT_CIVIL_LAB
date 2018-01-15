@@ -18,8 +18,11 @@
             else if ($_GET['page'] == 'check_status') {
                 require_once './page/check-page.php';
             }
+            else if ($_GET['page'] == 'quality_view') {
+                require_once './page/quality-update.php';
+            }
             else
-                require_once './page/admin.php';
+                require_once './page/quality-managent.php';
         } 
         else if ($role == 2) {
             if ($_GET['page'] == 'update_quality') {
