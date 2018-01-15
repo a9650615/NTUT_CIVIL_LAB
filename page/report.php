@@ -14,7 +14,7 @@
         <th>查驗日期/改善期限</th>
         <th width="20%">狀態<span style="float:right;">*(已更新)</span></th>
         <th>是否逾期</th>
-        <th>閱覽</th>
+        <th>更新</th>
     </tr>
 </thead>
 <tbody>
