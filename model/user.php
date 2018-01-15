@@ -72,4 +72,24 @@ if ($_GET['action'] == 'forget' && $has_all_data == true) {
     $page = 'login&forget=1&error=1';
 }
 
+if ($_GET['action'] == 'edit_ps' && $has_all_data == true) {
+    $ps = md5($_POST['new_ps']);
+    $old = md5($_POST['old_ps']);
+    $oldData = mysqli_query($conn, "SELECT ps FROM user WHERE ID='{$_COOKIE['userId']}'")->fetch_assoc();
+    if ($oldData['ps'] == $old && $_POST['new_ps'] == $_POST['check_ps']) {
+        mysqli_query($conn, "UPDATE `user` SET ps='{$ps}' WHERE ID='{$_COOKIE['userId']}'");
+        if (mysqli_affected_rows($conn) > 0) {
+            // echo "success";
+            $page = 'user&success=1';
+        } else {
+            // echo 'error'.mysqli_error($conn);
+            $page = '';
+        }
+    } else {
+        $page = 'edit_ps&error=1';
+    }
+} else if ($_GET['action'] == 'edit_ps') {
+    $page = 'edit_ps&error=1';
+}
+
 header("Location: /?page={$page}");
