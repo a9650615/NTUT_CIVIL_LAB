@@ -13,6 +13,8 @@
     $sql_string = $sql_string . " ORDER BY ID DESC";
     $sql = mysqli_query($conn, $sql_string);
     $row_count = mysqli_num_rows($sql);
+    $no_pass = 0;
+    $out_date = 0;
 ?>
 <div>
     <h4 style="display: inline-block;">工程項目列表</h4>
@@ -52,8 +54,11 @@
                     $status = "未改善";
                     if ($data['status'] == 1)
                         $status = "已改善";
-                    if ($data['status'] == 2)
-                        $status = "未合格";
+                    else {
+                        $no_pass ++;
+                        if ($data['status'] == 2)
+                            $status = "未合格";
+                    }
                     ?>
                     <tr>
                         <td><a href="?page=<?=$_GET['page']?>&name=<?=$data['name']?>"><?=$data['name']?></a></td>
@@ -68,6 +73,8 @@
                             <?php
                                 if (strtotime($data['resolve_date']) < time()) {
                                     echo '是';
+                                    if ($data['status'] != 1)
+                                        $out_date ++;
                                 }
                                 else 
                                 {
@@ -86,5 +93,8 @@
             ?>
         </tbody>
     </table>
+    <div class="alert alert-info" style="width: 80%; margin: auto; margin-top: 10px;" role="alert">
+        合格率: <?=intval((($row_count - $no_pass)/$row_count)*100)?>%,改善率: <?=max(0,intval((($row_count - $out_date)/$row_count)*100))?>%
+    </div>
 </div>
 <?php include './component/footer.php'; ?>

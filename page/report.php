@@ -4,6 +4,8 @@
     $sql = mysqli_query($conn, "SELECT * FROM (SELECT order_id, ID as user_id FROM `user` WHERE ID={$_COOKIE['userId']}) u INNER JOIN quality_list ON quality_list.No = u.order_id 
     ORDER BY ID DESC");
     $row_count = mysqli_num_rows($sql);
+    $no_pass = 0;
+    $out_date = 0;
 ?>
 <a href="/">上一頁</a>
 <div style="text-align: right;">
@@ -28,8 +30,11 @@
             $status = "未改善";
             if ($data['status'] == 1)
                 $status = "已改善";
-            if ($data['status'] == 2)
-                $status = "未合格";
+            else {
+                $no_pass ++;
+                if ($data['status'] == 2)
+                    $status = "未合格";
+            }
             ?>
             <tr>
                 <td><?=$data['name']?></td>
@@ -44,6 +49,8 @@
                     <?php
                         if (strtotime($data['resolve_date']) < time()) {
                             echo '是';
+                            if ($data['status'] != 1)
+                                $out_date ++;
                         }
                         else 
                         {
@@ -67,4 +74,7 @@
     ?>
 </tbody>
 </table>
+<div class="alert alert-info" style="width: 80%; margin: auto; margin-top: 10px;" role="alert">
+    合格率: <?=intval((($row_count - $no_pass)/$row_count)*100)?>%,改善率: <?=max(0,intval((($row_count - $out_date)/$row_count)*100))?>%
+</div>
 <?php include './component/footer.php'; ?>
