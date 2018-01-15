@@ -48,7 +48,7 @@
                             </td>
                         <tr>
                             <td>現況說明：<br><textarea rows="3" required name="now_status" cols="25"><?=$data['now_status']?></textarea></td>
-                            <td>改善建議：<br><textarea rows="3" name="feedback" cols="25"><?=$data['feedback']?></textarea></td>
+                            <td>改善建議：<br><textarea rows="3" required name="feedback" cols="25"><?=$data['feedback']?></textarea></td>
                         </tr>
                         <tr>
                             <td>施工現況<!--插入圖片-->
@@ -63,7 +63,7 @@
                                         <?php
                                     }
                                 ?>
-                                <input type="file" name="image" onchange="openFile(event)" />
+                                <input type="file" name="image" required onchange="openFile(event)" />
                                 <script type="text/javascript">
                                         function openFile(event){
                                             var input = event.target; //取得上傳檔案
