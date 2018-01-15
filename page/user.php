@@ -14,5 +14,6 @@
             <li class="list-group-item">工程 ID:<?=$data['order_id']?></li>
         </ul>
     </div>
+    <a href="?">回上一頁</a>
 </div>
 <?php include './component/footer.php'; ?>

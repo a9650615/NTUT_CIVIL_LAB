@@ -24,6 +24,10 @@
                 <input type="password" name="ps" required>
             </label>
             <label>
+                確認密碼：
+                <input type="password" name="check_ps" required>
+            </label>
+            <label>
                 Email：
                 <input type="email" name="email" required>
             </label>

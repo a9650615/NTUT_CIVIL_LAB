@@ -4,6 +4,7 @@
     $sql = mysqli_query($conn, "SELECT * FROM (SELECT order_id, ID as user_id FROM `user` WHERE ID={$_COOKIE['userId']}) u INNER JOIN quality_list ON quality_list.No = u.order_id 
     ORDER BY ID DESC");
 ?>
+<a href="/">上一頁</a>
 <div style="text-align: right;">
     <a href="?page=logout">登出</a>
 </div>
