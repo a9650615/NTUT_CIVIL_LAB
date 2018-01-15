@@ -11,8 +11,10 @@
 <thead>
     <tr>
         <th>工程名稱</th>
-        <th>狀態</th>
-        <th>編輯</th>
+        <th>查驗日期/改善期限</th>
+        <th width="20%">狀態<span style="float:right;">*(已更新)</span></th>
+        <th>是否逾期</th>
+        <th>閱覽</th>
     </tr>
 </thead>
 <tbody>
@@ -26,7 +28,24 @@
             ?>
             <tr>
                 <td><?=$data['name']?></td>
-                <td><?=$status?></td>
+                <td><span style="width:100px;"><?=$data['check_date']?></span>/<span style="width:100px;"><?=$data['resolve_date']?></span></td>
+                <td><?=$status?>
+                    <?
+                    if ($data['resolve_image'] != "" && ($data['status'] == 0 || $data['status'] == 2))
+                        echo "<span style='color:red;'>*</span>";
+                    ?>
+                </td>
+                <td>
+                    <?php
+                        if (strtotime($data['resolve_date']) < time()) {
+                            echo '是';
+                        }
+                        else 
+                        {
+                            echo '否';
+                        }
+                    ?>
+                </td>
                 <td>
                     <?php
                         if ($data['status'] != 1)
