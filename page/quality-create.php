@@ -42,11 +42,8 @@
                             <br><input value="<?=$data['other']?>" type="text" autocomplete="off" name="other" />(其他備註)</td>
                             <td>
                                 缺失修正方式：<br>
-                                <select name="how">
-                                    <option value="Taipei">紀錄照片</option>
-                                    <option value="Taoyuan">11</option>
-                                    <option value="Hsinchu">11</option>
-                                    <option value="Miaoli">11</option>
+                                <select name="fix_type">
+                                    <option>紀錄照片</option>
                                 </select>
                             </td>
                         <tr>

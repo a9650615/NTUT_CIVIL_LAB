@@ -45,7 +45,7 @@
                     <td>查驗位置：<?=$data['floor']?>樓
                     <br>(其他備註)<?=$data['now_status']?></td>
                     <td>
-                        缺失修正方式：
+                        缺失修正方式：<?=$data['fix_type']?>
                     </td>
                 <tr>
                     <td>現況說明：<?=$data['now_status']?></td>
