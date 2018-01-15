@@ -8,6 +8,9 @@
         setcookie('userId', '', time()+3600*24, '/', $_SERVER['SERVER_NAME']);
         header('Location: /');
     }
+    if ($_GET['page'] == 'user' && !empty($_COOKIE['userId'])) {
+        require_once './page/user.php';
+    }
     else
     if (!empty($_COOKIE['userId']) && !empty($_COOKIE['role'])) {
         $role = $_COOKIE['role'];
@@ -43,7 +46,8 @@
         }
         else {
         }
-    } else {
+    }
+    else {
         if ($_GET['page'] == 'register') {
             require_once './page/register.php';
         }

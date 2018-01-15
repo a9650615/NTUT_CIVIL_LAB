@@ -1,4 +1,5 @@
 <?php include './component/header.php'; ?>
+<a href="?page=logout" style="float:right;">登出</a>
 <div class="container">
     <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
