@@ -26,3 +26,12 @@
     background-color: #e7e8ea;
     border-color: #dddfe2;
 }
+
+.img-thumbnail {
+    background: transparent;
+    border: none;
+}
+
+.product_list .img-thumbnail {
+    width: 264px;
+}

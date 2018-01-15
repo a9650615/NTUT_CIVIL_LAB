@@ -109,7 +109,7 @@
                         <?php
                     }
                 ?>
-                <a href="?page="><span style="float: right;" >回上一頁</span>
+                <a href="?page=quality"><span style="float: right;" >回上一頁</span>
             </div>
         </form>
       </div>

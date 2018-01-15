@@ -2,7 +2,7 @@
 include './sql.php';
 $keys = array();
 $has_all_data = true;
-$page = '';
+$page = 'quality';
 
 switch ($_GET['action']) {
     case 'create':

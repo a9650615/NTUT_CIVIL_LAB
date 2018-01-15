@@ -86,7 +86,7 @@
             <br>
             <div style="font-size:25px;" class="col-sm-4 col-md-12 col-mm-12"> 
                 <button type="submit" class="button button-block" name="save" />確定送出</button>
-                <a href="?page="><span style="float: right;" >回上一頁</span>
+                <a href="?page=quality"><span style="float: right;" >回上一頁</span>
             </div>
         </form>
       </div>

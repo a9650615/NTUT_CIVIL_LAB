@@ -21,15 +21,21 @@
             else if ($_GET['page'] == 'quality_view') {
                 require_once './page/quality-update.php';
             }
-            else
+            else if ($_GET['page'] == 'quality') {
                 require_once './page/quality-managent.php';
+            }
+            else
+                require_once './page/index_panel.php';
         } 
         else if ($role == 2) {
             if ($_GET['page'] == 'update_quality') {
                 require_once './page/quality-update.php';
             }
-            else {
+            else if ($_GET['page'] == 'quality') {
                 require_once './page/report.php';
+            }
+            else {
+                require_once './page/index_panel.php';
             }
         }
         else if ($role == 4) {
