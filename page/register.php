@@ -16,7 +16,7 @@
         註冊頁面
         <form action='/model/user.php?action=register' method='post'>
             <label>
-                帳號:
+                員工編號:
                 <input type="text" name="acc" required>
             </label>
             <label>
@@ -28,10 +28,16 @@
                 <input type="email" name="email" required>
             </label>
             <label>
+                姓名：
+                <input type="text" name="name" required>
+            </label>
+            <label>
                 註冊類型：
                 <select name="role" id="role">
                     <option value='1'>審核者</option>
                     <option value='2'>監管者</option>
+                    <option value='3'>ISO 工程師</option>
+                    <option value='4'>主管 & 經理</option>
                 </select>
             </label>
             <label id="No" style="display:none">

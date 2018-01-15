@@ -1,7 +1,7 @@
 <?php
 include './sql.php';
 $keys = array();
-$check_register = array('acc', 'ps', 'email' , 'role');
+$check_register = array('acc', 'ps', 'email' , 'role', 'name');
 $has_all_data = true;
 $page = 'register&error=1';
 
@@ -27,7 +27,7 @@ if ($_GET['action'] == 'register' && $has_all_data == true) {
     $ps = md5($_POST['ps']);
     $sql = "INSERT INTO user(`acc`, `ps`, `email`, `role`) VALUES('{$_POST['acc']}','{$ps}', '{$_POST['email']}','{$_POST['role']}')";
     if ($_POST['role'] == 2) {
-        $sql = "INSERT INTO user(`acc`, `ps`, `email`, `role`, `order_id`) VALUES('{$_POST['acc']}','{$ps}', '{$_POST['email']}','{$_POST['role']}', '{$_POST['order_id']}')";
+        $sql = "INSERT INTO user(`acc`, `ps`, `email`, `role`, `order_id`, `name`) VALUES('{$_POST['acc']}','{$ps}', '{$_POST['email']}','{$_POST['role']}', '{$_POST['order_id']}', '{$_POST['name']}')";
     }
     if (mysqli_query($conn, $sql)) {
         // echo "success";

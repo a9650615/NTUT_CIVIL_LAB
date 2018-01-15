@@ -20,13 +20,19 @@
             }
             else
                 require_once './page/admin.php';
-        } else {
+        } 
+        else if ($role == 2) {
             if ($_GET['page'] == 'update_quality') {
                 require_once './page/quality-update.php';
             }
             else {
                 require_once './page/report.php';
             }
+        }
+        else if ($role == 4) {
+            
+        }
+        else {
         }
     } else {
         if ($_GET['page'] == 'register') {
