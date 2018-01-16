@@ -38,10 +38,11 @@
             <label>
                 註冊類型：
                 <select name="role" id="role">
-                    <option value='1'>審核者</option>
-                    <option value='2'>監管者</option>
-                    <option value='3'>ISO 工程師</option>
-                    <option value='4'>主管 & 經理</option>
+                    <option value='1'>施工所主管</option>
+                    <option value='5'>安全衛生稽核人員</option>
+                    <option value='2'>品質稽核人員</option>
+                    <option value='3'>現場工程師</option>
+                    <option value='4'>經理 & 公司主管</option>
                 </select>
             </label>
             <label id="No" style="display:none">

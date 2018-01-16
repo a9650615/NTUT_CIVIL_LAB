@@ -25,7 +25,7 @@
             ?>
             
             <?php
-                if ($role == 3 || $admin) {
+                if ($role == 1 || $role == 3 || $admin) {
                     ?>
                     <div class="col-sm-4 col-md-4 col-mm-6 product_img" data-move-y="150px">
                     <a href="iso-index.html">
