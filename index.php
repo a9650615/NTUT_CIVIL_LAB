@@ -36,6 +36,12 @@
             else if ($_GET['page'] == 'quailty_detail') {
                 require_once './page/quality-detail.php';
             }
+            else if ($_GET['page'] == 'iso_list') {
+                require_once './page/iso-list.php';
+            }
+            else if ($_GET['page'] == 'select_iso_form') {
+                require_once './page/select-iso.php';
+            }
             else
                 require_once './page/index_panel.php';
         } 

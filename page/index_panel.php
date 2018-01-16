@@ -28,7 +28,7 @@
                 if ($role == 1 || $role == 3 || $admin) {
                     ?>
                     <div class="col-sm-4 col-md-4 col-mm-6 product_img" data-move-y="150px">
-                    <a href="iso-index.html">
+                    <a href="?page=iso_list">
                     <img src="cloud/isoimage.png" class="img-thumbnail" ></a>
                     <p class="product_title">
                     <a href="iso-index.html" title="ISO工務表單">ISO工務表單</a>
