@@ -25,7 +25,8 @@ foreach ($keys as $key) {
 
 if ($_GET['action'] == 'create') {
     if ($has_all_data) {
-        $sql = "INSERT INTO iso_list (`project_name`, `order_id`, `contractor`, `floor`) VALUES('{$_POST['project_name']}', '{$_POST['order_id']}', '{$_POST['contractor']}', '{$_POST['floor']}')";
+        $date = date('Y-m-d');
+        $sql = "INSERT INTO iso_list (`project_name`, `order_id`, `contractor`, `floor`, `status`, `user`) VALUES('{$_POST['project_name']}', '{$_POST['order_id']}', '{$_POST['contractor']}', '{$_POST['floor']}', '0', '{$_COOKIE['userId']}')";
         if (mysqli_query($conn, $sql)) {
 
         }
