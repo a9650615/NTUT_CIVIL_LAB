@@ -52,7 +52,7 @@
                                         <td><?php 
                                             if ($data['status'] == 0) {
                                                 ?>
-                                                <a href="#">更新</a>
+                                                <a href="?page=update_iso_list&id=<?=$data['ID']?>">更新</a>
                                                 <?php
                                             }
                                         ?></td>

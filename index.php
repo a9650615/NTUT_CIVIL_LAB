@@ -45,6 +45,9 @@
             else if ($_GET['page'] == 'create_iso') {
                 require_once './page/create-iso.php';
             }
+            else if ($_GET['page'] == 'update_iso_list') {
+                require_once './page/update-iso-list.php';
+            }
             else
                 require_once './page/index_panel.php';
         } 
