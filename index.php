@@ -39,9 +39,6 @@
             else if ($_GET['page'] == 'iso_list') {
                 require_once './page/iso-list.php';
             }
-            else if ($_GET['page'] == 'select_iso_form') {
-                require_once './page/select-iso.php';
-            }
             else if ($_GET['page'] == 'create_iso') {
                 require_once './page/create-iso.php';
             }
@@ -52,6 +49,9 @@
                 require_once './page/index_panel.php';
         } 
         else if ($role == 2) {
+            if ($_GET['page'] == 'create_quality') {
+                require_once './page/quality-create.php';
+            }
             if ($_GET['page'] == 'update_quality') {
                 require_once './page/quality-update.php';
             }
@@ -62,8 +62,22 @@
                 require_once './page/index_panel.php';
             }
         }
-        else if ($role == 4) {
-            
+        else if ($role == 3) {
+            if ($_GET['page'] == 'create_iso') {
+                require_once './page/create-iso.php';
+            }
+            else if ($_GET['page'] == 'update_iso_list') {
+                require_once './page/update-iso-list.php';
+            }
+            else if ($_GET['page'] == 'iso_list') {
+                require_once './page/iso-list.php';
+            }
+            else if ($_GET['page'] == 'select_iso_form') {
+                require_once './page/select-iso.php';
+            }
+            else {
+                require_once './page/index_panel.php';
+            }
         }
         else {
         }

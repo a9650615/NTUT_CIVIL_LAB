@@ -23,3 +23,5 @@ $is_link = mysqli_real_connect(
 // if (!$conn) {
 //     echo 'die2';
 // }
+
+$admin = 4;

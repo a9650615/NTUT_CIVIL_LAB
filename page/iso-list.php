@@ -1,14 +1,20 @@
 <?php include './component/header.php'; ?>
 <?php
     include './model/sql.php';
-    $sql_string = "SELECT * FROM iso_list WHERE user='{$_COOKIE['userId']}'";
+    $sql_string = "SELECT * FROM iso_list WHERE user='{$_COOKIE['userId']}' ORDER BY ID DESC";
     $sql = mysqli_query($conn, $sql_string);
 ?>
 <div class="container">
     <a href="?">上一頁</a>
     <div class="col-xs-12 col-sm-12 col-md-12">   
           <div class="product_index">
-            <a href="?page=select_iso_form">新增 ISO 表單</a>
+            <?php
+                if ($_COOKIE['role'] == 3) {
+                    ?>
+                    <a href="?page=select_iso_form">新增 ISO 表單</a>
+                    <?php
+                }
+            ?>
             <div align="center">
               <h1>ISO工務表單</h1>
 
@@ -52,9 +58,25 @@
                                         ?></td>
                                         <td><?=date("Y-m-d",strtotime($data['create_date']))?></td>
                                         <td><?php 
+                                            if ($_COOKIE['role'] == 3)
                                             if ($data['status'] == 0) {
                                                 ?>
                                                 <a href="?page=update_iso_list&id=<?=$data['ID']?>">更新</a>
+                                                <?php
+                                            }
+                                            if ($_COOKIE['role'] == 1 || $_COOKIE['role'] == $admin) {
+                                                if ($data['status'] == 1) {
+                                                    ?>
+                                                    <a>審核</a>
+                                                    <?php
+                                                }
+                                                else  if ($data['status'] == 2) {
+                                                    ?>
+                                                    <a>閱覽</a>
+                                                    <?php
+                                                }
+                                                ?>
+                                                 <a>刪除</a>
                                                 <?php
                                             }
                                         ?></td>
