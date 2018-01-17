@@ -48,16 +48,22 @@
                             <td><?=$data['list_id']?></td>
                             <td><?=$data['check_item']?></td>
                             <td>
-                                <label><input type="radio" value="2" name="state[<?=$data['list_id']?>]" <?=($value=="2")?"checked":""?>>通過</label>
-                                <label><input type="radio" value="1" name="state[<?=$data['list_id']?>]" <?=($value=="1")?"checked":""?>>未通過</label>
-                                <label><input type="radio" value="0" name="state[<?=$data['list_id']?>]" <?=($value=="0"||$value=="-1")?"checked":""?>>未確認</label>
+                                <label><input type="radio" value="2" name="state[<?=$data['list_id']?>]" <?=($_GET['page']=='check_iso'||$_GET['page']=='view_iso')?"disabled":""?> <?=($value=="2")?"checked":""?>>通過</label>
+                                <label><input type="radio" value="1" name="state[<?=$data['list_id']?>]" <?=($_GET['page']=='check_iso'||$_GET['page']=='view_iso')?"disabled":""?> <?=($value=="1")?"checked":""?>>未通過</label>
+                                <label><input type="radio" value="0" name="state[<?=$data['list_id']?>]" <?=($_GET['page']=='check_iso'||$_GET['page']=='view_iso')?"disabled":""?> <?=($value=="0"||$value=="-1")?"checked":""?>>未確認</label>
                             </td>
                         </tr>
                         <?php
                     }
                 ?>
             </table>
-            <input type="submit" value="更新" >
+            <?php
+                if ($_GET['page']=='update_iso_list') {
+                    ?>
+                    <input type="submit" value="更新" >
+                    <?php
+                }
+            ?>
         </form>
         <style>
             label {

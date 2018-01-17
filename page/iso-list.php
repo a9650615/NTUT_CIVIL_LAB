@@ -64,15 +64,21 @@
                                                 <a href="?page=update_iso_list&id=<?=$data['ID']?>">更新</a>
                                                 <?php
                                             }
+                                            else {
+                                                ?>
+                                                <a href="?page=view_iso&id=<?=$data['ID']?>">閱覽</a>
+                                                <?php
+                                            }
+
                                             if ($_COOKIE['role'] == 1 || $_COOKIE['role'] == $admin) {
                                                 if ($data['status'] == 1) {
                                                     ?>
-                                                    <a>審核</a>
+                                                    <a href="?page=check_iso&id=<?=$data['ID']?>">審核</a>
                                                     <?php
                                                 }
-                                                else  if ($data['status'] == 2) {
+                                                else if ($data['status'] == 2) {
                                                     ?>
-                                                    <a>閱覽</a>
+                                                    <a href="?page=view_iso&id=<?=$data['ID']?>">閱覽</a>
                                                     <?php
                                                 }
                                                 ?>

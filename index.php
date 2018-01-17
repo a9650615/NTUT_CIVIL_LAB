@@ -42,7 +42,7 @@
             else if ($_GET['page'] == 'create_iso') {
                 require_once './page/create-iso.php';
             }
-            else if ($_GET['page'] == 'update_iso_list') {
+            else if ($_GET['page'] == 'update_iso_list'||$_GET['page'] == 'check_iso'||$_GET['page'] == 'view_iso') {
                 require_once './page/update-iso-list.php';
             }
             else
@@ -66,7 +66,7 @@
             if ($_GET['page'] == 'create_iso') {
                 require_once './page/create-iso.php';
             }
-            else if ($_GET['page'] == 'update_iso_list') {
+            else if ($_GET['page'] == 'update_iso_list'||$_GET['page'] == 'view_iso') {
                 require_once './page/update-iso-list.php';
             }
             else if ($_GET['page'] == 'iso_list') {
