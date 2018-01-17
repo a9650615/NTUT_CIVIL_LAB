@@ -47,6 +47,8 @@
                                         <td><?php
                                             if ($data['status'] == 0)
                                                 echo '未完成';
+                                            else if ($data['status'] == 1)
+                                                echo '審核中';
                                         ?></td>
                                         <td><?=date("Y-m-d",strtotime($data['create_date']))?></td>
                                         <td><?php 

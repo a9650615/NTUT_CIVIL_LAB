@@ -1,8 +1,8 @@
 <?php
-    error_reporting(E_ERROR | E_WARNING | E_PARSE);
     // error_reporting(E_ALL);
     // error_reporting(E_ALL);
     ini_set('display_errors', 1);
+    error_reporting(E_ERROR | E_WARNING | E_PARSE);
     if ($_GET['page'] == 'logout') {
         setcookie('role', '', time()+3600*24, '/', $_SERVER['SERVER_NAME']);
         setcookie('userId', '', time()+3600*24, '/', $_SERVER['SERVER_NAME']);
