@@ -28,7 +28,7 @@
                                 <?php
                                     while ($d = $case_sql -> fetch_assoc()) {
                                         ?>
-                                        <option data-id="<?=$d['order_id']?>"><?=$d['order_name']?></option>
+                                        <option <?=($data['No']==$d['order_id']?"selected":"")?> data-id="<?=$d['order_id']?>"><?=$d['order_name']?></option>
                                         <?
                                     }
                                 ?>
@@ -74,7 +74,7 @@
                                         <?php
                                     }
                                 ?>
-                                <input type="file" name="image" required onchange="openFile(event)" />
+                                <input type="file" name="image" <?=($_GET['id']?"":"required")?> onchange="openFile(event)" />
                                 <script type="text/javascript">
                                         function openFile(event){
                                             var input = event.target; //取得上傳檔案
