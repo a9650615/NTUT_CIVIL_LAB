@@ -56,6 +56,9 @@
             else if ($_GET['page'] == 'quality') {
                 require_once './page/quality-managent.php';
             }
+            else if ($_GET['page'] == 'quality_view') {
+                require_once './page/quality-update.php';
+            }
             else if ($_GET['page'] == 'check_status') {
                 require_once './page/check-page.php';
             }
