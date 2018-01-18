@@ -6,6 +6,7 @@
         $sql = mysqli_query($conn, "SELECT * FROM quality_list WHERE ID={$_GET['id']}");
         $data = $sql->fetch_assoc();
     }
+    $case_sql = mysqli_query($conn, "SELECT * FROM case_list")
 ?>
 <div class="container">    
     <div class="row">
@@ -17,11 +18,21 @@
                     <tbody>
                         <tr>
                             <td>工程編號：<br/>
-                            <input autocomplete="off" name="no" required type="text" value="<?=$data['No']?>" />
+                            <input autocomplete="off" name="no" id="no" required type="text" value="<?=$data['No']?>" />
                             </td>
                             <td>
                                 工程名稱：<!--秀出資料庫內容 -->
-                                <input autocomplete="off" name="name" required type="text" value="<?=$data['name']?>" />
+                                <!-- <input autocomplete="off" name="name" required type="text" value="<?=$data['name']?>" /> -->
+                                <select id="order_name" name="name" required>
+                                <option></option>
+                                <?php
+                                    while ($d = $case_sql -> fetch_assoc()) {
+                                        ?>
+                                        <option data-id="<?=$d['order_id']?>"><?=$d['order_name']?></option>
+                                        <?
+                                    }
+                                ?>
+                                </select>
                             </td>
                         </tr>
                         <tr>
@@ -88,5 +99,11 @@
         </form>
       </div>
     </div>
+    <script>
+        $('#order_name').change(function() {
+            console.log($(this).find(':selected').attr('data-id'))
+            $('#no').val($(this).find(':selected').attr('data-id'))
+        })
+    </script>
 </div>
 <?php include './component/footer.php'; ?>
