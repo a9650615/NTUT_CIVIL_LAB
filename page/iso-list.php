@@ -1,8 +1,23 @@
 <?php include './component/header.php'; ?>
 <?php
     include './model/sql.php';
-    $sql_string = "SELECT * FROM iso_list WHERE user='{$_COOKIE['userId']}' ORDER BY ID DESC";
+    $filter = $_GET['filter'] ? " AND status='{$_GET['filter']}'" : "";
+    $sql_string = "SELECT * FROM iso_list WHERE user='{$_COOKIE['userId']}' {$filter} ORDER BY ID DESC";
     $sql = mysqli_query($conn, $sql_string);
+    $sql2 = mysqli_query($conn, "SELECT * FROM iso_list WHERE user='{$_COOKIE['userId']}' ORDER BY ID DESC");
+    $tot = 0;
+    $che = 0;
+    $non = 0;
+    $ret = 0;
+    while($data = $sql2->fetch_assoc()) {
+        $tot ++;
+        if ($data['status'] == 1)
+            $non ++;
+        else if ($data['status'] == 2)
+            $che ++;
+        else if ($data['status'] == 3)
+           $ret ++;
+    }
 ?>
 <div class="container">
     <a href="?">上一頁</a>
@@ -34,6 +49,12 @@
                 <div class="menu">
                     <div>
                     <h2 style="color: red">已建檔ISO工務表單總覽</h2>
+                    </div>
+                    <div style="margin: 15px 0;" class="alert alert-secondary" role="alert">
+                        <a href="?page=iso_list">全</a>: <?=$tot?> 件 | 
+                        <a href="?page=iso_list&filter=2">施工所主管已審核</a>: <?=$che?> 件 | 
+                        <a href="?page=iso_list&filter=1">未審核</a>: <?=$non?> 件 | 
+                        <a href="?page=iso_list&filter=3">未合格</a>: <?=$ret?> 件
                     </div>
                     <table class="table" style="width: 100%;">
                         <thead>
