@@ -69,4 +69,8 @@ if ($_GET['action'] == 'check_iso') {
     mysqli_query($conn, "UPDATE iso_list SET `status`='{$_GET['data']}}' WHERE ID ='{$_GET['id']}' ");
 }
 
+if ($_GET['action'] == 'delete') {
+    mysqli_query($conn, "DELETE FROM iso_list WHERE ID='{$_GET['id']}'");
+}
+
 header("Location: /?page={$page}");
