@@ -11,7 +11,6 @@
 <div style="text-align: right;">
     <a href="?page=logout">登出</a>
 </div>
-<a href="?page=create_quality">建立</a>
 <div class="alert alert-info" style="width: 80%; margin: auto; margin-top: 10px;" role="alert">
     共 <?=$row_count?> 筆資料
 </div>
@@ -61,7 +60,7 @@
                 </td>
                 <td>
                     <?php
-                        if ($data['status'] != 2)
+                        if ($data['status'] != 1)
                         {
                             ?>
                             <a href="?page=update_quality&id=<?=$data['ID']?>">更新狀態</a>

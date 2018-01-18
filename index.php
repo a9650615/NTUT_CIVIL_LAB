@@ -19,17 +19,14 @@
     if (!empty($_COOKIE['userId']) && !empty($_COOKIE['role'])) {
         $role = $_COOKIE['role'];
         if ($role == 1) {
-            if ($_GET['page'] == 'create_quality' || $_GET['page'] == 'update_quality') {
-                require_once './page/quality-create.php';
-            }
-            else if ($_GET['page'] == 'check_status') {
-                require_once './page/check-page.php';
+            if ($_GET['page'] == 'update_quality') {
+                require_once './page/quality-update.php';
             }
             else if ($_GET['page'] == 'quality_view') {
                 require_once './page/quality-update.php';
             }
             else if ($_GET['page'] == 'quality') {
-                require_once './page/quality-managent.php';
+                require_once './page/report.php';
             }
             else if ($_GET['page'] == 'quality_finish') {
                 require_once './page/quality-finish.php';
@@ -53,11 +50,14 @@
             if ($_GET['page'] == 'create_quality') {
                 require_once './page/quality-create.php';
             }
-            if ($_GET['page'] == 'update_quality') {
-                require_once './page/quality-update.php';
+            else if ($_GET['page'] == 'create_quality' || $_GET['page'] == 'update_quality') {
+                require_once './page/quality-create.php';
             }
             else if ($_GET['page'] == 'quality') {
-                require_once './page/report.php';
+                require_once './page/quality-managent.php';
+            }
+            else if ($_GET['page'] == 'check_status') {
+                require_once './page/check-page.php';
             }
             else {
                 require_once './page/index_panel.php';
@@ -83,7 +83,10 @@
                 require_once './page/quality-update.php';
             }
             else if ($_GET['page'] == 'quality') {
-                require_once './page/quality-managent.php';
+                require_once './page/report.php';
+            }
+            else if ($_GET['page'] == 'update_quality') {
+                require_once './page/quality-update.php';
             }
             else {
                 require_once './page/index_panel.php';

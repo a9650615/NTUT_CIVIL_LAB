@@ -45,7 +45,7 @@
                     <option value='4'>經理 & 公司主管</option>
                 </select>
             </label>
-            <label id="No" style="display:none">
+            <label id="No">
                 工程編號：
                 <input type="text" name="order_id" id="order_id">
             </label>
@@ -57,7 +57,7 @@
 </div>
 <script>
     document.getElementById('role').onchange = function(e) {
-        if (e.target.value == 2) {
+        if (e.target.value == 1 || e.target.value == 3) {
             document.getElementById('No').style='display:block'
             document.getElementById('order_id').required = true;
         } else {

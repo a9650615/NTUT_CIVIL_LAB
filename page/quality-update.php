@@ -57,7 +57,7 @@
                     </td>
                     <td>
                     <?php
-                        if ($_COOKIE['role'] == 2) {
+                        if ($_COOKIE['role'] == 1 || $_COOKIE['role'] == 3) {
                             ?>
                             修正狀況:
                             <?php
@@ -99,7 +99,7 @@
             <br>
             <div style="font-size:25px;" class="col-sm-12 col-md-12 col-mm-12">
                 <?php
-                    if ($data && $_COOKIE['role'] == 2) {
+                    if ($data && ($_COOKIE['role'] == 1 || $_COOKIE['role'] == 3)) {
                         ?>
                         <button type="submit" class="button button-block" name="save" />確定更新</button>
                         <?php

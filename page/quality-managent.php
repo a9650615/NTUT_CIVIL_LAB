@@ -18,6 +18,7 @@
 ?>
 <div>
     <h4 style="display: inline-block;">工程項目列表</h4>
+    <a href="?page=create_quality">建立</a>
     <a href="?page=logout" style="float:right;">登出</a>
     <br>
     <a href="/">上一頁</a>
@@ -82,8 +83,14 @@
                             ?>
                         </td>
                         <td>
-                            <!--<a href="?page=update_quality&id=<?=$data['ID']?>">編輯</a>
-                            <a href="model/quality_list.php?action=delete&id=<?=$data['ID']?>">刪除</a>-->
+                            <?php
+                                if ($_COOKIE['role'] == $admin) {
+                                    ?>
+                                    <a href="?page=update_quality&id=<?=$data['ID']?>">編輯</a>
+                                    <a href="model/quality_list.php?action=delete&id=<?=$data['ID']?>">刪除</a>
+                                    <?php
+                                }
+                            ?>
                             <a href="?page=quality_view&id=<?=$data['ID']?>">閱覽</a>
                         </td>
                     </tr>
