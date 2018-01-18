@@ -107,6 +107,12 @@
             else if ($_GET['page'] == 'update_iso_list'||$_GET['page'] == 'check_iso'||$_GET['page'] == 'view_iso') {
                 require_once './page/update-iso-list.php';
             }
+            else if ($_GET['page'] == 'case') {
+                require_once './page/case.php';
+            }
+            else if ($_GET['page'] == 'create_case') {
+                require_once './page/create-case.php';
+            }
             else
                 require_once './page/index_panel.php';
         }
