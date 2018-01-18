@@ -36,6 +36,18 @@
                     </div>
                     <?php
                 }
+
+                if ($admin) {
+                  ?>
+                  <div class="col-sm-4 col-md-4 col-mm-6 product_img" data-move-y="150px">
+                    <a href="?page=case">
+                    <img src="cloud/siteimage.png" class="img-thumbnail" ></a>
+                    <p class="product_title">
+                    <a href="casefile.php" title="工程資料">工程資料</a>
+                    </p>
+                  </div>
+                  <?php
+                }
             ?>
             <!--
             <div class="col-sm-4 col-md-4 col-mm-6 product_img" data-move-y="150px">
@@ -51,14 +63,6 @@
               <img src="cloud/constructtionimage.png" class="img-thumbnail" ></a>
               <p class="product_title">
               <a href="javascript:;" title="施工日誌">施工日誌</a>
-              </p>
-            </div>
-
-            <div class="col-sm-4 col-md-4 col-mm-6 product_img" data-move-y="150px">
-              <a href="casefile.php">
-              <img src="cloud/siteimage.png" class="img-thumbnail" ></a>
-              <p class="product_title">
-              <a href="casefile.php" title="工程資料">工程資料</a>
               </p>
             </div>
 

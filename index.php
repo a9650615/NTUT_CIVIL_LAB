@@ -80,6 +80,35 @@
             }
         }
         else {
+            if ($_GET['page'] == 'create_quality' || $_GET['page'] == 'update_quality') {
+                require_once './page/quality-create.php';
+            }
+            else if ($_GET['page'] == 'check_status') {
+                require_once './page/check-page.php';
+            }
+            else if ($_GET['page'] == 'quality_view') {
+                require_once './page/quality-update.php';
+            }
+            else if ($_GET['page'] == 'quality') {
+                require_once './page/quality-managent.php';
+            }
+            else if ($_GET['page'] == 'quality_finish') {
+                require_once './page/quality-finish.php';
+            }
+            else if ($_GET['page'] == 'quailty_detail') {
+                require_once './page/quality-detail.php';
+            }
+            else if ($_GET['page'] == 'iso_list') {
+                require_once './page/iso-list.php';
+            }
+            else if ($_GET['page'] == 'create_iso') {
+                require_once './page/create-iso.php';
+            }
+            else if ($_GET['page'] == 'update_iso_list'||$_GET['page'] == 'check_iso'||$_GET['page'] == 'view_iso') {
+                require_once './page/update-iso-list.php';
+            }
+            else
+                require_once './page/index_panel.php';
         }
     }
     else {

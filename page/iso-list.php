@@ -2,9 +2,16 @@
 <?php
     include './model/sql.php';
     $filter = $_GET['filter'] ? " AND status='{$_GET['filter']}'" : "";
-    $sql_string = "SELECT * FROM iso_list WHERE user='{$_COOKIE['userId']}' {$filter} ORDER BY ID DESC";
+    if ($_COOKIE['role'] == 1 || $_COOKIE['role'] ==$admin) {
+        $filter = ($_GET['filter'] ? "WHERE status='{$_GET['filter']}'" : "");
+        $sql_string = "SELECT * FROM iso_list {$filter} ORDER BY ID DESC";
+        $sql_str2 = "SELECT * FROM iso_list ORDER BY ID DESC";
+    } else {
+        $sql_string = "SELECT * FROM iso_list WHERE user='{$_COOKIE['userId']}' {$filter} ORDER BY ID DESC";
+        $sql_str2 = "SELECT * FROM iso_list WHERE user='{$_COOKIE['userId']}' ORDER BY ID DESC";
+    }
     $sql = mysqli_query($conn, $sql_string);
-    $sql2 = mysqli_query($conn, "SELECT * FROM iso_list WHERE user='{$_COOKIE['userId']}' ORDER BY ID DESC");
+    $sql2 = mysqli_query($conn, $sql_str2);
     $tot = 0;
     $che = 0;
     $non = 0;
