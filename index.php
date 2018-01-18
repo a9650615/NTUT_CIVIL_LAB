@@ -76,6 +76,15 @@
             else if ($_GET['page'] == 'select_iso_form') {
                 require_once './page/select-iso.php';
             }
+            else if ($_GET['page'] == 'check_status') {
+                require_once './page/check-page.php';
+            }
+            else if ($_GET['page'] == 'quality_view') {
+                require_once './page/quality-update.php';
+            }
+            else if ($_GET['page'] == 'quality') {
+                require_once './page/quality-managent.php';
+            }
             else {
                 require_once './page/index_panel.php';
             }

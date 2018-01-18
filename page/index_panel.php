@@ -11,7 +11,7 @@
             <?php
                 $role = $_COOKIE['role'];
                 $admin = $role == 4;
-                if ($role == 1 || $role == 2 || $admin) {
+                if ($role == 1 || $role == 3|| $role == 2 || $admin) {
                     ?>
                     <div class="col-sm-4 col-md-4 col-mm-6 product_img" data-move-y="150px">
                     <a href="?page=quality">
