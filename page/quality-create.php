@@ -6,7 +6,7 @@
         $sql = mysqli_query($conn, "SELECT * FROM quality_list WHERE ID={$_GET['id']}");
         $data = $sql->fetch_assoc();
     }
-    $case_sql = mysqli_query($conn, "SELECT * FROM case_list")
+    $case_sql = mysqli_query($conn, "SELECT * FROM case_list");
 ?>
 <div class="container">    
     <div class="row">

@@ -52,7 +52,7 @@
                   <!-- Search Google -->
             </div>
             <br>
-            <div class="col-sm-4 col-md-12 col-mm-12" id="content-menu">
+            <div class="col-sm-12 col-md-12 col-mm-12" id="content-menu">
                 <div class="menu">
                     <div>
                     <h2 style="color: red">已建檔ISO工務表單總覽</h2>

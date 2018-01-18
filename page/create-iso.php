@@ -1,4 +1,8 @@
 <?php include './component/header.php'; ?>
+<?php
+    include './model/sql.php';
+     $case_sql = mysqli_query($conn, "SELECT * FROM case_list ORDER BY ID desc");
+?>
 <div class="container">
     <h1>新增檢查表</h1>
     <form method="post" action="/model/iso_form.php?action=create">
@@ -12,6 +16,15 @@
                     <td>
                         工程名稱<br>
                         <input type="text" name="project_name" autocomplete="off" />
+                        <!-- <select name="project_name" required>
+                            <?php
+                            while($data = $case_sql -> fetch_assoc()) {
+                                ?>
+                                <option value="<?=$data['order_id']?>"><?=$data['order_name']?></option>
+                                <?php
+                            }
+                            ?>
+                        </select> -->
                     </td>
                 </tr>
                 <tr>
