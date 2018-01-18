@@ -63,7 +63,7 @@
                                         <td><?=date("Y-m-d",strtotime($data['create_date']))?></td>
                                         <td><?php 
                                             if ($_COOKIE['role'] == 3)
-                                            if ($data['status'] == 0) {
+                                            if ($data['status'] == 0 || $data['status'] == 3) {
                                                 ?>
                                                 <a href="?page=update_iso_list&id=<?=$data['ID']?>">更新</a>
                                                 <?php

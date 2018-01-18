@@ -4,7 +4,8 @@
     $sql = mysqli_query($conn, "SELECT * FROM iso_list WHERE ID = '{$_GET['id']}'");
     $info = $sql->fetch_assoc();
     $quest = mysqli_query($conn, "SELECT * FROM iso_data_sheet WHERE order_id = '{$info['order_id']}' ORDER BY list_id");
-    $value_data = mysqli_query($conn, "SELECT * FROM iso_select_list WHERE order_list = '{$_GET['id']}' ORDER BY list_id");
+    $last = mysqli_query($conn, "SELECT max(order_count) as count FROM iso_list_history WHERE follow_id='{$_GET['id']}'")->fetch_assoc();
+    $value_data = mysqli_query($conn, "SELECT * FROM iso_select_list WHERE order_list = '{$_GET['id']}' and history_id='{$last['count']}' ORDER BY list_id");
     $select_data = [];
     while ($sel_d = $value_data->fetch_assoc()) {
         $select_data[$sel_d['list_id']] = $sel_d['value'];
