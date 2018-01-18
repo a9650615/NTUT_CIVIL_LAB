@@ -43,7 +43,7 @@
                 </tr>
                 <tr>
                     <td>查驗位置：<?=$data['floor']?>樓
-                    <br>(其他備註)<?=$data['now_status']?></td>
+                    <br>(其他備註)<?=$data['other']?></td>
                     <td>
                         缺失修正方式：<?=$data['fix_type']?>
                     </td>
