@@ -63,6 +63,16 @@
                     <input type="submit" value="更新" >
                     <?php
                 }
+                if ($_COOKIE['role'] == 1) {
+                    ?>
+                    <div style="margin: 15px 0;" class="alert alert-secondary" role="alert">
+                        審核狀態
+                        <a href="model/iso_form.php?action=check_iso&data=2&id=<?=$_GET['id']?>" class="btn btn-primary">已改善</a>
+                        <a href="model/iso_form.php?action=check_iso&data=3&id=<?=$_GET['id']?>" class="btn btn-danger">仍未改善</a>
+                        <a href="?page=iso_list" style="float: right; padding: 5px;">回上一頁</a>
+                    </div>
+                    <?php
+                }
             ?>
         </form>
         <style>

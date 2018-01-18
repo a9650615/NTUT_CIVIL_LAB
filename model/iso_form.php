@@ -54,4 +54,8 @@ if ($_GET['action'] == 'update') {
     }
 }
 
+if ($_GET['action'] == 'check_iso') {
+    mysqli_query($conn, "UPDATE iso_list SET `status`='{$_GET['data']}}' WHERE ID ='{$_GET['id']}' ");
+}
+
 header("Location: /?page={$page}");
