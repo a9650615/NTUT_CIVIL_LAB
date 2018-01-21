@@ -72,7 +72,7 @@
                                     <?php
                                 }
                             ?>
-                            <input type="file" name="image" onchange="openFile(event)" />
+                            <input type="file" name="image" onchange="openFile(event)" accept="image/*" />
                             <script type="text/javascript">
                                     function openFile(event){
                                         var input = event.target; //取得上傳檔案

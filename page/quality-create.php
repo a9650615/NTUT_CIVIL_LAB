@@ -74,7 +74,7 @@
                                         <?php
                                     }
                                 ?>
-                                <input type="file" name="image" <?=($_GET['id']?"":"required")?> onchange="openFile(event)" />
+                                <input type="file" name="image" <?=($_GET['id']?"":"required")?> onchange="openFile(event)" accept="image/*"/>
                                 <script type="text/javascript">
                                         function openFile(event){
                                             var input = event.target; //取得上傳檔案
