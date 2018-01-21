@@ -12,7 +12,7 @@
     <div class="row">
         <!--md=電腦 mm=手機 共12格 -->
       <div class="col-xs-12 col-sm-12 col-md-12">
-        <form action="/model/quality_list.php?action=<?=($_GET['id'])?"edit":"create"?>&id=<?=$_GET['id']?>" method="post" enctype="multipart/form-data">
+        <form id="quality_form" action="/model/quality_list.php?action=<?=($_GET['id'])?"edit":"create"?>&id=<?=$_GET['id']?>" method="post" enctype="multipart/form-data">
             <div class="product_index">
                 <table class="New">
                     <tbody>
@@ -36,7 +36,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>本單編號：<!--想自動輸出--><input autocomplete="off" name="order" readonly required type="text" value="<?=$_GET['id']?$data['order_id']:uniqid(rand())?>" /><!-- 顯示mysql row+1 --></td>
+                            <td>本單編號：<!--想自動輸出--><input autocomplete="off" name="order" id="order_id" readonly required type="text" value="<?=$_GET['id']?$data['order_id']:uniqid(rand())?>" /><!-- 顯示mysql row+1 --></td>
                             <td>改善確認：<br/>
                             <select name="status">
                                 <option value="0" <?=($data['status']=='0')?"selected":""?>>未改善</option>
@@ -129,27 +129,27 @@
                                     };
                                     }
                                         // Set up touch events for mobile, etc
-                                    // canvas.addEventListener("touchstart", function (e) {
-                                    //         mousePos = getTouchPos(canvas, e);
-                                    // var touch = e.touches[0];
-                                    // var mouseEvent = new MouseEvent("mousedown", {
-                                    //     clientX: touch.clientX,
-                                    //     clientY: touch.clientY
-                                    // });
-                                    // canvas.dispatchEvent(mouseEvent);
-                                    // }, false);
-                                    // canvas.addEventListener("touchend", function (e) {
-                                    // var mouseEvent = new MouseEvent("mouseup", {});
-                                    // canvas.dispatchEvent(mouseEvent);
-                                    // }, false);
-                                    // canvas.addEventListener("touchmove", function (e) {
-                                    // var touch = e.touches[0];
-                                    // var mouseEvent = new MouseEvent("mousemove", {
-                                    //     clientX: touch.clientX,
-                                    //     clientY: touch.clientY
-                                    // });
-                                    // canvas.dispatchEvent(mouseEvent);
-                                    // }, false);
+                                    canvas.addEventListener("touchstart", function (e) {
+                                            mousePos = getTouchPos(canvas, e);
+                                    var touch = e.touches[0];
+                                    var mouseEvent = new MouseEvent("mousedown", {
+                                        clientX: touch.clientX,
+                                        clientY: touch.clientY
+                                    });
+                                    canvas.dispatchEvent(mouseEvent);
+                                    }, false);
+                                    canvas.addEventListener("touchend", function (e) {
+                                    var mouseEvent = new MouseEvent("mouseup", {});
+                                    canvas.dispatchEvent(mouseEvent);
+                                    }, false);
+                                    canvas.addEventListener("touchmove", function (e) {
+                                    var touch = e.touches[0];
+                                    var mouseEvent = new MouseEvent("mousemove", {
+                                        clientX: touch.clientX,
+                                        clientY: touch.clientY
+                                    });
+                                    canvas.dispatchEvent(mouseEvent);
+                                    }, false);
 
                                     // Get the position of a touch relative to the canvas
                                     function getTouchPos(canvasDom, touchEvent) {
@@ -159,6 +159,23 @@
                                         y: touchEvent.touches[0].clientY - rect.top
                                     };
                                     }
+                                    let upload = () => {
+                                        var formData = new FormData();
+                                        canvas.toBlob((blob) => {
+                                            formData.append('img', blob);
+                                            formData.append('order_id', $('#order_id').val());
+                                            $.ajax({
+                                                url: "/model/canvasUpload.php?action=create_quality",
+                                                type: "POST",
+                                                data: formData,
+                                                processData: false,
+                                                contentType: false
+                                            }).done(function(respond){
+                                                // alert(respond);
+                                                $('#sub').click()
+                                            });
+                                        })
+                                    }
                                 </script>
                             </td>
                         </tr>
@@ -167,7 +184,8 @@
             </div>
             <br>
             <div style="font-size:25px;" class="col-sm-4 col-md-12 col-mm-12"> 
-                <button type="submit" class="button button-block" name="save" />確定送出</button>
+                <button type="button" onclick="upload()" class="button button-block" />確定送出</button>
+                <input type="submit" id="sub" style="display: none;"/>
                 <a href="?page=quality"><span style="float: right;" >回上一頁</span>
             </div>
         </form>
