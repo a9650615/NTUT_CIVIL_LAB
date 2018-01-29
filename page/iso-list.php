@@ -66,7 +66,7 @@
                     <table class="table" style="width: 100%;">
                         <thead>
                             <tr>
-                                <td>表單名稱</td>
+                                <td>工程名稱</td>
                                 <td>狀態</td>
                                 <td>建立時間</td>
                                 <td>編輯</td>
@@ -77,7 +77,7 @@
                                 while($data = $sql->fetch_assoc()) {
                                     ?>
                                     <tr>
-                                        <td><?=$data['project_name']?></td>
+                                        <td><?=$data['project_name']?>/<?=$data['order_id']?></td>
                                         <td><?php
                                             if ($data['status'] == 0)
                                                 echo '未完成';
