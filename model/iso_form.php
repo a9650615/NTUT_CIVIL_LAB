@@ -39,7 +39,7 @@ if ($_GET['action'] == 'update') {
     $id = $_GET['id'];
     if ($d['status'] == 3) {
         $need_back = $last['count'] + 1;
-        mysqli_query($conn, "INSERT INTO iso_list_history(`list_id`, `follow_id`, `order_count`) VALUES('{$_GET['id']}', '{$_GET['id']}', '{$need_back}')");
+        mysqli_query($conn, "INSERT INTO iso_list_history(`list_id`, `follow_id`, `order_count`,`user`,`checker`) VALUES('{$_GET['id']}', '{$_GET['id']}', '{$need_back}','{$_COOKIE['userId']}','0')");
         $id = $need_back;
     } else {
         $id = $last['count'];
@@ -67,6 +67,8 @@ if ($_GET['action'] == 'update') {
 
 if ($_GET['action'] == 'check_iso') {
     mysqli_query($conn, "UPDATE iso_list SET `status`='{$_GET['data']}}' WHERE ID ='{$_GET['id']}' ");
+    $last = mysqli_query($conn, "SELECT max(order_count) as count FROM iso_list_history WHERE follow_id='{$_GET['id']}'")->fetch_assoc();
+    mysqli_query($conn, "UPDATE iso_list_history SET `checker`='{$_COOKIE['userId']}', `comment`='{$_POST['comment']}', `other`='{$_POST['other']}' WHERE follow_id ='{$_GET['id']}' and order_count='{$last['count']}' ");
 }
 
 if ($_GET['action'] == 'delete') {

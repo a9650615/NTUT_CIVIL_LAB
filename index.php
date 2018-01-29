@@ -34,6 +34,9 @@
             else if ($_GET['page'] == 'create_iso') {
                 require_once './page/create-iso.php';
             }
+            else if ($_GET['page'] == 'iso_comment') {
+                require_once './page/iso-comment.php';
+            }
             else if ($_GET['page'] == 'update_iso_list'||$_GET['page'] == 'check_iso'||$_GET['page'] == 'view_iso') {
                 require_once './page/update-iso-list.php';
             }
@@ -131,6 +134,9 @@
             }
             else if ($_GET['page'] == 'edit_case') {
                 require_once './page/create-case.php';
+            }
+            else if ($_GET['page'] == 'iso_comment') {
+                require_once './page/iso-comment.php';
             }
             else
                 require_once './page/index_panel.php';
