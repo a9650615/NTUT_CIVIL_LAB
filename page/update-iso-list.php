@@ -43,7 +43,7 @@
                 <?php
                     while($data = $quest->fetch_assoc()) {
                         $value = $select_data[$data['list_id']];
-                        if (empty($value)) $value = "-1";
+                        if (!is_numeric($value)) $value = "-1";
                         ?>
                         <tr>
                             <td><?=$data['list_id']?></td>

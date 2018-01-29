@@ -51,7 +51,7 @@ if ($_GET['action'] == 'update') {
     foreach ($_POST['state'] as $key => $value) {
         $search_sql = mysqli_query($conn, "SELECT * FROM iso_select_list WHERE list_id='{$key}' and order_list='{$_GET['id']}' and history_id='{$id}'");
         $count = mysqli_num_rows($search_sql);
-        if ($value=="2") $total_count++;
+        if ($value=="2"||$value=="0") $total_count++;
         if ($count == 0 || $d['status'] == 3) {
             mysqli_query($conn, "INSERT INTO iso_select_list(`list_id`, `order_list`, `value`, `history_id`) VALUES('{$key}','{$_GET['id']}','{$value}', '{$id}')");
         } else {
