@@ -26,7 +26,7 @@ foreach ($keys as $key) {
 if ($_GET['action'] == 'register' && $has_all_data == true) {
     $ps = md5($_POST['ps']);
     if ($_POST['ps'] == $_POST['check_ps']) {
-        $sql = "INSERT INTO user(`acc`, `ps`, `email`, `role`, `name`) VALUES('{$_POST['acc']}','{$ps}', '{$_POST['email']}','{$_POST['role']}', '{$_POST['name']}')";
+        $sql = "INSERT INTO user(`acc`, `ps`, `email`, `role`, `name`, `order_id`) VALUES('{$_POST['acc']}','{$ps}', '{$_POST['email']}','{$_POST['role']}', '{$_POST['name']}', '')";
         if ($_POST['role'] == 1||$_POST['role'] == 3) {
             $sql = "INSERT INTO user(`acc`, `ps`, `email`, `role`, `order_id`, `name`) VALUES('{$_POST['acc']}','{$ps}', '{$_POST['email']}','{$_POST['role']}', '{$_POST['order_id']}', '{$_POST['name']}')";
         }

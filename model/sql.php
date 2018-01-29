@@ -1,9 +1,9 @@
 <?php
-$user = 'admin';
-$password = '1234';
-$db = 'NTUT_CIVIL_LAB';
-$host = 'birdyoserv.ga';
-$port = 3307;
+$user = 'root';
+$password = 'root';
+$db = 'civil';
+$host = '127.0.0.1';
+$port = 3306;
 // $socket = 'localhost:/Applications/MAMP/tmp/mysql/mysql.sock';
 
 $conn = mysqli_init();
