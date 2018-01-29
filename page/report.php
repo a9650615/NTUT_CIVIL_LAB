@@ -75,6 +75,6 @@
 </tbody>
 </table>
 <div class="alert alert-info" style="width: 80%; margin: auto; margin-top: 10px;" role="alert">
-    合格率: <?=intval((($row_count - $no_pass)/$row_count)*100)?>%,改善率: <?=max(0,intval((($row_count - $out_date)/$row_count)*100))?>%
+    合格率: <?=intval((($row_count - $no_pass)/$row_count)*100)?>%,改善率: <?=max(0,intval((($row_count - $no_pass - $out_date)/$row_count)*100))?>%
 </div>
 <?php include './component/footer.php'; ?>
