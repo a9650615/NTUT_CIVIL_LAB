@@ -129,6 +129,9 @@
             else if ($_GET['page'] == 'create_case') {
                 require_once './page/create-case.php';
             }
+            else if ($_GET['page'] == 'edit_case') {
+                require_once './page/create-case.php';
+            }
             else
                 require_once './page/index_panel.php';
         }

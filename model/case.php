@@ -24,4 +24,12 @@ if ($_GET['action'] == 'create') {
     mysqli_query($conn, "INSERT INTO case_list(`order_id`, `order_name`, `supervisor`, `checker`, `contractor`) VALUES('{$_POST['order_id']}', '{$_POST['order_name']}' ,'{$_POST['supervisor']}', '{$_POST['checker']}', '{$_POST['contractor']}')");
 }
 
+if ($_GET['action'] == 'update') {
+    mysqli_query($conn, "UPDATE case_list SET `order_id`='{$_POST['order_id']}', `order_name`='{$_POST['order_name']}', `supervisor`='{$_POST['supervisor']}', `checker`='{$_POST['checker']}', `contractor`='{$_POST['contractor']}' WHERE ID='{$_GET['id']}'");
+}
+
+if ($_GET['action'] == 'delete') {
+    mysqli_query($conn, "DELETE FROM case_list WHERE ID='{$_GET['id']}'");
+}
+
 header("Location: /?page={$page}");

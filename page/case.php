@@ -14,6 +14,7 @@
             <th>施工所主管</th>
             <th>檢查人員</th>
             <th>承包商名稱</th>
+            <th>編輯</th>
         </tr>
         </thead>
         <tbody>
@@ -26,6 +27,10 @@
                         <td><?=$data['supervisor']?></td>
                         <td><?=$data['checker']?></td>
                         <td><?=$data['contractor']?></td>
+                        <td>
+                            <a href="?page=edit_case&id=<?=$data['ID']?>">編輯</a>
+                            <a href="/model/case.php?action=delete&id=<?=$data['ID']?>">刪除</a>
+                        </td>
                     </tr>
                     <?php
                 }
