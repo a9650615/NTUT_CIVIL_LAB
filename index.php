@@ -138,6 +138,12 @@
             else if ($_GET['page'] == 'iso_comment') {
                 require_once './page/iso-comment.php';
             }
+            else if ($_GET['page'] == 'safty') {
+                require_once './page/safty-list.php';
+            }
+            else if ($_GET['page'] == 'safty_form') {
+                require_once './page/safty-form.php';
+            }
             else
                 require_once './page/index_panel.php';
         }

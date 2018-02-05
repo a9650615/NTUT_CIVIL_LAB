@@ -49,14 +49,14 @@
                   <?php
                 }
             ?>
-            <!--
             <div class="col-sm-4 col-md-4 col-mm-6 product_img" data-move-y="150px">
-              <a href="safty-index.html">
+              <a href="?page=safty">
               <img src="cloud/saftyimage.png" class="img-thumbnail"></a>
               <p class="product_title">
               <a href="safty-index.html" title="安全衛生檢查表">安全衛生檢查表 </a>
               </p>
             </div>
+            <!--
 
             <div class="col-sm-4 col-md-4 col-mm-6 product_img" data-move-y="150px">
               <a href="javascript:;">
