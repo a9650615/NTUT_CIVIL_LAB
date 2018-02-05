@@ -29,7 +29,7 @@
                                     while ($d = $case_sql -> fetch_assoc()) {
                                         ?>
                                         <option <?=($data['No']==$d['order_id']?"selected":"")?> data-id="<?=$d['order_id']?>"><?=$d['order_name']?></option>
-                                        <?
+                                        <?php
                                     }
                                 ?>
                                 </select>

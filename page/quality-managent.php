@@ -94,7 +94,7 @@
                             <a href="?page=quality_view&id=<?=$data['ID']?>">閱覽</a>
                         </td>
                     </tr>
-                    <?
+                    <?php
                 }
             ?>
         </tbody>

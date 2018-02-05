@@ -144,6 +144,9 @@
             else if ($_GET['page'] == 'safty_form') {
                 require_once './page/safty-form.php';
             }
+            else if ($_GET['page'] == 'update_safty') {
+                require_once './page/update-safty.php';
+            }
             else
                 require_once './page/index_panel.php';
         }
