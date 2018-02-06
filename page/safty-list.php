@@ -30,11 +30,17 @@
                         <td><?=$data['missing_company']?></td>
                         <td><?=$data['fine']?></td>
                         <td>
-                            <a>編輯</a>
-                            <a>刪除</a>
+                            <?php 
+                                if ($_COOKIE['role'] == 3 || $_COOKIE['role'] == $admin) {
+                                    ?>
+                                    <a>編輯</a>
+                                    <a>刪除</a>
+                                    <?php
+                                }
+                            ?>
                             <?php
-                                if ($data['resolve_image'] != "" && ($data['status'] == 0 || $data['status'] == 2) && $_COOKIE['role'] == 3)
-                                    echo "<span style='color:red;'>*</span><a href='?page=check_status&id={$data['ID']}'>檢查</a>";
+                                if ($data['resolve_image'] != "" && ($data['status'] == 3 || $data['status'] == 2) && $_COOKIE['role'] == 3)
+                                    echo "<span style='color:red;'>*</span><a href='?page=check_safty&id={$data['ID']}'>檢查</a>";
                                 if (($data['status'] == 0 || $data['status'] == 3)&&$_COOKIE['role']==5) {
                                     ?>
                                     <a href="?page=update_safty&id=<?=$data['ID']?>">更新圖片</a>

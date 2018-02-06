@@ -94,8 +94,31 @@
             else if ($_GET['page'] == 'update_quality') {
                 require_once './page/quality-update.php';
             }
+            else if ($_GET['page'] == 'safty') {
+                require_once './page/safty-list.php';
+            }
+            else if ($_GET['page'] == 'safty_form') {
+                require_once './page/safty-form.php';
+            }
+            else if ($_GET['page'] == 'update_safty') {
+                require_once './page/update-safty.php';
+            }
+            else if ($_GET['page'] == 'check_safty') {
+                require_once './page/check-safty.php';
+            }
             else {
                 require_once './page/index_panel.php';
+            }
+        }
+        else if ($role == 5) {
+            if ($_GET['page'] == 'safty') {
+                require_once './page/safty-list.php';
+            }
+            else if ($_GET['page'] == 'safty_form') {
+                require_once './page/safty-form.php';
+            }
+            else if ($_GET['page'] == 'update_safty') {
+                require_once './page/update-safty.php';
             }
         }
         else {
