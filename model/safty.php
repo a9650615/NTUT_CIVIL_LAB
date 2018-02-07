@@ -59,4 +59,8 @@ if ($_GET['action'] == 'check_status') {
     $sql = mysqli_query($conn, "UPDATE safty_list SET `status`='{$data}' WHERE ID='{$_GET['id']}'");
 }
 
+if ($_GET['action']=='delete') {
+    $sql = mysqli_query($conn, "DELETE FROM safty_list WHERE ID='{$_GET['id']}'");
+}
+
 header("Location: /?page={$page}");

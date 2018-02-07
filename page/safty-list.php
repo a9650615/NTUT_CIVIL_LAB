@@ -33,8 +33,8 @@
                             <?php 
                                 if ($_COOKIE['role'] == 3 || $_COOKIE['role'] == $admin) {
                                     ?>
-                                    <a>編輯</a>
-                                    <a>刪除</a>
+                                    <a href="?page=safty_form&id=<?=$data['ID']?>">編輯</a>
+                                    <a href="./model/safty.php?action=delete&id=<?=$data['ID']?>">刪除</a>
                                     <?php
                                 }
                             ?>
