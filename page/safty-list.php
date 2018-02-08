@@ -6,6 +6,17 @@
 <a href="?page=logout" style="float:right;">登出</a>
 <div class="col-sm-12 col-md-12 col-mm-12" id="content-menu">
     <a href="?page=safty_form">新增安衛罰款</a>
+    <form method="get" actions="?">
+        <input type="hidden" value="<?=$_GET['page']?>" name="page" />
+        篩選 : 
+        <select name="filter">
+            <option value="">全部</option>
+            <option value="0" <?=$_GET['filter']=='0'?"selected":""?>>未改善</option>
+            <option value="1" <?=$_GET['filter']=='1'?"selected":""?>>已改善</option>
+            <option value="2" <?=$_GET['filter']=='2'?"selected":""?>>未合格</option>
+        </select>
+        <input type="submit" value="篩選" />
+    </form>
     <div class="menu">
         <div>
         <h2 style="color: red">已建檔安衛罰款總覽</h2>
@@ -16,7 +27,7 @@
                     <td>查驗位置</td>
                     <td>缺失項目</td>
                     <td>缺失廠商</td>
-                    <td>罰款項目</td>
+                    <td>狀態</td>
                     <td>編輯</td>
                 </tr>
             </thead>
@@ -28,7 +39,16 @@
                         <td><?=$data['check_place']?></td>
                         <td><?=$data['missing_place']?></td>
                         <td><?=$data['missing_company']?></td>
-                        <td><?=$data['fine']?></td>
+                        <td><?php 
+                            $status = "未改善";
+                            if ($data['status'] == 1)
+                                $status = "已改善";
+                            else {
+                                if ($data['status'] == 2)
+                                    $status = "未合格";
+                            }
+                            echo $status;
+                        ?></td>
                         <td>
                             <?php 
                                 if ($_COOKIE['role'] == 3 || $_COOKIE['role'] == $admin) {

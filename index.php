@@ -120,6 +120,9 @@
             else if ($_GET['page'] == 'update_safty') {
                 require_once './page/update-safty.php';
             }
+            else {
+                require_once './page/index_panel.php';
+            }
         }
         else {
             if ($_GET['page'] == 'create_quality' || $_GET['page'] == 'update_quality') {

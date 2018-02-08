@@ -51,6 +51,17 @@ if ($_GET['action'] == 'update' && $has_all_data) {
     $page = "update_safty&id={$_GET['id']}";
 }
 
+if ($_GET['action']=='update_data') {
+    $sql = mysqli_query($conn, "UPDATE safty_list 
+        SET 
+            `missing_place`='{$_POST['missing_place']}',
+            `missing_company`='{$_POST['missing_company']}',
+            `check_place`='{$_POST['check_place']}',
+            `fine`='{$_POST['fine']}',
+            `other`='{$_POST['other']}'
+     WHERE ID='{$_GET['id']}'");
+}
+
 if ($_GET['action'] == 'check_status') {
     $data = 2;
     if ($_GET['data']=='success') {
