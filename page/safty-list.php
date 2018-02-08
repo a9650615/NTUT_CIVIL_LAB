@@ -1,11 +1,21 @@
 <?php require_once './component/header.php'; ?>
 <?php
     include './model/sql.php';
-    $sql = mysqli_query($conn, "SELECT * FROM safty_list ORDER BY ID DESC");
+    $search = '';
+    if ($_GET['filter']) {
+        $search = "WHERE status = '{$_GET['filter']}'";
+    }
+    $sql = mysqli_query($conn, "SELECT * FROM safty_list {$search} ORDER BY ID DESC");
 ?>
 <a href="?page=logout" style="float:right;">登出</a>
 <div class="col-sm-12 col-md-12 col-mm-12" id="content-menu">
-    <a href="?page=safty_form">新增安衛罰款</a>
+    <?php
+        if ($_COOKIE['role']==3) {
+            ?>
+            <a href="?page=safty_form">新增安衛罰款</a>
+            <?php
+        }
+    ?>
     <form method="get" actions="?">
         <input type="hidden" value="<?=$_GET['page']?>" name="page" />
         篩選 : 
@@ -43,6 +53,8 @@
                             $status = "未改善";
                             if ($data['status'] == 1)
                                 $status = "已改善";
+                            else if ($data['status'] == 3)
+                                $status = "審核中";
                             else {
                                 if ($data['status'] == 2)
                                     $status = "未合格";
@@ -61,7 +73,7 @@
                             <?php
                                 if ($data['resolve_image'] != "" && ($data['status'] == 3 || $data['status'] == 2) && $_COOKIE['role'] == 3)
                                     echo "<span style='color:red;'>*</span><a href='?page=check_safty&id={$data['ID']}'>檢查</a>";
-                                if (($data['status'] == 0 || $data['status'] == 3)&&$_COOKIE['role']==5) {
+                                if (($data['status'] == 0 || $data['status'] == 2 || $data['status']==3)&&$_COOKIE['role']==5) {
                                     ?>
                                     <a href="?page=update_safty&id=<?=$data['ID']?>">更新圖片</a>
                                     <?php

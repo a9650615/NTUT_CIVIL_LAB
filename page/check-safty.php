@@ -41,7 +41,7 @@
             是否已改善?
             <a href="model/safty.php?action=check_status&data=success&id=<?=$_GET['id']?>" class="btn btn-primary">已改善</a>
             <a href="model/safty.php?action=check_status&data=cancel&id=<?=$_GET['id']?>" class="btn btn-danger">仍未改善</a>
-            <a href="?page=quality" style="float: right; padding: 5px;">回上一頁</a>
+            <a href="?page=safty" style="float: right; padding: 5px;">回上一頁</a>
         </div>
     </div>
 </div>

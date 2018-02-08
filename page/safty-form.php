@@ -33,7 +33,13 @@
                     </select>
                 </td>
                 <td>
-                    選擇照片：<input type="file" name="missing_image" <?=($_GET['id'?"":"required"])?>/>
+                    <?php 
+                        if (!$_GET['id']) {
+                            ?>
+                            選擇照片：<input type="file" name="missing_image" <?=($_GET['id'?"":"required"])?>/>
+                            <?php
+                        }
+                    ?>
                     <?php
                         if ($d['image']) {
                             ?>
