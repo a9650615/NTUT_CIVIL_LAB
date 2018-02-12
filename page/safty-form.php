@@ -43,7 +43,7 @@
                     <?php
                         if ($d['image']) {
                             ?>
-                            <img src="/upload_space/<?=$d['image']?>" />
+                            <img style="max-width:100%;" src="/upload_space/<?=$d['image']?>" />
                             <?php
                         }
                     ?>

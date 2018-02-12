@@ -47,11 +47,9 @@
                         <td></td>
                     </tr>
                 </table>
-                <input value="送出" type="submit" />
-            </form>
-        <?php
+                <?php
     }
-?>
+    ?>
         </div>
         <br>
         <div style="font-size:25px;" class="col-sm-12 col-md-12 col-mm-12">
@@ -59,15 +57,16 @@
             <?php
                 if ($data && ($_COOKIE['role'] == 1 || $_COOKIE['role'] == 3)) {
                     ?>
-                    <button type="button" onclick="upload()" class="button button-block" name="save" />確定更新</button>
+                    <input value="送出" type="submit" />
                     <?php
                 } else if (!$data) {
                     ?>
                     找不到表單
                     <?php
                 }
-            ?>
+                ?>
             <a href="?page=safty"><span style="float: right;" >回上一頁</span>
+        </form>
         </div>
       </div>
     </div>
