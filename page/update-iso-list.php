@@ -97,6 +97,16 @@
                     </div>
                     <?php
                 }
+                if ($_GET['page']=='view_iso') {
+                    $creater = mysqli_query($conn, "SELECT * FROM user WHERE ID='{$info['user']}'")->fetch_assoc();
+                    $checker = mysqli_query($conn, "SELECT * FROM user WHERE ID='{$ls['checker']}'")->fetch_assoc();
+                    ?>
+                    <div class="row">
+                        <div class="col col-xs-6">建單人:<span style="text-decoration:underline;"><?=$creater['name']?></span></div>
+                        <div class="col col-xs-6">審核人:<span style="text-decoration:underline;"><?=$checker['name']?></span></div>
+                    </div>
+                    <?php
+                }
             ?>
         </form>
         <style>
