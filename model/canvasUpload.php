@@ -14,6 +14,19 @@
                 echo 'fail';
             }
         }
+        else if ($_GET['action'] == 'create_safty') {
+            if (move_uploaded_file($_FILES["img"]["tmp_name"], '../upload_space/safty_'.$_POST['order_id'].'_create.png')) {
+                echo 'ok';
+            } else {
+                echo 'fail';
+            }
+        } else if ($_GET['action'] == 'update_safty') {
+            if (move_uploaded_file($_FILES["img"]["tmp_name"], '../upload_space/safty_'.$_POST['order_id'].'_update.png')) {
+                echo 'ok';
+            } else {
+                echo 'fail';
+            }
+        }
     } else {
         echo 'no';
     }
