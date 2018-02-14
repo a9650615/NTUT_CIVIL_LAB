@@ -36,7 +36,7 @@
                         <td><?php
                                 if (strtotime($data['resolve_date']) < time()) {
                                     echo '是';
-                                    if ($data['status'] != 1)
+                                    //if ($data['status'] != 1)
                                         $out_date ++;
                                 }
                                 else 

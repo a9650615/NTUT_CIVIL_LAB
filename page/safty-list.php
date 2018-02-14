@@ -7,6 +7,7 @@
     }
     $sql = mysqli_query($conn, "SELECT * FROM safty_list {$search} ORDER BY ID DESC");
 ?>
+<a href="/">上一頁</a>
 <a href="?page=logout" style="float:right;">登出</a>
 <div class="col-sm-12 col-md-12 col-mm-12" id="content-menu">
     <?php
