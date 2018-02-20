@@ -173,6 +173,12 @@
             else if ($_GET['page'] == 'update_safty') {
                 require_once './page/update-safty.php';
             }
+            else if ($_GET['page'] == 'select_iso_form') {
+                require_once './page/select-iso.php';
+            }
+            else if ($_GET['page'] == 'check_safty') {
+                require_once './page/check-safty.php';
+            }
             else
                 require_once './page/index_panel.php';
         }

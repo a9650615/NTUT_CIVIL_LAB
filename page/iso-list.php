@@ -31,7 +31,7 @@
     <div class="col-xs-12 col-sm-12 col-md-12">   
           <div class="product_index">
             <?php
-                if ($_COOKIE['role'] == 3) {
+                if ($_COOKIE['role'] == 3 || $_COOKIE['role'] == $admin) {
                     ?>
                     <a href="?page=select_iso_form">新增 ISO 表單</a>
                     <?php

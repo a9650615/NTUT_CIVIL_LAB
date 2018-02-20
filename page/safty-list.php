@@ -11,7 +11,7 @@
 <a href="?page=logout" style="float:right;">登出</a>
 <div class="col-sm-12 col-md-12 col-mm-12" id="content-menu">
     <?php
-        if ($_COOKIE['role']==5) {
+        if ($_COOKIE['role']==5 || $_COOKIE['role']==$admin) {
             ?>
             <a href="?page=safty_form">新增安衛罰款</a>
             <?php
@@ -35,8 +35,7 @@
         <table class="table" style="width: 100%;">
             <thead>
                 <tr>
-                    <td>查驗位置</td>
-                    <td>缺失項目</td>
+                    <td>工程名稱</td>
                     <td>缺失廠商</td>
                     <td>狀態</td>
                     <td>編輯</td>
@@ -47,7 +46,6 @@
                 while ($data = $sql->fetch_assoc()) {
                     ?>
                     <tr>
-                        <td><?=$data['check_place']?></td>
                         <td><?=$data['missing_place']?></td>
                         <td><?=$data['missing_company']?></td>
                         <td><?php 
@@ -64,6 +62,11 @@
                         ?></td>
                         <td>
                             <?php 
+                                if ($_COOKIE['role'] == $admin) {
+                                    ?>
+                                    <a href='?page=check_safty&id=<?=$data['ID']?>'>預覽</a>
+                                    <?php
+                                }
                                 if ($_COOKIE['role'] == 5 || $_COOKIE['role'] == $admin) {
                                     ?>
                                     <a href="?page=safty_form&id=<?=$data['ID']?>">編輯</a>
