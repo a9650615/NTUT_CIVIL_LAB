@@ -21,9 +21,9 @@
                     while ($dd = $inner_sql -> fetch_assoc()) {
                         if ($dd['status'] != 1) {
                             $no_pass ++;
-                            if (strtotime($dd['resolve_date']) < time()) {
-                                $out_date ++;
-                            }
+                        }
+                        if (strtotime($dd['resolve_date']) < time()) {
+                            $out_date ++;
                         }
                     }
                     ?>
