@@ -58,7 +58,8 @@ if ($_GET['action']=='update_data') {
             `missing_company`='{$_POST['missing_company']}',
             `check_place`='{$_POST['check_place']}',
             `fine`='{$_POST['fine']}',
-            `other`='{$_POST['other']}'
+            `other`='{$_POST['other']}',
+            `status`='{$_POST['status']}'
      WHERE ID='{$_GET['id']}'");
 }
 

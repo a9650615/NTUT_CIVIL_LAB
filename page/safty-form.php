@@ -100,7 +100,19 @@
                     </select>
                 </td>
                 <td>
-                    
+                    <?php
+                        if ($_GET['id']) {
+                            ?>
+                            狀態：
+                            <select name="status">
+                                <option value="0" <?=($d['status']==0?"selected":"")?>>未改善</option>
+                                <option value="1" <?=($d['status']==1?"selected":"")?>>已改善</option>
+                                <option value="2" <?=($d['status']==2?"selected":"")?>>未合格</option>
+                                <option value="3" <?=($d['status']==3?"selected":"")?>>審核中</option>
+                            </select>
+                            <?php
+                        }
+                    ?>
                 </td>
             </tr>
             <tr>
