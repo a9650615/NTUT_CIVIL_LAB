@@ -31,8 +31,8 @@ if ($_GET['action'] == 'create' && $has_all_data) {
     } else {
         // echo "Sorry, there was an error uploading your file.";
     }
-    $sql = mysqli_query($conn, "INSERT INTO safty_list(`missing_place`, `missing_company`, `check_place`, `fine`, `other`, `image`, `resolve_image`)
-        VALUES ('{$_POST['missing_place']}', '{$_POST['missing_company']}', '{$_POST['check_place']}', '{$_POST['fine']}', '{$_POST['other']}', '{$file_name}', '')
+    $sql = mysqli_query($conn, "INSERT INTO safty_list(`missing_place`, `missing_company`, `check_place`, `fine`, `other`, `image`, `resolve_image`,`resolve_date`)
+        VALUES ('{$_POST['missing_place']}', '{$_POST['missing_company']}', '{$_POST['check_place']}', '{$_POST['fine']}', '{$_POST['other']}', '{$file_name}', '','{$_POST['resolve_date']}')
     ");
 }
 
@@ -59,7 +59,8 @@ if ($_GET['action']=='update_data') {
             `check_place`='{$_POST['check_place']}',
             `fine`='{$_POST['fine']}',
             `other`='{$_POST['other']}',
-            `status`='{$_POST['status']}'
+            `status`='{$_POST['status']}',
+            `resolve_date`='{$_POST['resolve_date']}'
      WHERE ID='{$_GET['id']}'");
 }
 

@@ -16,6 +16,9 @@
             <a href="?page=safty_form">新增安衛罰款</a>
             <?php
         }
+        $row_count = 0;
+        $no_pass = 0;
+        $out_date = 0;
     ?>
     <form method="get" actions="?">
         <input type="hidden" value="<?=$_GET['page']?>" name="page" />
@@ -44,6 +47,10 @@
             <tbody>
                 <?php
                 while ($data = $sql->fetch_assoc()) {
+                        $row_count ++;
+                        if (strtotime($data['resolve_date']) < time()) {
+                            $out_date ++;
+                        }
                     ?>
                     <tr>
                         <td><?=$data['missing_place']?></td>
@@ -52,11 +59,14 @@
                             $status = "未改善";
                             if ($data['status'] == 1)
                                 $status = "已改善";
-                            else if ($data['status'] == 3)
-                                $status = "審核中";
                             else {
-                                if ($data['status'] == 2)
-                                    $status = "未合格";
+                                    $no_pass ++;
+                                    if ($data['status'] == 2) {
+                                        $status = "未合格";
+                                    }
+                                    else if ($data['status'] == 3) {
+                                        $status = "審核中";
+                                    }
                             }
                             echo $status;
                         ?></td>
@@ -90,6 +100,9 @@
                 ?>
             </tbody>
         </table>
+    </div>
+    <div class="alert alert-info" style="width: 80%; margin: auto; margin-top: 10px;" role="alert">
+        合格率: <?=intval((($row_count - $no_pass)/$row_count)*100)?>%,改善率: <?=max(0,intval((($row_count - $no_pass - $out_date)/$row_count)*100))?>%
     </div>
 </div>
 <?php require_once './component/footer.php'; ?>

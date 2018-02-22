@@ -100,6 +100,10 @@
                     </select>
                 </td>
                 <td>
+                    <label>
+                        解決期限：
+                        <input type="date" name="resolve_date" value="<?=$d['resolve_date']?>"/>
+                    </label>
                     <?php
                         if ($_GET['id']) {
                             ?>
