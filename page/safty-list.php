@@ -103,6 +103,7 @@
     </div>
     <div class="alert alert-info" style="width: 80%; margin: auto; margin-top: 10px;" role="alert">
         合格率: <?=intval((($row_count - $no_pass)/$row_count)*100)?>%,改善率: <?=max(0,intval((($row_count - $no_pass - $out_date)/$row_count)*100))?>%
+        （<a href="?page=safty_finish">檢視改善率</a>）
     </div>
 </div>
 <?php require_once './component/footer.php'; ?>
