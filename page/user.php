@@ -7,15 +7,15 @@
     $sql = mysqli_query($conn, "SELECT * FROM user WHERE ID='{$_COOKIE['userId']}'");
     $data = $sql->fetch_assoc();
 ?>
-<a href="?page=logout" style="float:right;">登出</a>
 <div class="container">
     <div>
-        會員資料 <a href="?page=edit_ps">修改密碼</a>
+        <p style="font-size: 35px">員工資料</p> <br> 
         <ul class="list-group">
-            <li class="list-group-item">會員帳號:<?=$data['acc']?></li>
-            <li class="list-group-item">會員名稱:<?=$data['name']?></li>
-            <li class="list-group-item">工程 ID:<?=$data['order_id']?></li>
+            <li class="list-group-item">員工編號:<?=$data['acc']?></li>
+            <li class="list-group-item">員工姓名:<?=$data['name']?></li>
+            <li class="list-group-item">所屬工程編號:<?=$data['order_id']?></li>
         </ul>
+        <a style="float:right;" href="?page=edit_ps">修改密碼</a>
     </div>
     <a href="?">回上一頁</a>
 </div>

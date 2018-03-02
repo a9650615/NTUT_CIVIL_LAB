@@ -1,7 +1,9 @@
 <?php include './component/header.php'; ?>   
 <div class="container">
-<h1>新增ISO工務表單</h1>          
-    <div class="col-sm-4 col-md-6 col-mm-6" id="content-menu">
+    <br>
+    <p align="center" style="font-size: 35px;">ISO工務表單列表</p>
+    <br>         
+    <br><div class="col-sm-4 col-md-6 col-mm-6" id="content-menu">
         <div class="menu">
             <div>
             <h2>地面下工程檢查表</h2>
@@ -19,13 +21,6 @@
                     <li><a href="?page=create_iso&order_id=SF-0304-01">SF-0304-01擋土支撐工程</a></li>
                     <li><a href="?page=create_iso&order_id=SF-0305-01">SF-0305-01安全監測系統</a></li>
                     <li><a href="?page=create_iso&order_id=SF-0402-01">SF-0402-01放樣工程</a></li>
-                    <li><a href="#">測試留存</a>
-                    <ul>
-                        <li><a href="#">Subitem 1</a></li>
-                        <li><a href="#">Subitem 2</a></li>
-                        <li><a href="#">Subitem 3</a></li>
-                        <li><a href="#">Subitem 4</a></li>
-                    </ul>
                     </li>
                 </ul>
             </li>                  
@@ -56,14 +51,7 @@
                     <li><a href="?page=create_iso&order_id=SF-0601-02">SF-0601-02鋼骨工程品管流程</a></li>
                     <li><a href="?page=create_iso&order_id=SF-0701-01">SF-0701-01混凝土澆置前工程</a></li>
                     <li><a href="?page=create_iso&order_id=SF-0701-02">SF-0701-02混凝土澆置中工程</a></li>
-                    <li><a href="?page=create_iso&order_id=SF-0701-03">SF-0701-03混凝土澆置後工程</a></li>                                               
-                    <li><a href="#">測試留存</a>
-                    <ul>
-                        <li><a href="#">Subitem 1</a></li>
-                        <li><a href="#">Subitem 2</a></li>
-                        <li><a href="#">Subitem 3</a></li>
-                        <li><a href="#">Subitem 4</a></li>
-                    </ul>
+                    <li><a href="?page=create_iso&order_id=SF-0701-03">SF-0701-03混凝土澆置後工程</a></li>
                     </li>
                 </ul>
             </li>                  
@@ -103,13 +91,6 @@
                     <li><a href="?page=create_iso&order_id=SF-1802-01">SF-1802-01輕鋼架工程</a></li>
                     <li><a href="?page=create_iso&order_id=SF-1803-01">SF-1803-01高架地板工程</a></li>
                     <li><a href="?page=create_iso&order_id=>SF-1901-01">SF-1901-01油漆工程</a></li>
-                    <li><a href="#">測試留存</a>
-                    <ul>
-                        <li><a href="#">Subitem 1</a></li>
-                        <li><a href="#">Subitem 2</a></li>
-                        <li><a href="#">Subitem 3</a></li>
-                        <li><a href="#">Subitem 4</a></li>
-                    </ul>
                     </li>
                 </ul>
             </li>

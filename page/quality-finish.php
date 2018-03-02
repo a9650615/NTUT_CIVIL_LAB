@@ -4,13 +4,15 @@
     $sql = mysqli_query($conn, "SELECT DISTINCT(No) FROM quality_list order by ID desc");
 ?>
 <div class="container">
-    <a href="?page=quality">上一頁</a>
+    <p style="font-size: 35px" align="center">合格/改善效率</p><br>
+    <a style="font-size: 25px;float: right;" href="?page=quality">上一頁</a>
+    <br>
     <table class="table" style="margin:auto;">
         <thead>
             <tr>
                 <td>工程編號</td>
                 <td>合格率</td>
-                <td>改善率</td>
+                <td>改善效率</td>
             </tr>
             <?php
                 while ($data = $sql->fetch_assoc()) {

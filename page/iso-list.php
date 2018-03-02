@@ -30,32 +30,19 @@
     <a href="?">上一頁</a>
     <div class="col-xs-12 col-sm-12 col-md-12">   
           <div class="product_index">
-            <?php
+
+            <div class="col-sm-12 col-md-12 col-mm-12" id="content-menu">
+                <div class="menu">
+                                <?php
                 if ($_COOKIE['role'] == 3 || $_COOKIE['role'] == $admin) {
                     ?>
                     <a href="?page=select_iso_form">新增 ISO 表單</a>
                     <?php
                 }
             ?>
-            <div align="center">
-              <h1>ISO工務表單</h1>
-
-                  <!-- Search Google -->
-                  <!--
-                  <form method="get" action="http://www.google.com.tw/custom" target="_blank">
-                  <input type="text" name="q" size="20">
-                  <input type="submit" name="sa" value="搜尋">
-                  <input type="hidden" name="domains" value="http://3to3.myds.me/runapp/iso-index.html">
-                  <input type="hidden" name="sitesearch" value="http://3to3.myds.me/runapp/iso-index.html">
-                  </form>
-                  -->
-                  <!-- Search Google -->
-            </div>
-            <br>
-            <div class="col-sm-12 col-md-12 col-mm-12" id="content-menu">
-                <div class="menu">
                     <div>
-                    <h2 style="color: red">已建檔ISO工務表單總覽</h2>
+                    <p align="center" style="font-size: 35px;">ISO工務表單總覽</p>
+                    <br>
                     </div>
                     <div style="margin: 15px 0;" class="alert alert-secondary" role="alert">
                         <a href="?page=iso_list">全</a>: <?=$tot?> 件 | 

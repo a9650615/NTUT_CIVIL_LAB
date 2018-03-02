@@ -8,19 +8,21 @@
     $sql = mysqli_query($conn, "SELECT * FROM safty_list {$search} ORDER BY ID DESC");
 ?>
 <a href="/">上一頁</a>
-<a href="?page=logout" style="float:right;">登出</a>
 <div class="col-sm-12 col-md-12 col-mm-12" id="content-menu">
     <?php
         if ($_COOKIE['role']==5 || $_COOKIE['role']==$admin) {
             ?>
-            <a href="?page=safty_form">新增安衛罰款</a>
+            <a style="font-size: 25px;" href="?page=safty_form">新增安衛罰款</a>
+            <p align="center" style="font-size: 35px;">安衛罰款總覽</p>
             <?php
         }
         $row_count = 0;
         $no_pass = 0;
         $out_date = 0;
     ?>
+    
     <form method="get" actions="?">
+        <br>
         <input type="hidden" value="<?=$_GET['page']?>" name="page" />
         篩選 : 
         <select name="filter">
@@ -33,7 +35,7 @@
     </form>
     <div class="menu">
         <div>
-        <h2 style="color: red">已建檔安衛罰款總覽</h2>
+
         </div>
         <table class="table" style="width: 100%;">
             <thead>
@@ -101,9 +103,9 @@
             </tbody>
         </table>
     </div>
-    <div class="alert alert-info" style="width: 80%; margin: auto; margin-top: 10px;" role="alert">
-        合格率: <?=intval((($row_count - $no_pass)/$row_count)*100)?>%,改善率: <?=max(0,intval((($row_count - $no_pass - $out_date)/$row_count)*100))?>%
-        （<a href="?page=safty_finish">檢視改善率</a>）
+    <div class="alert alert-info" style="width: 100%; margin: auto; margin-top: 10px;" role="alert">
+        合格率: <?=intval((($row_count - $no_pass)/$row_count)*100)?>%,改善效率: <?=max(0,intval((($row_count - $no_pass - $out_date)/$row_count)*100))?>%
+        （<a href="?page=safty_finish">合格/改善效率</a>）
     </div>
 </div>
 <?php require_once './component/footer.php'; ?>

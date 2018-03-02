@@ -50,7 +50,7 @@
                         </tr>
                         <tr>
                             <td>查驗位置：<br><input type="text" value="<?=$data['floor']?>" required autocomplete="off" name="floor" />樓
-                            <br><input value="<?=$data['other']?>" type="text" autocomplete="off" name="other" />(其他備註)</td>
+                            <br><input value="<?=$data['other']?>" type="text" autocomplete="off" name="other" />(其他位置備註)</td>
                             <td>
                                 缺失修正方式：<br>
                                 <select name="fix_type">
@@ -59,7 +59,7 @@
                             </td>
                         <tr>
                             <td>現況說明：<br><textarea rows="3" required name="now_status" cols="25"><?=$data['now_status']?></textarea></td>
-                            <td>改善建議：<br><textarea rows="3" required name="feedback" cols="25"><?=$data['feedback']?></textarea></td>
+                            <td>改善建議：<br><textarea rows="3"  name="feedback" cols="25"><?=$data['feedback']?></textarea></td>
                         </tr>
                         <tr>
                             <td>施工現況<!--插入圖片-->

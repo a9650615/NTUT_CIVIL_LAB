@@ -16,7 +16,7 @@
                 <table class="table" width="width:100%;">
                     <tr>
                         <td style="min-width:200px;">
-                            缺失項目: <?=$data['missing_place']?><br>
+                            工程名稱: <?=$data['missing_place']?><br>
                             缺失廠商: <?=$data['missing_company']?>
                         </td>
                         <td>

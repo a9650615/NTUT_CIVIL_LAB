@@ -8,13 +8,13 @@
     $d = $data_sql->fetch_assoc();
     $id = $next_id['max(ID)'];
 ?>
-<div class="container">
+<div  class="container">
+    <a style="float: right;" href="?page=safty">上一頁</a>
     <form action="/model/safty.php?action=<?=($_GET['id']?"update_data&id={$_GET['id']}":"create")?>" method="post" enctype="multipart/form-data">
         <table class="table">
             <tr>
                 <td>
-                    <select name="missing_place" required>
-                        <option value="">缺失項目</option>
+                    工程名稱：<select name="missing_place" required>
                         <?php 
                             while ($data = $sql_case_name->fetch_assoc()) {
                                 ?>
@@ -23,8 +23,8 @@
                             }
                         ?>
                     </select><br>
-                    <select name="missing_company" required>
-                        <option value="">缺失廠商</option>
+                    缺失廠商：<select name="missing_company" required>
+
                         <?php 
                             while ($data = $sql_case_contractor->fetch_assoc()) {
                                 ?>
@@ -54,7 +54,7 @@
                                     }
                                 ?>
                             </div>
-                            選擇照片：<input type="file" name="missing_image" onchange="openFile(event)" <?=($_GET['id'?"":"required"])?>/>
+                            工地現況：<input type="file" name="missing_image" onchange="openFile(event)" <?=($_GET['id'?"":"required"])?>/>
                             <?php
                         } else {
                             ?>
@@ -81,14 +81,14 @@
             </tr>
             <tr>
                 <td>
-                    查驗位置
+                    查驗位置：
                     <br>
                     <input type="text" name="check_place" required value="<?=$d['check_place']?>"/>
                     <br>
-                    罰款項目
+                    <br>
+                    罰款項目：
                     <br>
                     <select name="fine" style="max-width:300px;" required>
-                        <option value="">罰款項目</option>
                         <?php
                             require_once './model/fine_list.php';
                             foreach ($FINE_LIST as $key => $val) {
@@ -101,7 +101,7 @@
                 </td>
                 <td>
                     <label>
-                        解決期限：
+                        改善期限：
                         <input type="date" name="resolve_date" value="<?=$d['resolve_date']?>"/>
                     </label>
                     <?php
@@ -122,7 +122,7 @@
             <tr>
                 <td>
                     現況說明：
-                    <textarea rows="3" cols="20" name="other"><?=$d['other']?></textarea>
+                    <textarea style="vertical-align:text-top;" rows="2" cols="20" name="other"><?=$d['other']?></textarea>
                 </td>
                 <td></td>
             </tr>

@@ -4,9 +4,11 @@
     $sql = mysqli_query($conn, "SELECT * FROM case_list ORDER BY ID desc");
 ?>
 <div class="container">
-    <a href="/">上一頁</a> <br>
-    <a href="?page=create_case">新增工程</a>
+    
+    <a style="font-size: 35px" href="?page=create_case">新增工程資料</a>
+    <br>
     <table class="Table" align="center">
+        <br><br>
         <thead>
         <tr>
             <th>工程編號</th>
@@ -37,5 +39,6 @@
             ?>
         </tbody>
     </table>
+    <a  href="/">上一頁</a>
 </div>
 <?php include './component/footer.php'; ?>

@@ -1,10 +1,9 @@
 <?php include './component/header.php'; ?>
-<a href="?page=logout" style="float:right;">登出</a>
 <div class="container">
     <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="product_index">
-          <div class="product_head" data-move-y="-40px"></div>
+          <div class="product_head" data-move-y="-25px"></div>
           
           <div class="product_list">
 
@@ -17,7 +16,7 @@
                     <a href="?page=quality">
                     <img src="cloud/Qualityimage.png" class="img-thumbnail" ></a>
                     <p class="product_title">
-                    <a href="quality-index.html" title="品質改善檢查表">品質改善檢查表</a>
+                    <a href="?page=quality" title="品質改善檢查表">品質改善檢查表</a>
                     </p>
                     </div>
                     <?php
@@ -31,7 +30,7 @@
                     <a href="?page=iso_list">
                     <img src="cloud/isoimage.png" class="img-thumbnail" ></a>
                     <p class="product_title">
-                    <a href="iso-index.html" title="ISO工務表單">ISO工務表單</a>
+                    <a href="?page=iso_list" title="ISO工務表單">ISO工務表單</a>
                     </p>
                     </div>
                     <?php
@@ -43,7 +42,7 @@
                     <a href="?page=case">
                     <img src="cloud/siteimage.png" class="img-thumbnail" ></a>
                     <p class="product_title">
-                    <a href="casefile.php" title="工程資料">工程資料</a>
+                    <a href="?page=case" title="工程資料">工程資料</a>
                     </p>
                   </div>
                   <?php
@@ -56,7 +55,7 @@
                   <a href="?page=safty">
                   <img src="cloud/saftyimage.png" class="img-thumbnail"></a>
                   <p class="product_title">
-                  <a href="safty-index.html" title="安全衛生檢查表">安全衛生檢查表 </a>
+                  <a href="?page=safty" title="安全衛生檢查表">安全衛生檢查表 </a>
                   </p>
                 </div>
                 <?php
@@ -116,7 +115,15 @@
               <a href="?page=user">
               <img src="cloud/manager.png" class="img-thumbnail" ></a>
               <p class="product_title">
-              <a href="javascript:;" title="會員管理">會員管理</a>
+              <a href="?page=user" title="會員管理">個人資料管理</a>
+              </p>
+            </div>
+
+            <div class="col-sm-4 col-md-4 col-mm-6 product_img" data-move-y="150px">
+              <a href="?page=logout">
+              <img src="cloud/exit.png" class="img-thumbnail" ></a>
+              <p class="product_title">
+              <a href="?page=logout" title="登出">登出</a>
               </p>
             </div>
 

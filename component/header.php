@@ -42,15 +42,15 @@
 
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-nav-c">
-            <li class="dropdown"><a href="cloud-index.html">雲端資料庫系統</a>
+            <li class="dropdown"><a href="index.php">雲端資料庫系統</a>
               <a href="javascript:;" id="app_menudown" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-menu-down btn-xs"></span></a>
                 <ul class="dropdown-menu nav_small" role="menu">
                   <li><a href="javascript:;">相片影音檔</a></li>
                   <li><a href="javascript:;">合約資料</a></li>
-                  <li><a href="iso-index.html">ISO工務表單</a></li>
-                  <li><a href="safty-index.html">安衛查驗表</a></li>
-                  <li><a href="quality-index.html">品質改善表</a></li>
-                  <li><a href="casefile.php">工程資料</a></li>
+                  <li><a href="?page=iso_list">ISO工務表單</a></li>
+                  <li><a href="?page=safty">安衛查驗表</a></li>
+                  <li><a href="?page=quality">品質改善表</a></li>
+                  <li><a href="?page=case">工程資料</a></li>
                   <li><a href="javascript:;">施工圖說</a></li>
                   <li><a href="javascript:;">施工日誌</a></li>
                   <li><a href="javascript:;">收發文資料</a></li>

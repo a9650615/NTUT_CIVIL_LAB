@@ -10,7 +10,7 @@
             <tr>
                 <td>工程名稱</td>
                 <td>合格率</td>
-                <td>改善率</td>
+                <td>改善效率</td>
             </tr>
             <?php
                 while ($data = $sql->fetch_assoc()) {

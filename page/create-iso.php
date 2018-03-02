@@ -4,8 +4,8 @@
     $case_sql = mysqli_query($conn, "SELECT * FROM case_list ORDER BY ID desc");
 ?>
 <div class="container">
-    <h1>新增檢查表</h1>
-    <form method="post" action="/model/iso_form.php?action=create">
+    <br><p align="center" style="font-size: 35px;">新增ISO工務表單</p>
+    <br><br><form method="post" action="/model/iso_form.php?action=create">
         <table class="New">
             <tbody>
                 <tr>

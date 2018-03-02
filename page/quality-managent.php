@@ -17,12 +17,12 @@
     $out_date = 0;
 ?>
 <div>
-    <h4 style="display: inline-block;">工程項目列表</h4>
-    <a href="?page=create_quality">建立</a>
-    <a href="?page=logout" style="float:right;">登出</a>
+    <p align="center" style="font-size: 35px;">品質改善表單總覽</p>
+    <br><br><a style="font-size: 25px" href="?page=create_quality">新增品質改善表</a>
+    <a  style="float:right;" href="/">上一頁</a>
     <br>
-    <a href="/">上一頁</a>
-    <div>
+
+    <div class="alert alert-info" style="width: 80%; margin: auto; margin-top: 10px;" role="alert">
         <form method="get" actions="?">
             <input type="hidden" value="quality" name="page" />
             篩選 : 
@@ -34,16 +34,15 @@
             </select>
             <input type="submit" value="篩選" />
         </form>
-    </div>
-    <div class="alert alert-info" style="width: 80%; margin: auto; margin-top: 10px;" role="alert">
-        共 <?=$row_count?> 筆資料 ( <a href="?page=quality_finish">合格改善率</a> )
+
+        共 <?=$row_count?> 筆資料 ( <a href="?page=quality_finish">合格/改善效率</a> )
     </div>
     <table class="table" style="margin:auto;">
         <thead>
             <tr>
                 <th>工程名稱</th>
                 <th>查驗日期/改善期限</th>
-                <th width="20%">狀態<span style="float:right;">*(已更新)</span></th>
+                <th width="20%">狀態(*=已更新)<span style="float:right;"></span></th>
                 <th>是否逾期</th>
                 <th>閱覽</th>
             </tr>
