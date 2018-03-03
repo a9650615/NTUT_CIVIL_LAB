@@ -97,6 +97,9 @@
             else if ($_GET['page'] == 'safty') {
                 require_once './page/safty-list.php';
             }
+            else if ($_GET['page'] == 'safty_company') {
+                require_once './page/safty-company.php';
+            }
             else if ($_GET['page'] == 'safty_form') {
                 require_once './page/safty-form.php';
             }
@@ -178,6 +181,12 @@
             }
             else if ($_GET['page'] == 'safty') {
                 require_once './page/safty-list.php';
+            }
+            else if ($_GET['page'] == 'safty_company') {
+                require_once './page/safty-company.php';
+            }
+            else if ($_GET['page'] == 'safty_company_detail') {
+                require_once './page/safty-company-detail.php';
             }
             else if ($_GET['page'] == 'safty_form') {
                 require_once './page/safty-form.php';
