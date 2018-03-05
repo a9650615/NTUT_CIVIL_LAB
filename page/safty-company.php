@@ -20,9 +20,11 @@
                     $row_count = mysqli_num_rows($inner_sql);
                     $no_pass = 0;
                     $out_date = 0;
+                    $all_fine = array();
                     while ($dd = $inner_sql -> fetch_assoc()) {
                         if ($dd['status'] != 1 || strtotime($dd['resolve_date']) < time()) {
                             $no_pass ++;
+                            array_push($all_fine, $dd['fine']);
                         }
                     }
                     ?>
@@ -31,6 +33,19 @@
                         <td><a href="?page=safty_company_detail&no=<?=$data['missing_company']?>"><?=$data['missing_company']?></a></td>
                         <td><?=$no_pass?></td>
                         <td><?=$row_count?></td>
+                        <td>
+                            <?php
+                                require_once './model/fine_list.php';
+                                foreach ($all_fine as $v) {
+                                    foreach ($FINE_LIST as $i => $val) {
+                                        if ($i == $v) {
+                                            echo "{$val}<br>";
+                                            break;
+                                        }
+                                    }
+                                }
+                            ?>
+                        </td>
                     </tr>
                     <?php
                 }
