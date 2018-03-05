@@ -23,13 +23,13 @@
                     <tr>
                         <td><?=$data['missing_place']?></td>
                         <td><?php
-                            $status = "未改善";
+                            $status = "<span style='color:red'>未改善</span>";
                             if ($data['status'] == 1)
                                 $status = "已改善";
                             else {
                                 $no_pass ++;
                                 if ($data['status'] == 2)
-                                    $status = "未合格";
+                                    $status = "<span style='color:red'>未合格</span>";
                             }
                             echo $status;
                         ?></td>
