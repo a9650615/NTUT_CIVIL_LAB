@@ -25,7 +25,7 @@ if ($_GET['action'] == 'create') {
         $date = date('Y-m-d');
         $sql = "INSERT INTO iso_list (`project_name`, `order_id`, `contractor`, `floor`, `status`, `user`) VALUES('{$_POST['project_name']}', '{$_POST['order_id']}', '{$_POST['contractor']}', '{$_POST['floor']}', '0', '{$_COOKIE['userId']}')";
         if ($data = mysqli_query($conn, $sql)) {
-            mysqli_query($conn, "INSERT INTO iso_list_history(`list_id`, `follow_id`, `order_count`) VALUES('{$conn->insert_id}', '{$conn->insert_id}', '0')");
+            mysqli_query($conn, "INSERT INTO iso_list_history(`list_id`, `follow_id`, `order_count`, `other`) VALUES('{$conn->insert_id}', '{$conn->insert_id}', '0', '{$_POST['other']}')");
         }
     } else {
         $page = "create_iso&order_id={$_POST['order_id']}";
@@ -39,10 +39,11 @@ if ($_GET['action'] == 'update') {
     $id = $_GET['id'];
     if ($d['status'] == 3) {
         $need_back = $last['count'] + 1;
-        mysqli_query($conn, "INSERT INTO iso_list_history(`list_id`, `follow_id`, `order_count`,`user`,`checker`) VALUES('{$_GET['id']}', '{$_GET['id']}', '{$need_back}','{$_COOKIE['userId']}','0')");
+        mysqli_query($conn, "INSERT INTO iso_list_history(`list_id`, `follow_id`, `order_count`,`user`,`checker`, `other`) VALUES('{$_GET['id']}', '{$_GET['id']}', '{$need_back}','{$_COOKIE['userId']}','0', '{$_POST['other']}')");
         $id = $need_back;
     } else {
         $id = $last['count'];
+        mysqli_query($conn, "UPDATE iso_list_history SET other='{$_POST['other']}' WHERE follow_id ='{$_GET['id']}' and order_count='{$last['count']}'");
     }
     // echo $id;
     // $max_succ->fetch_assoc();

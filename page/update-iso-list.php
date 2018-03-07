@@ -43,7 +43,7 @@
                         <?=$ls['comment']?>
                     </td>
                     <td>
-                        備註：<br>
+                        備註(通過/未通過說明)：<br>
                         <?=$ls['other']?>
                     </td>
                 </tr>
@@ -84,6 +84,10 @@
             <?php
                 if ($_GET['page']=='update_iso_list') {
                     ?>
+                    <label style="width: 100%;">
+                        未通過說明
+                        <textarea style="width: 100%; height: 50px;" name="other"><?=$ls['other']?></textarea>
+                    </label>
                     <input type="submit" value="更新" >
                     <?php
                 }
