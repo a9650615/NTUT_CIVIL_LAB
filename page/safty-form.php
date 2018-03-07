@@ -101,6 +101,10 @@
                 </td>
                 <td>
                     <label>
+                        查驗日期：
+                        <input type="date" name="check_date" value="<?=$d['check_date']?>"/>
+                    </label>
+                    <label>
                         改善期限：
                         <input type="date" name="resolve_date" value="<?=$d['resolve_date']?>"/>
                     </label>
