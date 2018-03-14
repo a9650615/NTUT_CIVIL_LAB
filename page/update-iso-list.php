@@ -5,16 +5,34 @@
     $info = $sql->fetch_assoc();
     $quest = mysqli_query($conn, "SELECT * FROM iso_data_sheet WHERE order_id = '{$info['order_id']}' ORDER BY list_id");
     $last = mysqli_query($conn, "SELECT max(order_count) as count FROM iso_list_history WHERE follow_id='{$_GET['id']}'")->fetch_assoc();
-    $ls = mysqli_query($conn, "SELECT * FROM iso_list_history WHERE follow_id='{$_GET['id']}' ORDER BY order_count DESC")->fetch_assoc();
-    $value_data = mysqli_query($conn, "SELECT * FROM iso_select_list WHERE order_list = '{$_GET['id']}' and history_id='{$last['count']}' ORDER BY list_id");
+    $now_version = isset($_GET['version'])?$_GET['version']:$last['count'];
+    $ls = mysqli_query($conn, "SELECT * FROM iso_list_history WHERE follow_id='{$_GET['id']}' and order_count='{$now_version}'")->fetch_assoc();
+    $value_data = mysqli_query($conn, "SELECT * FROM iso_select_list WHERE order_list = '{$_GET['id']}' and history_id='{$now_version}' ORDER BY list_id");
     $select_data = [];
     while ($sel_d = $value_data->fetch_assoc()) {
         $select_data[$sel_d['list_id']] = $sel_d['value'];
     }
 ?>
 <div class="container">
-    <a href="?page=iso_list">上一頁</a>
+    <a class="no-print" href="?page=iso_list">上一頁</a>
     <div>
+        <div class="no-print">
+        <?php
+            // if ($_GET['page'] == 'view_iso') {
+
+            // }
+            if ($now_version >0) {
+                ?>
+                <a href="?page=<?="{$_GET['page']}&id={$_GET['id']}&version=".($now_version-1)?>">上一版</a>
+                <?php
+            }
+            if ($now_version < $last['count']) {
+                ?>
+                <a href="?page=<?="{$_GET['page']}&id={$_GET['id']}&version=".($now_version+1)?>">下一版</a>
+                <?php
+            }
+        ?>
+        </div>
         <table class="New">
             <tbody>
                 <tr>

@@ -35,3 +35,11 @@
 .product_list .img-thumbnail {
     width: 264px;
 }
+
+@media print
+{    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}
