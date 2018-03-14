@@ -90,7 +90,7 @@
                         ?>
                         </td>
                         <td><?=$fine['price']*$data['fine_people']?></td>
-                        <td>付款狀態</td>
+                        <td><?=$data['has_pay']?'已付款':'未付款'?></td>
                         <td><?=$data['create_date']?></td>
                         <td>
                             <?php 

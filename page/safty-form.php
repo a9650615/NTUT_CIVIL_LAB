@@ -141,7 +141,14 @@
                             }
                         ?>
                     </select>
-                    <span id="other">罰款金額 <input id="fine_price" style="border:none;border-bottom:1px solid;,background:transparent;width:auto;min-width:30px;" readonly > 元, <input id="people" name="fine_people" type="number" min="1" value="1" style="border:none;border-bottom:1px solid;,background:transparent;width:40px;" > 人, 共 <a id="total_fine_price"></a> 元 </span>
+                    <span id="other">
+                        罰款金額 <input id="fine_price" style="border:none;border-bottom:1px solid;,background:transparent;width:auto;min-width:30px;" readonly > 元, <input id="people" name="fine_people" type="number" min="1" value="1" style="border:none;border-bottom:1px solid;,background:transparent;width:40px;" > 人, 共 <a id="total_fine_price"></a> 元 
+                        <div style="margin: 15px 0;" class="alert alert-secondary" role="alert">
+                            是否付款
+                            <a href="/model/safty.php?action=check_has_pay&data=1&id=<?=$_GET['id']?>" class="btn btn-primary">已付款</a>
+                            <a href="/model/safty.php?action=check_has_pay&adata=0&id=<?=$_GET['id']?>" class="btn btn-danger">仍未付款</a>
+                        </div>
+                    </span>
                     <script>
                         let count = _ => {
                             $('#total_fine_price').text($('#people').val() * $('#fine_price').val())
