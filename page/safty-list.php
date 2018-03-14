@@ -42,7 +42,11 @@
                 <tr>
                     <td>工程名稱</td>
                     <td>缺失廠商</td>
-                    <td>狀態</td>
+                    <td>罰款項目</td>
+                    <td>總額</td>
+                    <td>付款狀態</td>
+                    <td>開單日期</td>
+                    <!-- <td>狀態</td> -->
                     <td>編輯</td>
                 </tr>
             </thead>
@@ -57,7 +61,7 @@
                     <tr>
                         <td><?=$data['missing_place']?></td>
                         <td><?=$data['missing_company']?></td>
-                        <td><?php 
+                        <!--td><?php 
                             $status = "<span style='color: red;'>未改善</span>";
                             if ($data['status'] == 1)
                                 $status = "已改善";
@@ -71,7 +75,23 @@
                                     }
                             }
                             echo $status;
-                        ?></td>
+                        ?></td>-->
+                        <td>
+                        <?php
+                        require_once './model/fine_list.php';
+                        $fine = array();
+                        foreach ($FINE_LIST as $key => $val) {
+                            if ($data['fine'] == $key) {
+                                $fine = $val;
+                                echo $val['text'];
+                                break;
+                            }
+                        }
+                        ?>
+                        </td>
+                        <td><?=$fine['price']?></td>
+                        <td>付款狀態</td>
+                        <td><?=$data['create_date']?></td>
                         <td>
                             <?php 
                                 if ($_COOKIE['role'] == $admin) {

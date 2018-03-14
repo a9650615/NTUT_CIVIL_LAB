@@ -93,7 +93,7 @@
                             require_once './model/fine_list.php';
                             foreach ($FINE_LIST as $key => $val) {
                                 ?>
-                                <option <?=($d['fine'] == $key?"selected":"")?> value="<?=$key?>"><?=$val?></option>
+                                <option <?=($d['fine'] == $key?"selected":"")?> value="<?=$key?>"><?=$val['text']?></option>
                                 <?php
                             }
                         ?>
@@ -108,6 +108,7 @@
                         改善期限：
                         <input type="date" name="resolve_date" value="<?=$d['resolve_date']?>"/>
                     </label>
+                    <br>
                     <?php
                         if ($_GET['id']) {
                             ?>
