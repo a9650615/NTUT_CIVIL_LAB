@@ -1,7 +1,7 @@
 <?php require_once './component/header.php'; ?>
 <?php
     include './model/sql.php';
-    $sql_case_name = mysqli_query($conn, "SELECT `order_name` FROM case_list");
+    $sql_case_name = mysqli_query($conn, "SELECT `order_name`,`ID` FROM case_list");
     $sql_case_contractor = mysqli_query($conn, "SELECT `contractor` FROM case_list");
     $data_sql = mysqli_query($conn, "SELECT * FROM safty_list WHERE ID='{$_GET['id']}'");
     $next_id = mysqli_query($conn, "SELECT max(ID) FROM safty_list")->fetch_assoc();
@@ -15,10 +15,13 @@
             <tr>
                 <td>
                     工程名稱：<select name="missing_place" required>
+                        <option value="">尚未選擇</option>
                         <?php 
+                            $caseId = 0;
                             while ($data = $sql_case_name->fetch_assoc()) {
+                                if ($data['order_name']==$d['missing_place']) $caseId = $data['ID'];
                                 ?>
-                                <option <?=($data['order_name']==$d['missing_place']?"selected":"")?>><?=$data['order_name']?></option>
+                                <option data-id="<?=$data['ID']?>" <?=($data['order_name']==$d['missing_place']?"selected":"")?>><?=$data['order_name']?></option>
                                 <?php
                             }
                         ?>
@@ -35,48 +38,13 @@
                     </select>
                 </td>
                 <td>
-                    <?php 
-                        if (!$_GET['id']) {
-                            ?>
-                            <div style="position:relative;">
-                                <canvas id="drawing" style="position:absolute; left: 0; height: 0; width:100%; height:100%;z-index:5;"></canvas>
-                                <img onerror="this.style='display:none'" id="update_img" src="upload_space/<?=$data['order_id']?>_update.png?a=<?=rand()?>" style="max-width:100%; position:absolute;width:100%; height:100%;" />
-                                <?php
-                                    if ($d['image']) {
-                                        ?>
-                                        <img id="output" src="upload_space/<?=$d['image']?>" style="max-width:100%;" />
-                                        <?php
-                                    }
-                                    else {
-                                        ?>
-                                        <img id="output" style="max-width:100%;" />
-                                        <?php
-                                    }
-                                ?>
-                            </div>
-                            工地現況：<input type="file" name="missing_image" onchange="openFile(event)" <?=($_GET['id'?"":"required"])?>/>
-                            <?php
-                        } else {
-                            ?>
-                            <div style="position:relative;">
-                                <canvas id="drawing" style="position:absolute; left: 0; height: 0; width:100%; height:100%;z-index:5;"></canvas>
-                                <img onerror="this.style='display:none'" id="update_img" src="upload_space/safty_<?=$_GET['id']?>_create.png?a=<?=rand()?>" style="max-width:100%; position:absolute;width:100%; height:100%;" />
-                                <?php
-                                    if ($d['image']) {
-                                        ?>
-                                        <img id="output" src="upload_space/<?=$d['image']?>" style="max-width:100%;" />
-                                        <?php
-                                    }
-                                    else {
-                                        ?>
-                                        <img id="output" style="max-width:100%;" />
-                                        <?php
-                                    }
-                                ?>
-                            </div>
-                            <?php
-                        }
-                    ?>
+                    <script>
+                        $('select[name=missing_place]').bind('change', function() {
+                            if ($(this).find(':selected').attr('data-id'))
+                                $('#case_id').val(`<?=$_GET['id']?$_GET['id']:($id+1)?>-${$(this).find(':selected').attr('data-id')}`)
+                        })
+                    </script>
+                    工程編號：<input name="case_id" style="border:none; background-color: transparent;" id="case_id" readonly value="<?=$_GET['id'].'-'.$caseId?>" />
                 </td>
             </tr>
             <tr>
@@ -128,6 +96,49 @@
                 <td>
                     現況說明：
                     <textarea style="vertical-align:text-top;" rows="2" cols="20" name="other"><?=$d['other']?></textarea>
+                    <br>
+                    <?php 
+                        if (!$_GET['id']) {
+                            ?>
+                            <div style="position:relative;">
+                                <canvas id="drawing" style="position:absolute; left: 0; height: 0; width:100%; height:100%;z-index:5;"></canvas>
+                                <img onerror="this.style='display:none'" id="update_img" src="upload_space/<?=$data['order_id']?>_update.png?a=<?=rand()?>" style="max-width:100%; position:absolute;width:100%; height:100%;" />
+                                <?php
+                                    if ($d['image']) {
+                                        ?>
+                                        <img id="output" src="upload_space/<?=$d['image']?>" style="max-width:100%;" />
+                                        <?php
+                                    }
+                                    else {
+                                        ?>
+                                        <img id="output" style="max-width:100%;" />
+                                        <?php
+                                    }
+                                ?>
+                            </div>
+                            工地現況：<input type="file" name="missing_image" onchange="openFile(event)" <?=($_GET['id'?"":"required"])?>/>
+                            <?php
+                        } else {
+                            ?>
+                            <div style="position:relative;">
+                                <canvas id="drawing" style="position:absolute; left: 0; height: 0; width:100%; height:100%;z-index:5;"></canvas>
+                                <img onerror="this.style='display:none'" id="update_img" src="upload_space/safty_<?=$_GET['id']?>_create.png?a=<?=rand()?>" style="max-width:100%; position:absolute;width:100%; height:100%;" />
+                                <?php
+                                    if ($d['image']) {
+                                        ?>
+                                        <img id="output" src="upload_space/<?=$d['image']?>" style="max-width:100%;" />
+                                        <?php
+                                    }
+                                    else {
+                                        ?>
+                                        <img id="output" style="max-width:100%;" />
+                                        <?php
+                                    }
+                                ?>
+                            </div>
+                            <?php
+                        }
+                    ?>
                 </td>
                 <td></td>
             </tr>
