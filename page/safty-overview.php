@@ -7,15 +7,15 @@
     }
     $sql = mysqli_query($conn, "SELECT * FROM safty_list {$search} ORDER BY ID DESC");
 ?>
-<a href="/">上一頁</a>
+<a href="/?page=safty">上一頁</a>
 <div class="col-sm-12 col-md-12 col-mm-12" id="content-menu">
+<p align="center" style="font-size: 35px;">安衛罰款總覽</p>
     <?php
-        if ($_COOKIE['role']==5 || $_COOKIE['role']==$admin) {
+        /*if ($_COOKIE['role']==5 || $_COOKIE['role']==$admin) {
             ?>
             <a style="font-size: 25px;" href="?page=safty_form">新增安衛罰款</a>
-            <p align="center" style="font-size: 35px;">安衛罰款</p>
             <?php
-        }
+        }*/
         $row_count = 0;
         $no_pass = 0;
         $out_date = 0;
@@ -42,7 +42,11 @@
                 <tr>
                     <td>工程名稱</td>
                     <td>缺失廠商</td>
-                    <td>狀態</td>
+                    <td>罰款項目</td>
+                    <td>總額</td>
+                    <td>付款狀態</td>
+                    <td>開單日期</td>
+                    <!-- <td>狀態</td> -->
                     <td>編輯</td>
                 </tr>
             </thead>
@@ -57,7 +61,7 @@
                     <tr>
                         <td><?=$data['missing_place']?></td>
                         <td><?=$data['missing_company']?></td>
-                        <td><?php 
+                        <!--td><?php 
                             $status = "<span style='color: red;'>未改善</span>";
                             if ($data['status'] == 1)
                                 $status = "已改善";
@@ -71,7 +75,23 @@
                                     }
                             }
                             echo $status;
-                        ?></td>
+                        ?></td>-->
+                        <td>
+                        <?php
+                        require_once './model/fine_list.php';
+                        $fine = array();
+                        foreach ($FINE_LIST as $key => $val) {
+                            if ($data['fine'] == $key) {
+                                $fine = $val;
+                                echo $val['text'];
+                                break;
+                            }
+                        }
+                        ?>
+                        </td>
+                        <td><?=$fine['price']*$data['fine_people']?></td>
+                        <td>付款狀態</td>
+                        <td><?=$data['create_date']?></td>
                         <td>
                             <?php 
                                 if ($_COOKIE['role'] == $admin) {
@@ -103,9 +123,9 @@
             </tbody>
         </table>
     </div>
-    <div class="alert alert-info" style="width: 100%; margin: auto; margin-top: 10px;" role="alert">
+    <!-- <div class="alert alert-info" style="width: 100%; margin: auto; margin-top: 10px;" role="alert">
         合格率: <?=intval((($row_count - $no_pass)/$row_count)*100)?>%,改善效率: <?=max(0,intval((($row_count - $no_pass - $out_date)/$row_count)*100))?>%
-        （<a href="?page=safty_finish">合格/改善效率</a>）(<a href="?page=safty_company">缺失廠商統計</a>) (<a href="?page=safty_overview">罰款總覽</a>)
-    </div>
+        （<a href="?page=safty_finish">合格/改善效率</a>）(<a href="?page=safty_company">缺失廠商統計</a>)
+    </div> -->
 </div>
 <?php require_once './component/footer.php'; ?>
