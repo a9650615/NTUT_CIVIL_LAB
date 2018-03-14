@@ -32,7 +32,12 @@
         </div>
         <div class="row">
             <div class="col-sm-12 col-md-6">
-                <div>施工現況 ： </div><img style="max-width: 100%; max-height: 400px;" src="upload_space/<?=$data['image']?>" />
+                <div>施工現況 ： </div>
+                <div style="position:relative;">
+                    <canvas id="drawing" style="position:absolute; left: 0; height: 0; width:100%; height:100%;z-index:5;"></canvas>
+                    <img onerror="this.style='display:none'" id="update_img" src="upload_space/safty_<?=$_GET['id']?>_create.png?a=<?=rand()?>" style="max-width:100%; position:absolute;width:100%; height:100%;" />
+                    <img style="max-width: 100%; max-height: 400px;" src="upload_space/<?=$data['image']?>" />
+                </div>
             </div>
             <?php
                 if ($data['resolve_image']) {

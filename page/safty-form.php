@@ -54,18 +54,6 @@
                     <input type="text" name="check_place" required value="<?=$d['check_place']?>"/>
                     <br>
                     <br>
-                    罰款項目：
-                    <br>
-                    <select name="fine" style="max-width:300px;" required>
-                        <?php
-                            require_once './model/fine_list.php';
-                            foreach ($FINE_LIST as $key => $val) {
-                                ?>
-                                <option <?=($d['fine'] == $key?"selected":"")?> value="<?=$key?>"><?=$val['text']?></option>
-                                <?php
-                            }
-                        ?>
-                    </select>
                 </td>
                 <td>
                     <label>
@@ -140,7 +128,44 @@
                         }
                     ?>
                 </td>
-                <td></td>
+                <td>
+                    罰款項目：
+                    <br>
+                    <select name="fine" style="max-width:300px;" required>
+                        <?php
+                            require_once './model/fine_list.php';
+                            foreach ($FINE_LIST as $key => $val) {
+                                ?>
+                                <option <?=($d['fine'] == $key?"selected":"")?> value="<?=$key?>" data-price="<?=$val['price']?>"><?=$val['text']?></option>
+                                <?php
+                            }
+                        ?>
+                    </select>
+                    <span>罰款金額 <input id="fine_price" style="border:none;border-bottom:1px solid;,background:transparent;width:auto;min-width:30px;" readonly > 元, <input id="people" name="fine_people" type="number" min="1" value="1" style="border:none;border-bottom:1px solid;,background:transparent;width:40px;" > 人, 共 <a id="total_fine_price"></a> 元 </span>
+                    <script>
+                        let count = _ => {
+                            $('#total_fine_price').text($('#people').val() * $('#fine_price').val())
+                        }
+
+                        let update = () => {
+                            let price = $('select[name=fine]').find(':selected').attr('data-price');
+                            $('#fine_price').val(price)
+                        }
+                        
+                        $(document).ready(_ => {
+                            update();
+                            count();
+                            $('select[name=fine]').bind('change', function() {
+                                update();
+                                count();
+                            })
+
+                            $('#people').change(function() {
+                                count();
+                            })
+                        })
+                    </script>
+                </td>
             </tr>
         </table>
         <input value="送出" type="button" onclick="upload()"/>

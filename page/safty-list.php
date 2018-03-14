@@ -89,7 +89,7 @@
                         }
                         ?>
                         </td>
-                        <td><?=$fine['price']?></td>
+                        <td><?=$fine['price']*$data['fine_people']?></td>
                         <td>付款狀態</td>
                         <td><?=$data['create_date']?></td>
                         <td>
