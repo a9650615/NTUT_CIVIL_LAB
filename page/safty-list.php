@@ -5,7 +5,7 @@
     if ($_GET['filter']) {
         $search = "WHERE status = '{$_GET['filter']}'";
     }
-    $sql = mysqli_query($conn, "SELECT * FROM safty_list {$search} ORDER BY ID DESC");
+    $sql = mysqli_query($conn, "SELECT * FROM safty_list {$search} WHERE fine='1' ORDER BY ID DESC");
 ?>
 <a href="/">上一頁</a>
 <div class="col-sm-12 col-md-12 col-mm-12" id="content-menu">

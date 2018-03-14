@@ -141,7 +141,7 @@
                             }
                         ?>
                     </select>
-                    <span>罰款金額 <input id="fine_price" style="border:none;border-bottom:1px solid;,background:transparent;width:auto;min-width:30px;" readonly > 元, <input id="people" name="fine_people" type="number" min="1" value="1" style="border:none;border-bottom:1px solid;,background:transparent;width:40px;" > 人, 共 <a id="total_fine_price"></a> 元 </span>
+                    <span id="other">罰款金額 <input id="fine_price" style="border:none;border-bottom:1px solid;,background:transparent;width:auto;min-width:30px;" readonly > 元, <input id="people" name="fine_people" type="number" min="1" value="1" style="border:none;border-bottom:1px solid;,background:transparent;width:40px;" > 人, 共 <a id="total_fine_price"></a> 元 </span>
                     <script>
                         let count = _ => {
                             $('#total_fine_price').text($('#people').val() * $('#fine_price').val())
@@ -152,10 +152,18 @@
                             $('#fine_price').val(price)
                         }
                         
+                        let showOff = _ => {
+                            if ($('select[name=fine]').val() == 1) {
+                                $('#other').hide()
+                            } else $('#other').show()
+                        }
+
                         $(document).ready(_ => {
+                            showOff();
                             update();
                             count();
                             $('select[name=fine]').bind('change', function() {
+                                showOff();
                                 update();
                                 count();
                             })
