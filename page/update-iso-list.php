@@ -9,8 +9,10 @@
     $ls = mysqli_query($conn, "SELECT * FROM iso_list_history WHERE follow_id='{$_GET['id']}' and order_count='{$now_version}'")->fetch_assoc();
     $value_data = mysqli_query($conn, "SELECT * FROM iso_select_list WHERE order_list = '{$_GET['id']}' and history_id='{$now_version}' ORDER BY list_id");
     $select_data = [];
+    $images = [];
     while ($sel_d = $value_data->fetch_assoc()) {
         $select_data[$sel_d['list_id']] = $sel_d['value'];
+        $images[$sel_d['list_id']] = explode(',',  $sel_d['image'], -1);
     }
 ?>
 <div class="container">
@@ -69,7 +71,7 @@
                 </tr>
             </tbody>
         </table>
-        <form method="post" action="/model/iso_form.php?action=update&id=<?=$_GET['id']?>&order_id=<?=$info['order_id']?>">
+        <form method="post" action="/model/iso_form.php?action=update&id=<?=$_GET['id']?>&order_id=<?=$info['order_id']?>" enctype="multipart/form-data">
             <table class="New">
                 <?php
                     while($data = $quest->fetch_assoc()) {
@@ -78,17 +80,60 @@
                         ?>
                         <tr>
                             <td><?=$data['list_id']?></td>
-                            <td><?=$data['check_item']?></td>
+                            <td style="word-wrap:break-word;"><?=$data['check_item']?></td>
                             <td>
                                 <label><input type="radio" value="2" name="state[<?=$data['list_id']?>]" <?=($_GET['page']=='check_iso'||$_GET['page']=='view_iso')?"disabled":""?> <?=($value=="2")?"checked":""?>>通過</label>
                                 <label><input type="radio" value="1" name="state[<?=$data['list_id']?>]" <?=($_GET['page']=='check_iso'||$_GET['page']=='view_iso')?"disabled":""?> <?=($value=="1"||$value=="-1")?"checked":""?>>未通過</label>
                                 <label><input type="radio" value="0" name="state[<?=$data['list_id']?>]" <?=($_GET['page']=='check_iso'||$_GET['page']=='view_iso')?"disabled":""?> <?=($value=="0")?"checked":""?>>未確認</label>
                             </td>
+                            <?php
+                                if ($info['status'] == 0 || $info['status'] == 3 || $_GET['page'] == 'view_iso') {
+                                        ?>
+                                        <td>
+                                        <?php
+                                            if ($_GET['page'] == 'update_iso_list') {
+                                                ?>
+                                                <label class="btn btn-default">
+                                                    上傳圖片
+                                                    <input class="file_selecter" type="file" multiple name="image[<?=$data['list_id']?>][]" style="display: none;">
+                                                </label>
+                                                <?php
+                                            }
+                                        ?>
+                                        <?php
+                                        if (count($images[$data['list_id']])) {
+                                            foreach ($images[$data['list_id']] as $key => $val) {
+                                                ?>
+                                                <div><a style="font-size: 14px;" href="upload_space/<?=$val?>" target="_new">查看圖片</a></div>
+                                                <?php
+                                            }
+                                        }
+                                        ?>
+                                        </td>
+                                    <?php
+                                }
+                            ?>
                         </tr>
                         <?php
                     }
                 ?>
             </table>
+            <script>
+                $(document).ready(() => {
+                    $('.file_selecter').change(function(e) {
+                        if (this.files && this.files.length > 0) {
+                            $(this).parent().addClass('selected')
+                        } else {
+                            $(this).parent().removeClass('selected')
+                        }
+                    })
+                })
+            </script>
+            <style>
+                .selected {
+                    background: #42e5f4;
+                }
+            </style>
             <?php
                 if ($last['count'] > 0) {
                     $user = mysqli_query($conn, "SELECT * FROM user WHERE ID = '{$ls['user']}'")->fetch_assoc();
