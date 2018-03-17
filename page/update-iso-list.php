@@ -39,6 +39,8 @@
                     <td>
                         檢查表單類型<br>
                         <?=$info['order_id']?>
+                        檢查表單編號/名稱<br>
+                        <?=$info['order_id'] ?>
                     </td>
                     <td>
                         工程名稱<br>
@@ -61,7 +63,7 @@
                         <?=$ls['comment']?>
                     </td>
                     <td>
-                        備註(通過/未通過說明)：<br>
+                        備註：<br>
                         <?=$ls['other']?>
                     </td>
                 </tr>
