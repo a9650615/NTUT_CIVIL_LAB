@@ -2,6 +2,7 @@
 <?php
     include './model/sql.php';
     $case_sql = mysqli_query($conn, "SELECT * FROM case_list ORDER BY ID desc");
+    $user_order = mysqli_query($conn, "SELECT * FROM user WHERE ID='{$_COOKIE['userId']}'")->fetch_assoc();
 ?>
 <div class="container">
     <br><p align="center" style="font-size: 35px;">新增ISO工務表單</p>
@@ -16,11 +17,22 @@
                     <td>
                         工程名稱<br>
                         <!-- <input type="text" name="project_name" autocomplete="off" /> -->
-                        <select name="project_name" required>
+                        <?php
+                            $one_case = mysqli_query($conn, "SELECT * FROM case_list WHERE order_id = '{$user_order['order_id']}' ")->fetch_assoc();
+                            if ($_COOKIE['role'] != $admin)
+                                echo $one_case['order_name'];
+                        ?>
+                        <select name="project_name" required style="<?=($_COOKIE['role'] == $admin)?"":"display: none;"?>">
                             <?php
-                            while($data = $case_sql -> fetch_assoc()) {
+                            if ($_COOKIE['role'] == $admin)
+                                while($data = $case_sql -> fetch_assoc()) {
+                                    ?>
+                                    <option value="<?=$data['order_name']?>"><?=$data['order_name']?></option>
+                                    <?php
+                                }
+                            else {
                                 ?>
-                                <option value="<?=$data['order_id']?>"><?=$data['order_name']?></option>
+                                <option value="<?=$one_case['order_name']?>"><?=$one_case['order_name']?></option>
                                 <?php
                             }
                             ?>
