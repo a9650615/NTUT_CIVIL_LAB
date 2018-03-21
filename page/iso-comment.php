@@ -2,7 +2,7 @@
 <div class="container">
     <a href="?page=check_iso&id=<?=$_GET['id']?>">上一頁</a>
     <form method="post" action="/model/iso_form.php?action=check_iso&data=<?=$_GET['data']?>&id=<?=$_GET['id']?>">
-        <div>
+        <div style="<?=$_GET['data']==3?"display: none;":""?>">
             綜合評語：<br>
             <textarea name="comment"></textarea>
         </div>

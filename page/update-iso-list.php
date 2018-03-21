@@ -35,6 +35,9 @@
             }
         ?>
         </div>
+        <div style="margin: 15px 0;" class="alert alert-danger" role="alert">
+        不合格原因 : <?=$ls['other']?>
+        </div>
         <table class="New">
             <tbody>
                 <tr>
@@ -59,16 +62,22 @@
                         <?=$info['floor']?>
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        綜合評語：<br>
-                        <?=$ls['comment']?>
-                    </td>
-                    <td>
-                        備註：<br>
-                        <?=$ls['other']?>
-                    </td>
-                </tr>
+                <?php
+                    if ($info['status'] != 3) {
+                        ?>
+                        <tr>
+                            <td>
+                                綜合評語：<br>
+                                <?=$ls['comment']?>
+                            </td>
+                            <td>
+                                備註：<br>
+                                <?=$ls['other']?>
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                ?>
             </tbody>
         </table>
         <form method="post" action="/model/iso_form.php?action=update&id=<?=$_GET['id']?>&order_id=<?=$info['order_id']?>" enctype="multipart/form-data">
