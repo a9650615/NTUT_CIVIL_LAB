@@ -112,6 +112,7 @@
                                                     上傳圖片
                                                     <input class="file_selecter" type="file" multiple name="image[<?=$data['list_id']?>][]" style="display: none;">
                                                 </label>
+                                                <div class="viewer"></div>
                                                 <?php
                                             }
                                         ?>
@@ -133,8 +134,21 @@
                 ?>
             </table>
             <script>
+                let getData = (file) => new Promise((resolve, reject) => {
+                    let reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = () => resolve(reader);
+                })
                 $(document).ready(() => {
-                    $('.file_selecter').change(function(e) {
+                    $('.file_selecter').change(async function(e) {
+                        $(this).parents('td').find('.viewer').html('')
+                        // console.log($(this).parents('td').find('.viewer'))
+                        for (let i in this.files) {
+                            if (this.files.hasOwnProperty(i)) {
+                                let rend = await getData(this.files[i]);
+                                $(this).parents('td').find('.viewer').append(`<div style="min-width: 70px;"><a href="${rend.result}" target="_new"><img style="max-width:200px;" src="${rend.result}" /></a></div>`)
+                            }
+                        }
                         if (this.files && this.files.length > 0) {
                             $(this).parent().addClass('selected')
                         } else {
