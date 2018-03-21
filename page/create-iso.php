@@ -3,6 +3,12 @@
     include './model/sql.php';
     $case_sql = mysqli_query($conn, "SELECT * FROM case_list ORDER BY ID desc");
     $user_order = mysqli_query($conn, "SELECT * FROM user WHERE ID='{$_COOKIE['userId']}'")->fetch_assoc();
+    if ($_COOKIE['role'] == $admin) {
+        //SELECT DISTINCT(case_list.contractor),B.* FROM case_list RIGHT JOIN case_list AS B ON B.contractor = case_list.contractor 
+        $case_contractor = mysqli_query($conn, "SELECT DISTINCT(contractor) FROM case_list");
+    } else {
+        $case_contractor = mysqli_query($conn, "SELECT DISTINCT(contractor) FROM case_list WHERE order_id='{$user_order['order_id']}'");
+    }
 ?>
 <div class="container">
     <br><p align="center" style="font-size: 35px;">新增ISO工務表單</p>
@@ -42,7 +48,16 @@
                 <tr>
                     <td>
                         承包商<br>
-                        <input type="text" name="contractor" autocomplete="off" />
+                        <select name="contractor" require>
+                        <?php
+                            while($d = $case_contractor->fetch_assoc()) {
+                                ?>
+                                <option><?=$d['contractor']?></option>
+                                <?php
+                            }
+                        ?>
+                        </select>
+                        <!-- <input type="text" name="contractor" autocomplete="off" /> -->
                     </td>
                     <td>
                         施工樓層/分區：<br>
