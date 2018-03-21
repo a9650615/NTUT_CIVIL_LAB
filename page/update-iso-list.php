@@ -35,9 +35,15 @@
             }
         ?>
         </div>
-        <div style="margin: 15px 0;" class="alert alert-danger" role="alert">
-        不合格原因 : <?=$ls['other']?>
-        </div>
+        <?php
+            if ($info['status'] == 3) {
+                ?>
+                <div style="margin: 15px 0;" class="alert alert-danger" role="alert">
+                不合格原因 : <?=$ls['other']?>
+                </div>
+                <?php
+            }
+        ?>
         <table class="New">
             <tbody>
                 <tr>
