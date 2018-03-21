@@ -192,6 +192,7 @@
         <input value="送出" type="button" onclick="upload()"/>
         <input value="送出" id="sub" type="submit" style="display:none;" />
         <script>
+              let move = false;
               let canvas = document.getElementById('drawing');
                 let ctx = canvas.getContext('2d');
                     function openFile(event){
@@ -219,6 +220,7 @@
                         drawing = true;
                         $('#update_img').hide()
                 lastPos = getMousePos(canvas, e);
+                    move = true;
                 }, false);
                 canvas.addEventListener("mouseup", function (e) {
                 drawing = false;
@@ -249,6 +251,7 @@
                     // Set up touch events for mobile, etc
                 canvas.addEventListener("touchstart", function (e) {
                         mousePos = getTouchPos(canvas, e);
+                        move = true;
                 var touch = e.touches[0];
                 var mouseEvent = new MouseEvent("mousedown", {
                     clientX: touch.clientX,
@@ -282,16 +285,18 @@
                     canvas.toBlob((blob) => {
                         formData.append('img', blob);
                         formData.append('order_id', '<?=($_GET['id'])?$_GET['id']:($id+1)?>');
-                        $.ajax({
-                            url: "/model/canvasUpload.php?action=create_safty",
-                            type: "POST",
-                            data: formData,
-                            processData: false,
-                            contentType: false
-                        }).done(function(respond){
-                            // alert(respond);
-                            $('#sub').click()
-                        });
+                        if (move)
+                            $.ajax({
+                                url: "/model/canvasUpload.php?action=create_safty",
+                                type: "POST",
+                                data: formData,
+                                processData: false,
+                                contentType: false
+                            }).done(function(respond){
+                                // alert(respond);
+                                $('#sub').click()
+                            });
+                        else $('#sub').click()
                     })
                 }
         </script>
