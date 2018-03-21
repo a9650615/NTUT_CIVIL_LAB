@@ -39,7 +39,7 @@
                                 foreach ($all_fine as $v) {
                                     foreach ($FINE_LIST as $i => $val) {
                                         if ($i == $v) {
-                                            echo "{$val}<br>";
+                                            echo "{$val['text']}<br>";
                                             break;
                                         }
                                     }

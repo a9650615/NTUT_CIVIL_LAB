@@ -1,7 +1,7 @@
 <?php require_once './component/header.php'; ?>
 <?php
     include './model/sql.php';
-    $sql_case_name = mysqli_query($conn, "SELECT `order_name`,`ID` FROM case_list");
+    $sql_case_name = mysqli_query($conn, "SELECT `order_name`,`order_id`,`ID` FROM case_list");
     $sql_case_contractor = mysqli_query($conn, "SELECT `contractor` FROM case_list");
     $data_sql = mysqli_query($conn, "SELECT * FROM safty_list WHERE ID='{$_GET['id']}'");
     $next_id = mysqli_query($conn, "SELECT max(ID) FROM safty_list")->fetch_assoc();
@@ -19,9 +19,9 @@
                         <?php 
                             $caseId = 0;
                             while ($data = $sql_case_name->fetch_assoc()) {
-                                if ($data['order_name']==$d['missing_place']) $caseId = $data['ID'];
+                                if ($data['order_name']==$d['missing_place']) $caseId = $data['order_id'];
                                 ?>
-                                <option data-id="<?=$data['ID']?>" <?=($data['order_name']==$d['missing_place']?"selected":"")?>><?=$data['order_name']?></option>
+                                <option data-id="<?=$data['order_id']?>" <?=($data['order_name']==$d['missing_place']?"selected":"")?>><?=$data['order_name']?></option>
                                 <?php
                             }
                         ?>
