@@ -30,18 +30,17 @@
     <a href="?">上一頁</a>
     <div class="col-xs-12 col-sm-12 col-md-12">   
           <div class="product_index">
-
-            <div class="col-sm-12 col-md-12 col-mm-12" id="content-menu">
-                <div class="menu">
-                                <?php
+<?php
                 if ($_COOKIE['role'] == 3 || $_COOKIE['role'] == $admin) {
                     ?>
-                    <a href="?page=select_iso_form">新增 ISO 表單</a>
+                    <a href="?page=select_iso_form">新增ISO檢查表單</a>
                     <?php
                 }
             ?>
+            <div class="col-sm-12 col-md-12 col-mm-12" id="content-menu">
+                <div class="menu">
                     <div>
-                    <p align="center" style="font-size: 35px;">ISO工務表單總覽</p>
+                    <p align="center" style="font-size: 35px;">ISO檢查表單總覽</p>
                     <br>
                     </div>
                     <div style="margin: 15px 0;" class="alert alert-secondary" role="alert">

@@ -42,7 +42,7 @@ else {
 ?>
 iso 確認資料新增器
 <form action="" method="post" enctype="multipart/form-data">
-工程ID: <input name="order_id" /><br>
+ISO表單編號: <input name="order_id" /><br>
 <input type="file" name="file" />
 <input type="submit" />
 </form>

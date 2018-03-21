@@ -50,13 +50,32 @@ if ($_GET['action'] == 'update') {
     $max = $max_succ['m'];
     $total_count = 0;
     foreach ($_POST['state'] as $key => $value) {
+        $file_name = $_FILES['image']['name'];
+        $file_tmp = $_FILES['image']['tmp_name'];
+        $image_name_list = array();
+        // echo $key.'<br>';
+        // print_r($file_tmp[$key]);
+        // upload image 
+        foreach ($file_tmp[$key] as $index => $val) {
+            if (file_exists($val) && is_uploaded_file($val)) {
+                $imageFileType = strtolower(pathinfo($file_name[$key][$index],PATHINFO_EXTENSION));
+                $name = "iso_{$_GET['id']}-{$key}-{$index}.{$imageFileType}";
+                array_push($image_name_list, $name);
+                move_uploaded_file($val, "../upload_space/{$name}");
+            }
+        }
         $search_sql = mysqli_query($conn, "SELECT * FROM iso_select_list WHERE list_id='{$key}' and order_list='{$_GET['id']}' and history_id='{$id}'");
         $count = mysqli_num_rows($search_sql);
+        $image = implode(',', $image_name_list);
         if ($value=="2"||$value=="0") $total_count++;
         if ($count == 0 || $d['status'] == 3) {
-            mysqli_query($conn, "INSERT INTO iso_select_list(`list_id`, `order_list`, `value`, `history_id`) VALUES('{$key}','{$_GET['id']}','{$value}', '{$id}')");
+            mysqli_query($conn, "INSERT INTO iso_select_list(`list_id`, `order_list`, `value`, `history_id`, `image`) VALUES('{$key}','{$_GET['id']}','{$value}', '{$id}', '{$image}')");
         } else {
-            mysqli_query($conn, "UPDATE iso_select_list SET `value`='{$value}' WHERE list_id='{$key}' and order_list='{$_GET['id']}' and history_id='{$id}' ");
+            $join = '';
+            if (count($image_name_list)) {
+                $join = ", `image`='{$image},'";
+            }
+            mysqli_query($conn, "UPDATE iso_select_list SET `value`='{$value}'{$join} WHERE list_id='{$key}' and order_list='{$_GET['id']}' and history_id='{$id}' ");
         }
     }
     if ($total_count >= $max) {

@@ -14,6 +14,7 @@
             ?>
             <a style="font-size: 25px;" href="?page=safty_form">新增安衛罰款</a>
             <p align="center" style="font-size: 35px;">安衛罰款</p>
+            <p align="center" style="font-size: 35px;">安衛罰款總覽</p>
             <?php
         }
         $row_count = 0;

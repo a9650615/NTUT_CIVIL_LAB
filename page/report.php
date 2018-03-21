@@ -7,6 +7,7 @@
     $no_pass = 0;
     $out_date = 0;
 ?>
+<p align="center" style="font-size: 35px;">品質改善表單總覽</p>
 <a href="/">上一頁</a>
 <div style="text-align: right;">
     <a href="?page=logout">登出</a>
