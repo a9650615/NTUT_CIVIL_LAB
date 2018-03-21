@@ -86,10 +86,10 @@
                                 <label><input type="radio" value="1" name="state[<?=$data['list_id']?>]" <?=($_GET['page']=='check_iso'||$_GET['page']=='view_iso')?"disabled":""?> <?=(($value=="1"||$value=="-1")&&$info['status'] !== 3)?"checked":""?>>未通過</label>
                                 <label><input type="radio" value="0" name="state[<?=$data['list_id']?>]" <?=($_GET['page']=='check_iso'||$_GET['page']=='view_iso')?"disabled":""?> <?=($value=="0" || $info['status'] == 3)?"checked":""?>>未確認</label>
                             </td>
+                            <td>
                             <?php
                                 if ($info['status'] == 0 || $info['status'] == 3 || $_GET['page'] == 'view_iso') {
                                         ?>
-                                        <td>
                                         <?php
                                             if ($_GET['page'] == 'update_iso_list') {
                                                 ?>
@@ -101,18 +101,17 @@
                                             }
                                         ?>
                                         <?php
-                                        if (count($images[$data['list_id']])) {
-                                            foreach ($images[$data['list_id']] as $key => $val) {
-                                                ?>
-                                                <div><a style="font-size: 14px;" href="upload_space/<?=$val?>" target="_new">查看圖片</a></div>
-                                                <?php
-                                            }
+                                        
+                                    }
+                                    if (count($images[$data['list_id']])) {
+                                        foreach ($images[$data['list_id']] as $key => $val) {
+                                            ?>
+                                            <div style="min-width: 70px;"><a style="font-size: 14px;" href="upload_space/<?=$val?>" target="_new">查看圖片</a></div>
+                                            <?php
                                         }
-                                        ?>
-                                        </td>
-                                    <?php
-                                }
-                            ?>
+                                    }
+                                ?>
+                            </td>
                         </tr>
                         <?php
                     }
