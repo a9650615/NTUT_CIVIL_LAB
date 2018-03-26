@@ -8,8 +8,8 @@
     $d = $data_sql->fetch_assoc();
     $id = $next_id['max(ID)'];
 ?>
-<div  class="container">
-    <a " href="?page=safty">上一頁</a>
+<div class="container">
+    <a  href="?page=safty">上一頁</a>
     <p align="center" style="font-size: 35px;">建立安全衛生表單</p>
     <br>
 
@@ -44,10 +44,11 @@
                     <script>
                         $('select[name=missing_place]').bind('change', function() {
                             if ($(this).find(':selected').attr('data-id'))
-                                $('#case_id').val(`<?=$_GET['id']?$_GET['id']:($id+1)?>-${$(this).find(':selected').attr('data-id')}`)
+                                // <?=$_GET['id']?$_GET['id']:($id+1)?>-
+                                $('#case_id').val(`${$(this).find(':selected').attr('data-id')}`)
                         })
                     </script>
-                    工程編號：<input name="case_id" style="border:none; background-color: transparent;" id="case_id" readonly value="<?=$_GET['id'].'-'.$caseId?>" />
+                    工程編號：<input name="case_id" style="border:none; background-color: transparent;" id="case_id" readonly value="<?=$caseId/*.'-'.*/?>" />
                 </td>
             </tr>
             <tr>
