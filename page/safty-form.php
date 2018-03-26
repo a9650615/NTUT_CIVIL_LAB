@@ -120,12 +120,17 @@
                         } else {
                             ?>
                             <div style="position:relative;">
+                                <img onerror="this.style='display:none'" src="upload_space/safty_<?=$_GET['id']?>_create.png?a=<?=rand()?>" style="max-width:100%; position:absolute;width:100%; height:100%;" />
+                                <img src="upload_space/<?=$d['image']?>" style="max-width:100%;" />
+                            </div>
+                            工地現況：<input type="file" name="missing_image" onchange="openFile(event)" <?=($_GET['id'?"":"required"])?>/>
+                            <div style="position:relative;">
                                 <canvas id="drawing" style="position:absolute; left: 0; height: 0; width:100%; height:100%;z-index:5;"></canvas>
-                                <img onerror="this.style='display:none'" id="update_img" src="upload_space/safty_<?=$_GET['id']?>_create.png?a=<?=rand()?>" style="max-width:100%; position:absolute;width:100%; height:100%;" />
+                                <img onerror="this.style='display:none'" id="update_img" src="upload_space/safty_<?=$_GET['id']?>_update.png?a=<?=rand()?>" style="max-width:100%; position:absolute;width:100%; height:100%;" />
                                 <?php
-                                    if ($d['image']) {
+                                    if ($d['resolve_image']) {
                                         ?>
-                                        <img id="output" src="upload_space/<?=$d['image']?>" style="max-width:100%;" />
+                                        <img id="output" src="upload_space/<?=$d['resolve_image']?>" style="max-width:100%;" />
                                         <?php
                                     }
                                     else {
@@ -298,7 +303,7 @@
                         formData.append('order_id', '<?=($_GET['id'])?$_GET['id']:($id+1)?>');
                         if (move)
                             $.ajax({
-                                url: "/model/canvasUpload.php?action=create_safty",
+                                url: "/model/canvasUpload.php?action=<?=$_GET['id']?'update_safty':'create_safty'?>",
                                 type: "POST",
                                 data: formData,
                                 processData: false,

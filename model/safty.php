@@ -52,6 +52,16 @@ if ($_GET['action'] == 'update' && $has_all_data) {
 }
 
 if ($_GET['action']=='update_data') {
+    $target_dir = "../upload_space/";
+    $imageFileType = strtolower(pathinfo($_FILES["missing_image"]["name"],PATHINFO_EXTENSION));
+    // $target_file = $target_dir . basename($_FILES["image"]["name"]);
+    $file_name = md5(microtime()) .'.'. $imageFileType;
+    $target_file = $target_dir . $file_name;
+    if (move_uploaded_file($_FILES["missing_image"]["tmp_name"], $target_file)) {
+        // echo "The file ". basename( $_FILES["image"]["name"]). " has been uploaded.";
+    } else {
+        // echo "Sorry, there was an error uploading your file.";
+    }
     $sql = mysqli_query($conn, "UPDATE safty_list 
         SET 
             `missing_place`='{$_POST['missing_place']}',
@@ -63,7 +73,8 @@ if ($_GET['action']=='update_data') {
             `resolve_date`='{$_POST['resolve_date']}',
             `check_date`='{$_POST['check_date']}',
             `case_id`='{$_POST['case_id']}',
-            `fine_people`='{$_POST['fine_people']}'
+            `fine_people`='{$_POST['fine_people']}',
+            `resolve_image`='{$file_name}'
      WHERE ID='{$_GET['id']}'");
 }
 
