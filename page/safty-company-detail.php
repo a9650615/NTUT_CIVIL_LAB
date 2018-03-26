@@ -1,7 +1,7 @@
 <?php include './component/header.php'; ?>
 <?php
     include './model/sql.php';
-    $sql = mysqli_query($conn, "SELECT DISTINCT(missing_place) FROM safty_list WHERE missing_company='{$_GET['no']}' order by ID desc");
+    $sql = mysqli_query($conn, "SELECT DISTINCT(missing_place) FROM safty_list WHERE missing_company='{$_GET['no']}' and missing_place='{$_GET['no2']}' order by ID desc");
     $row_count = mysqli_num_rows($sql);
     $out_date = 0;
     $no_pass = 0;
