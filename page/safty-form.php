@@ -153,7 +153,7 @@
                         ?>
                     </select>
                     <span id="other">
-                        罰款金額 <input id="fine_price" style="border:none;border-bottom:1px solid;,background:transparent;width:auto;min-width:30px;" readonly > 元, <input id="people" name="fine_people" type="number" min="1" value="<?=$d['fine_people']?>" style="border:none;border-bottom:1px solid;,background:transparent;width:40px;" > 人, 共 <a id="total_fine_price"></a> 元 
+                        罰款金額 <input id="fine_price" style="border:none;border-bottom:1px solid;,background:transparent;width:auto;min-width:30px;" readonly > 元, <input id="people" name="fine_people" type="number" min="1" value="<?=$d['fine_people']||1?>" style="border:none;border-bottom:1px solid;,background:transparent;width:40px;" > 人, 共 <a id="total_fine_price"></a> 元 
                     <?php
                         if ($_GET['id'] != '') {
                             ?>
