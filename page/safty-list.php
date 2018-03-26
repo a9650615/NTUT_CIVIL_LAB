@@ -41,8 +41,10 @@
             <thead>
                 <tr>
                     <td>工程名稱</td>
-                    <td>缺失廠商</td>
-                    <td>狀態</td>
+                    <!-- <td>缺失廠商</td> -->
+                    <!-- <td>狀態</td> -->
+                    <td>查驗日/改善日</td>
+                    <td>是否逾期</td>
                     <td>編輯</td>
                 </tr>
             </thead>
@@ -56,8 +58,8 @@
                     ?>
                     <tr>
                         <td><?=$data['missing_place']?></td>
-                        <td><?=$data['missing_company']?></td>
-                        <td><?php 
+                        <!-- <td><?=$data['missing_company']?></td> -->
+                        <!-- <td><?php 
                             $status = "<span style='color: red;'>未改善</span>";
                             if ($data['status'] == 1)
                                 $status = "已改善";
@@ -71,7 +73,11 @@
                                     }
                             }
                             echo $status;
-                        ?></td>
+                        ?></td> -->
+                        <td><?=$data['check_date']?>/<?=$data['resolve_date']?></td>
+                        <td>
+                            <?=((strtotime($data['resolve_date']) < time()&&$data['status']!=1)?"是":"否")?>
+                        </td>
                         <td>
                             <?php 
                                 if ($_COOKIE['role'] == $admin) {
