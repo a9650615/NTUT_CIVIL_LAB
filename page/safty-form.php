@@ -7,6 +7,13 @@
     $next_id = mysqli_query($conn, "SELECT max(ID) FROM safty_list")->fetch_assoc();
     $d = $data_sql->fetch_assoc();
     $id = $next_id['max(ID)'];
+    $user_order = mysqli_query($conn, "SELECT * FROM user WHERE ID='{$_COOKIE['userId']}'")->fetch_assoc();
+    if ($_COOKIE['role'] == $admin) {
+        //SELECT DISTINCT(case_list.contractor),B.* FROM case_list RIGHT JOIN case_list AS B ON B.contractor = case_list.contractor 
+        $case_contractor = mysqli_query($conn, "SELECT DISTINCT(contractor) FROM case_list");
+    } else {
+        $case_contractor = mysqli_query($conn, "SELECT DISTINCT(contractor) FROM case_list WHERE order_id='{$user_order['order_id']}'");
+    }
 ?>
 <div class="container">
     <a  href="?page=safty">上一頁</a>
@@ -32,7 +39,7 @@
                     缺失廠商：<select name="missing_company" required>
 
                         <?php 
-                            while ($data = $sql_case_contractor->fetch_assoc()) {
+                            while($data = $case_contractor->fetch_assoc()) {
                                 ?>
                                 <option <?=($data['contractor']==$d['missing_company']?"selected":"")?>><?=$data['contractor']?></option>
                                 <?php
