@@ -9,7 +9,10 @@
     $id = $next_id['max(ID)'];
 ?>
 <div  class="container">
-    <a style="float: right;" href="?page=safty">上一頁</a>
+    <a " href="?page=safty">上一頁</a>
+    <p align="center" style="font-size: 35px;">建立安全衛生表單</p>
+    <br>
+
     <form action="/model/safty.php?action=<?=($_GET['id']?"update_data&id={$_GET['id']}":"create")?>" method="post" enctype="multipart/form-data">
         <table class="table">
             <tr>

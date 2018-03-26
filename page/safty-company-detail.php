@@ -11,8 +11,8 @@
     <table class="table" style="margin:auto;">
         <thead>
             <tr>
-                <th>工程名稱or編號</th>
-                <th>合格率/改善率</th>
+                <th>工程名稱</th>
+                <th>合格率/改善效率</th>
                 <th>已完成(件)</th>
                 <th>未完成/未改善(件)</th>
                 <th>逾期件數</th>

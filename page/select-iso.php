@@ -2,13 +2,11 @@
 <div class="container">
         <a href="?page=iso_list">上一頁</a>
     <br>
-    <p align="center" style="font-size: 35px;">ISO工務表單列表</p>
-    <p align="center" style="font-size: 35px;">ISO檢查表單總覽</p>
+    <p align="center" style="font-size: 35px;">ISO檢查表單列表</p>
     <br>         
     <br><div class="col-sm-4 col-md-6 col-mm-6" id="content-menu">
         <div class="menu">
             <div>
-            <h2>地面下工程檢查表</h2>
             <h2>品質－地面下工程檢查表</h2>
             </div>
             <ul>
@@ -33,7 +31,6 @@
     <div class="col-sm-4 col-md-6 col-mm-6" id="content-menu">
         <div class="menu">
             <div>
-            <h2>地面上工程檢查表</h2>
             <h2>品質－地面上工程檢查表</h2>
             </div>
             <ul>
@@ -66,7 +63,6 @@
         <div class="menu">
             <ul>
             <div>
-                <h2>安裝、修飾工程檢查表</h2>
                 <h2>品質－安裝、修飾工程檢查表</h2>
             </div>
             <li><a class="active" href="#">粉刷與玻璃等</a>
@@ -105,7 +101,7 @@
         <div class="menu">
             <ul>
             <div>
-                <h2>配電及消防工程檢查表</h2>
+
                 <h2>品質－配電及消防工程檢查表</h2>
             </div>                  
             <li><a a class="active" href="#">電氣及空調等</a>

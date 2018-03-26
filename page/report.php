@@ -10,7 +10,7 @@
 <p align="center" style="font-size: 35px;">品質改善表單總覽</p>
 <a href="/">上一頁</a>
 <div style="text-align: right;">
-    <a href="?page=logout">登出</a>
+
 </div>
 <div class="alert alert-info" style="width: 80%; margin: auto; margin-top: 10px;" role="alert">
     共 <?=$row_count?> 筆資料
@@ -20,7 +20,7 @@
     <tr>
         <th>工程名稱</th>
         <th>查驗日期/改善期限</th>
-        <th width="20%">狀態<span style="float:right;">*(已更新)</span></th>
+        <th width="20%">狀態<span style="float:right;">＊=(已更新)</span></th>
         <th>是否逾期</th>
         <th>更新</th>
     </tr>

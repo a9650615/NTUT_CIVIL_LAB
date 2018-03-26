@@ -7,7 +7,7 @@
             <textarea name="comment"></textarea>
         </div>
         <div>
-            其他備註：<br>
+            其他備註／若為未合格請輸入原因：<br>
             <textarea name="other"></textarea>
         </div>
         <input value="送出" type="submit" >
