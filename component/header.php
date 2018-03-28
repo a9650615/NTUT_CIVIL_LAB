@@ -23,6 +23,17 @@
   <link rel="stylesheet" type="text/css" href="css/menu-css_YMD.css">
   <link rel="stylesheet" type="text/css" href="css/menu-style_YMD.css"> 
   <link rel="stylesheet" type="text/css" href="css/custom.css"> 
+  <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width">
+  <link rel="apple-touch-icon" href="touch-icon-iphone.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="touch-icon-iphone-retina.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="touch-icon-ipad-retina.png">
+  <meta name="apple-mobile-web-app-title" content="福住建設股份有限公司APP">
+  <meta name="apple-mobile-web-app-status-bar-style" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
 <body>
 
