@@ -1,7 +1,7 @@
 <?php include './component/header.php'; ?>
 <?php
     include './model/sql.php';
-    $sql = mysqli_query($conn, "SELECT DISTINCT(missing_company), missing_place FROM safty_list order by ID desc");
+    $sql = mysqli_query($conn, "SELECT DISTINCT(missing_company), missing_place, case_id FROM safty_list order by ID desc");
 ?>
 <div class="container">
     <a href="?page=safty">上一頁</a>
@@ -17,7 +17,7 @@
             <?php
                 while ($data = $sql->fetch_assoc()) {
                     $inner_sql_count = mysqli_query($conn, "SELECT * FROM safty_list WHERE missing_company='{$data['missing_company']}' and missing_place='{$data['missing_place']}' order by ID desc");
-                    $inner_sql = mysqli_query($conn, "SELECT * FROM safty_list WHERE missing_company='{$data['missing_company']}' order by ID desc");
+                    $inner_sql = mysqli_query($conn, "SELECT * FROM safty_list WHERE missing_company='{$data['missing_company']}' and case_id='{$data['case_id']}' order by ID desc");
                     $row_count = mysqli_num_rows($inner_sql);
                     $no_pass = 0;
                     $out_date = 0;
