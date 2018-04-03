@@ -16,23 +16,24 @@
             </tr>
             <?php
                 while ($data = $sql->fetch_assoc()) {
-                    $inner_sql_count = mysqli_query($conn, "SELECT * FROM safty_list WHERE missing_company='{$data['missing_company']}' and missing_place='{$data['missing_place']}' order by ID desc");
-                    $inner_sql = mysqli_query($conn, "SELECT * FROM safty_list WHERE missing_company='{$data['missing_company']}' and case_id='{$data['case_id']}' order by ID desc");
-                    $row_count = mysqli_num_rows($inner_sql);
+                    $inner_sql_count = mysqli_query($conn, "SELECT * FROM safty_list WHERE missing_company='{$data['missing_company']}' and missing_place='{$data['missing_place']}' and fine='1' order by ID desc");
+                    $inner_sql = mysqli_query($conn, "SELECT * FROM safty_list WHERE missing_company='{$data['missing_company']}' and missing_place='{$data['missing_place']}' and fine != '1' order by ID desc");
+                    $row_count = mysqli_num_rows($inner_sql_count);
+                    $row_count2 = mysqli_num_rows($inner_sql);
                     $no_pass = 0;
                     $out_date = 0;
                     $all_fine = array();
-                    while ($dd = $inner_sql_count -> fetch_assoc()) {
-                        if ($dd['status'] != 1 || strtotime($dd['resolve_date']) < time()) {
-                            $no_pass ++;
-                            array_push($all_fine, $dd['fine']);
-                        }
+                    while ($dd = $inner_sql -> fetch_assoc()) {
+                        array_push($all_fine, $dd['fine']);
+                        // if ($dd['status'] != 1 || strtotime($dd['resolve_date']) < time()) {
+                        //     $no_pass ++;
+                        // }
                     }
                     ?>
                     <tr>
                         <td><?=$data['missing_place']?></td>
                         <td><a href="?page=safty_company_detail&no=<?=$data['missing_company']?>&no2=<?=$data['missing_place']?>"><?=$data['missing_company']?></a></td>
-                        <td><?=$no_pass?></td>
+                        <td><?=$row_count2?></td>
                         <td><?=$row_count?></td>
                         <td>
                             <?php
