@@ -8,7 +8,7 @@
     $d = $data_sql->fetch_assoc();
     $id = $next_id['max(ID)'];
     $user_order = mysqli_query($conn, "SELECT * FROM user WHERE ID='{$_COOKIE['userId']}'")->fetch_assoc();
-    if ($_COOKIE['role'] == $admin) {
+    if ($_COOKIE['role'] == $admin || $_COOKIE['role'] == 5) {
         //SELECT DISTINCT(case_list.contractor),B.* FROM case_list RIGHT JOIN case_list AS B ON B.contractor = case_list.contractor 
         $case_contractor = mysqli_query($conn, "SELECT DISTINCT(contractor) FROM case_list");
     } else {
