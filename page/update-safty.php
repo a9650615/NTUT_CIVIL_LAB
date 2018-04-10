@@ -26,12 +26,12 @@
                                 <?php
                                     if ($data['image']) {
                                         ?>
-                                        <img id="output" src="upload_space/<?=$data['image']?>" style="max-width:100%;" />
+                                        <img src="upload_space/<?=$data['image']?>" style="max-width:100%;" />
                                         <?php
                                     }
                                     else {
                                         ?>
-                                        <img id="output" style="max-width:100%;" />
+                                        <img style="max-width:100%;" />
                                         <?php
                                     }
                                 ?>
