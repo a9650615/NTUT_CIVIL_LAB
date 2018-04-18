@@ -79,6 +79,7 @@ if ($_GET['action']=='update_data') {
             `fine_people`='{$_POST['fine_people']}'
             {$update_image}
      WHERE ID='{$_GET['id']}'");
+    $page = "safty_form&id={$_GET['id']}";
 }
 
 if ($_GET['action'] == 'check_status') {
