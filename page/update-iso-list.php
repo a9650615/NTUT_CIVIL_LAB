@@ -184,12 +184,25 @@
                 }
                 if (($_COOKIE['role'] == 1||$_COOKIE['role']==4) && $info['status'] == 1) {
                     ?>
-                    <div style="margin: 15px 0;" class="alert alert-secondary" role="alert">
+                    <div style="margin: 15px 0;" class="alert alert-secondary" id="check_iso" role="alert">
                         審核狀態
-                        <a href="?page=iso_comment&data=2&id=<?=$_GET['id']?>" class="btn btn-primary">通過</a>
-                        <a href="?page=iso_comment&data=3&id=<?=$_GET['id']?>" class="btn btn-danger">未合格</a>
+                        <a data-data="2" data-id="<?=$_GET['id']?>" href="#" class="btn btn-primary">通過</a>
+                        <a data-data="3" data-id="<?=$_GET['id']?>" href="#" class="btn btn-danger">未合格</a>
                         <a href="?page=iso_list" style="float: right; padding: 5px;">回上一頁</a>
                     </div>
+                    <script>
+                        $(document).on('click','#check_iso > a', function(e) {
+                            e.preventDefault();
+                            let id = $(this).attr('data-id')
+                            let data = $(this).attr('data-data')
+                            console.log(data, id)
+                            $('#comment_form').show().attr('action', `/model/iso_form.php?action=check_iso&data=${data}&id=${id}`)
+                            if (data == 3)
+                                $('#common_comment').hide()
+                            else 
+                                $('#common_comment').show()
+                        })
+                    </script>
                     <?php
                 }
                 if ($_GET['page']=='view_iso') {
@@ -203,6 +216,17 @@
                     <?php
                 }
             ?>
+        </form>
+        <form method="post" id="comment_form" style="display: none;">
+            <div id="common_comment" >
+                綜合評語：<br>
+                <textarea name="comment"></textarea>
+            </div>
+            <div>
+                其他備註／若為未合格請輸入原因：<br>
+                <textarea name="other"></textarea>
+            </div>
+            <input value="送出" type="submit" >
         </form>
         <style>
             label {
