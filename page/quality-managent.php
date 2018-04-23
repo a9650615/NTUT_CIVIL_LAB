@@ -19,6 +19,7 @@
 <div>
     <p align="center" style="font-size: 35px;">品質改善表單總覽</p>
     <br><br><a style="font-size: 25px" href="?page=create_quality">新增品質改善表</a>
+    <a href="?page=quality_statistics">品質月/季/年統計</a>
     <a  style="float:right;" href="/">上一頁</a>
     <br>
 
