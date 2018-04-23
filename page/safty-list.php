@@ -112,6 +112,7 @@
     <div class="alert alert-info" style="width: 100%; margin: auto; margin-top: 10px;" role="alert">
         合格率: <?=intval((($row_count - $no_pass)/$row_count)*100)?>%,改善效率: <?=max(0,intval((($row_count - $no_pass - $out_date)/$row_count)*100))?>%
         （<a href="?page=safty_finish">合格/改善效率</a>）(<a href="?page=safty_company">缺失廠商統計</a>) (<a href="?page=safty_overview">罰款總覽</a>)
+        (<a href="?page=safty_statistics">月/季/年統計 </a>)
     </div>
 </div>
 <?php require_once './component/footer.php'; ?>

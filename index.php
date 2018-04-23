@@ -124,6 +124,9 @@
             else if ($_GET['page'] == 'safty_detail') {
                 require_once './page/safty-detail.php';
             }
+            else if ($_GET['page'] == 'safty_statistics') {
+                require_once './page/safty-statistics.php';
+            }
             else {
                 require_once './page/index_panel.php';
             }
@@ -155,6 +158,9 @@
             }
             else if ($_GET['page'] == 'safty_company_detail') {
                 require_once './page/safty-company-detail.php';
+            }
+            else if ($_GET['page'] == 'safty_statistics') {
+                require_once './page/safty-statistics.php';
             }
             else {
                 require_once './page/index_panel.php';
@@ -232,6 +238,9 @@
             }
             else if ($_GET['page'] == 'safty_detail') {
                 require_once './page/safty-detail.php';
+            }
+            else if ($_GET['page'] == 'safty_statistics') {
+                require_once './page/safty-statistics.php';
             }
             else
                 require_once './page/index_panel.php';
