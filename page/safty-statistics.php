@@ -23,7 +23,7 @@
     $data_season_finish = mysqli_query($conn, "SELECT * FROM safty_list {$in_one_season} AND status=1");
     $data_season_outdate = mysqli_query($conn, "SELECT * FROM safty_list {$in_one_season} AND status!=1 AND check_date < now()");
     
-    $in_one_year = "WHERE YEAR(check_date) = YEAR(CURRENT_DATE())";
+    $in_one_year = "WHERE YEAR(check_date) = YEAR('{$year}-{$month}-1')";
     $data_year_total = mysqli_query($conn, "SELECT * FROM safty_list {$in_one_year}");
     $data_year_finish = mysqli_query($conn, "SELECT * FROM safty_list {$in_one_year} AND status=1");
     $data_year_outdate = mysqli_query($conn, "SELECT * FROM safty_list {$in_one_year} AND status!=1 AND check_date < now()");
