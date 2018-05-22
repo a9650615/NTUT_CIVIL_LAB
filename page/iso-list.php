@@ -27,7 +27,7 @@
     }
 ?>
 <div class="container">
-    <a href="?">上一頁</a>
+    <a href="?" class="no-print">上一頁</a>
     <div class="col-xs-12 col-sm-12 col-md-12">   
           <div class="product_index">
 <?php
@@ -56,7 +56,7 @@
                                 <td>工程名稱</td>
                                 <td>狀態</td>
                                 <td>建立時間</td>
-                                <td>編輯</td>
+                                <td class="no-print">編輯</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -76,7 +76,7 @@
                                                 echo '未通過';
                                         ?></td>
                                         <td><?=date("Y-m-d",strtotime($data['create_date']))?></td>
-                                        <td><?php 
+                                        <td class="no-print"><?php 
                                             if ($_COOKIE['role'] == 3)
                                             if ($data['status'] == 0 || $data['status'] == 3) {
                                                 ?>
