@@ -2,13 +2,15 @@
 <?php
     include './model/sql.php';
     $sql_string = "SELECT * FROM quality_list";
-    if ((string) $_GET['filter'] != '') {
+    if ((string) $_GET['filter'] != '' && (string) $_GET['name'] == '' ) {
         $sql_string = $sql_string . " WHERE status='{$_GET['filter']}'";
         if ($_GET['name']) {
             $sql_string = $sql_string . " name='{$_GET['name']}'";
         }
-    } else if ((string) $_GET['name'] != '') {
+    } else if ((string) $_GET['name'] != '' && (string) $_GET['filter'] == '') {
         $sql_string = $sql_string . " WHERE name='{$_GET['name']}'";
+    } else if ((string) $_GET['name'] != '' && (string) $_GET['filter'] != '') {
+        $sql_string = $sql_string . " WHERE name='{$_GET['name']}' and status='{$_GET['filter']}'";
     }
     $sql_string = $sql_string . " ORDER BY ID DESC";
     $sql = mysqli_query($conn, $sql_string);
@@ -26,6 +28,7 @@
     <div class="alert alert-info" style="width: 80%; margin: auto; margin-top: 10px;" role="alert">
         <form method="get" actions="?">
             <input type="hidden" value="quality" name="page" />
+            <input type="hidden" value="<?=$_GET['name']?>" name="name" />
             篩選 : 
             <select name="filter">
                 <option value="">全部</option>
