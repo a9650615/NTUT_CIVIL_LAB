@@ -1,9 +1,9 @@
 <?php include './component/header.php'; ?>
 <?php
     include './model/sql.php';
-    $filter = $_GET['filter'] ? " AND status='{$_GET['filter']}'" : "";
+    $filter = strlen($_GET['filter']) > 0 ? " AND status='{$_GET['filter']}'" : "";
     if ($_COOKIE['role'] == 1 || $_COOKIE['role'] ==$admin) {
-        $filter = ($_GET['filter'] ? "WHERE status='{$_GET['filter']}'" : "");
+        $filter = (strlen($_GET['filter']) > 0 ? "WHERE status='{$_GET['filter']}'" : "");
         $sql_string = "SELECT * FROM iso_list {$filter} ORDER BY ID DESC";
         $sql_str2 = "SELECT * FROM iso_list ORDER BY ID DESC";
     } else {
@@ -47,7 +47,8 @@
                         <a href="?page=iso_list">全</a>: <?=$tot?> 件 | 
                         <a href="?page=iso_list&filter=2">施工所主管已審核</a>: <?=$che?> 件 | 
                         <a href="?page=iso_list&filter=1">未審核</a>: <?=$non?> 件 | 
-                        <a href="?page=iso_list&filter=3">未合格</a>: <?=$ret?> 件
+                        <a href="?page=iso_list&filter=3">未合格</a>: <?=$ret?> 件 |
+                        <a href="?page=iso_list&filter=0">未完成</a>: <?=$ret?> 件
                     </div>
                     <table class="table" style="width: 100%;">
                         <thead>
