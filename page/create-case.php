@@ -22,10 +22,10 @@
                 <td>施工所主管</td>
                 <td><label><input type="text" name="supervisor" value="<?=$data['supervisor']?>"></label></td>
             </tr>
-            <tr>
+            <!-- <tr>
                 <td>檢查人員</td>
                 <td><label><input type="text" name="checker" value="<?=$data['checker']?>"></label></td>
-            </tr>
+            </tr> -->
             <tr>
                 <td>承包商名稱</td>
                 <td><label><input type="text" name="contractor" value="<?=$data['contractor']?>"></label></td>

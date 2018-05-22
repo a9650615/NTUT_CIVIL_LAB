@@ -14,7 +14,7 @@
             <th>工程編號</th>
             <th>工程名稱</th>
             <th>施工所主管</th>
-            <th>檢查人員</th>
+            <!-- <th>檢查人員</th> -->
             <th>承包商名稱</th>
             <th>編輯</th>
         </tr>
@@ -27,7 +27,7 @@
                         <td><?=$data['order_id']?></td>
                         <td><?=$data['order_name']?></td>
                         <td><?=$data['supervisor']?></td>
-                        <td><?=$data['checker']?></td>
+                        <!-- <td><?=$data['checker']?></td> -->
                         <td><?=$data['contractor']?></td>
                         <td>
                             <a href="?page=edit_case&id=<?=$data['ID']?>">編輯</a>
