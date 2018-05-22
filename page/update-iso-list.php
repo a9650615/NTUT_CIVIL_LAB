@@ -23,14 +23,18 @@
             // if ($_GET['page'] == 'view_iso') {
 
             // }
-            if ($now_version >0) {
+            if ($now_version > 0) {
                 ?>
-                <a href="?page=<?="{$_GET['page']}&id={$_GET['id']}&version=".($now_version-1)?>">上一版</a>
+                <a href="?page=<?="{$_GET['page']}&id={$_GET['id']}&version=".($now_version-1)?>">第 <?=($now_version)?> 版</a>
                 <?php
             }
-            if ($now_version < $last['count']) {
+            if ($now_version < $last['count'] - 1) {
                 ?>
                 <a href="?page=<?="{$_GET['page']}&id={$_GET['id']}&version=".($now_version+1)?>">下一版</a>
+                <?php
+            } else if ($now_version == $last['count'] - 1) {
+                ?>
+                <a href="?page=<?="{$_GET['page']}&id={$_GET['id']}&version=".($now_version+1)?>">最終版</a>
                 <?php
             }
         ?>
