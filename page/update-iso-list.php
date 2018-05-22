@@ -103,7 +103,7 @@
                                 <label><input type="radio" value="1" name="state[<?=$data['list_id']?>]" <?=($_GET['page']=='check_iso'||$_GET['page']=='view_iso')?"disabled":""?> <?=(($value=="1"||$value=="-1")&&$info['status'] !== 3)?"checked":""?>>未通過</label>
                                 <label><input type="radio" value="0" name="state[<?=$data['list_id']?>]" <?=($_GET['page']=='check_iso'||$_GET['page']=='view_iso')?"disabled":""?> <?=($value=="0" || $info['status'] == 3)?"checked":""?>>無此項目</label>
                             </td>
-                            <td>
+                            <td class="no-print">
                             <?php
                                 if ($info['status'] == 0 || $info['status'] == 3 || $_GET['page'] == 'view_iso') {
                                         ?>
