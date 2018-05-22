@@ -2,7 +2,7 @@
 <?php
     include './model/sql.php';
     $filter = strlen($_GET['filter']) > 0 ? " AND status='{$_GET['filter']}'" : "";
-    if ($_COOKIE['role'] == 1 || $_COOKIE['role'] ==$admin) {
+    if ($_COOKIE['role'] ==$admin) {
         $filter = (strlen($_GET['filter']) > 0 ? "WHERE status='{$_GET['filter']}'" : "");
         $sql_string = "SELECT * FROM iso_list {$filter} ORDER BY ID DESC";
         $sql_str2 = "SELECT * FROM iso_list ORDER BY ID DESC";
