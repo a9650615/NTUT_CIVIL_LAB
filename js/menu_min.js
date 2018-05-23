@@ -35,6 +35,7 @@
                     a.removeAttr("class");
                     a.addClass("active")
                 })
+                $('.active').removeAttr("active").addClass("inactive").parent("li").children("ul").slideUp(b.Speed)
             }
             if (a.attr("class") == "active") {
                 a.removeAttr("class");
