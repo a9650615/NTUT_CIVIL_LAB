@@ -80,7 +80,7 @@
         <div style="font-size:25px;" class="col-sm-12 col-md-12 col-mm-12">
             <input type="submit" id="sub" style="display: none;"/>
             <?php
-                if ($data && ($_COOKIE['role'] == 1 || $_COOKIE['role'] == 3)) {
+                if ($data && ($_COOKIE['role'] == 1 || $_COOKIE['role'] == 3 || $_COOKIE['role'] == $admin)) {
                     ?>
                     <input value="送出" type="button" onclick="upload()"/>
                     <input value="送出" id="sub" type="submit" style="display:none;" />
