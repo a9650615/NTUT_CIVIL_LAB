@@ -5,7 +5,12 @@
     if ($_GET['filter']) {
         $search = "WHERE status = '{$_GET['filter']}'";
     }
-    $sql = mysqli_query($conn, "SELECT * FROM safty_list {$search} WHERE fine!='1' ORDER BY ID DESC");
+    if ($_COOKIE['role'] == 3) {
+        $user_order_id = mysqli_query($conn, "SELECT * FROM user WHERE ID='{$_COOKIE['userId']}'")->fetch_assoc()['order_id'];
+        $sql = mysqli_query($conn, "SELECT * FROM safty_list {$search} WHERE fine!='1' AND case_id='{$user_order_id}' ORDER BY ID DESC");
+    } else {
+        $sql = mysqli_query($conn, "SELECT * FROM safty_list {$search} WHERE fine!='1' ORDER BY ID DESC");
+    }
 ?>
 <a href="/?page=safty">上一頁</a>
 <div class="col-sm-12 col-md-12 col-mm-12" id="content-menu">

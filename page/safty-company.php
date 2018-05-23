@@ -1,7 +1,12 @@
 <?php include './component/header.php'; ?>
 <?php
     include './model/sql.php';
-    $sql = mysqli_query($conn, "SELECT DISTINCT(missing_company), missing_place, case_id FROM safty_list order by ID desc");
+    if ($_COOKIE['role'] == 3) {
+        $user_order_id = mysqli_query($conn, "SELECT * FROM user WHERE ID='{$_COOKIE['userId']}'")->fetch_assoc()['order_id'];
+        $sql = mysqli_query($conn, "SELECT DISTINCT(missing_company), missing_place, case_id FROM safty_list WHERE case_id='{$user_order_id}' order by ID desc");
+    } else {
+        $sql = mysqli_query($conn, "SELECT DISTINCT(missing_company), missing_place, case_id FROM safty_list order by ID desc");
+    }
 ?>
 <div class="container">
     <a href="?page=safty">上一頁</a>
