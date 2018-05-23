@@ -6,7 +6,7 @@ $page = 'iso_list';
 
 switch ($_GET['action']) {
     case 'create':
-        $keys = array('project_name', 'order_id', 'contractor');
+        $keys = array('project_name', 'order_id', 'contractor', 'state');
         break;
     case 'update':
         $keys = array();
@@ -25,7 +25,15 @@ if ($_GET['action'] == 'create') {
         $date = date('Y-m-d');
         $sql = "INSERT INTO iso_list (`project_name`, `order_id`, `contractor`, `floor`, `status`, `user`) VALUES('{$_POST['project_name']}', '{$_POST['order_id']}', '{$_POST['contractor']}', '{$_POST['floor']}', '0', '{$_COOKIE['userId']}')";
         if ($data = mysqli_query($conn, $sql)) {
+            $id = $conn->insert_id;
             mysqli_query($conn, "INSERT INTO iso_list_history(`list_id`, `follow_id`, `order_count`, `other`) VALUES('{$conn->insert_id}', '{$conn->insert_id}', '0', '{$_POST['other']}')");
+            foreach ($_POST['state'] as $key => $value) {
+                $search_sql = mysqli_query($conn, "SELECT * FROM iso_select_list WHERE list_id='{$key}' and order_list='{$id}' and history_id='0'");
+                $count = mysqli_num_rows($search_sql);
+                if ($count == 0) {
+                    mysqli_query($conn, "INSERT INTO iso_select_list(`list_id`, `order_list`, `value`, `history_id`, `image`) VALUES('{$key}','{$id}','{$value}', '0', '')");
+                }
+            }
         }
     } else {
         $page = "create_iso&order_id={$_POST['order_id']}";

@@ -9,6 +9,7 @@
     } else {
         $case_contractor = mysqli_query($conn, "SELECT DISTINCT(contractor) FROM case_list WHERE order_id='{$user_order['order_id']}'");
     }
+    $quest = mysqli_query($conn, "SELECT * FROM iso_data_sheet WHERE order_id = '{$_GET['order_id']}' ORDER BY list_id");
 ?>
 <div class="container">
     <br><p align="center" style="font-size: 35px;">新增ISO工務表單</p>
@@ -65,6 +66,25 @@
                     </td>
                 </tr>
             </tbody>
+        </table>
+        <table class="New">
+            <?php
+                while($data = $quest->fetch_assoc()) {
+                    $value = $select_data[$data['list_id']];
+                    if (!is_numeric($value)) $value = "-1";
+                    ?>
+                    <tr>
+                        <td><?=$data['list_id']?></td>
+                        <td style="word-wrap:break-word;"><?=$data['check_item']?></td>
+                        <td>
+                            <label><input type="radio" value="2" name="state[<?=$data['list_id']?>]" <?=($_GET['page']=='check_iso'||$_GET['page']=='view_iso')?"disabled":""?> <?=($value=="2"&&$info['status'] !== 3)?"checked":""?>>通過</label>
+                            <label><input type="radio" value="1" name="state[<?=$data['list_id']?>]" <?=($_GET['page']=='check_iso'||$_GET['page']=='view_iso')?"disabled":""?> <?=(($value=="1"||$value=="-1")&&$info['status'] !== 3)?"checked":""?>>未通過</label>
+                            <label><input type="radio" value="0" name="state[<?=$data['list_id']?>]" <?=($_GET['page']=='check_iso'||$_GET['page']=='view_iso')?"disabled":""?> <?=($value=="0" || $info['status'] == 3)?"checked":""?>>無此項目</label>
+                        </td>
+                    </tr>
+                    <?php
+                }
+            ?>
         </table>
         <input type="submit" value="新增" />
         <a href="?page=select_iso_form">上一頁</a>
