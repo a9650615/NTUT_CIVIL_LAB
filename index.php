@@ -96,6 +96,12 @@
             else if ($_GET['page'] == 'quality') {
                 require_once './page/report.php';
             }
+            else if ($_GET['page'] == 'quality_finish') {
+                require_once './page/quality-finish.php';
+            }
+            else if ($_GET['page'] == 'quailty_detail') {
+                require_once './page/quality-detail.php';
+            }
             else if ($_GET['page'] == 'update_quality') {
                 require_once './page/quality-update.php';
             }
