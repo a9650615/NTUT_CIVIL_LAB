@@ -13,7 +13,7 @@
     <table class="table" style="margin:auto;">
         <thead>
             <tr>
-                <td>工程名稱or編號</td>
+                <td>工程名稱</td>
                 <td>缺失廠商名稱</td>
                 <td>罰款件數</td>
                 <td>缺失件數</td>

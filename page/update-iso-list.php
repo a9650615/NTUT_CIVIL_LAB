@@ -183,7 +183,7 @@
                         未通過說明
                         <textarea style="width: 100%; height: 50px;" name="other"><?=$ls['other']?></textarea>
                     </label>
-                    <input type="submit" value="更新" >
+                    <input type="submit" value="送出" >
                     <?php
                 }
                 if (($_COOKIE['role'] == 1||$_COOKIE['role']==4) && $info['status'] == 1) {

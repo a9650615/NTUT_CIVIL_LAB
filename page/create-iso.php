@@ -86,7 +86,7 @@
                 }
             ?>
         </table>
-        <input type="submit" value="新增" />
+        <input type="submit" value="送出" />
         <a href="?page=select_iso_form">上一頁</a>
     </form>
 </div>

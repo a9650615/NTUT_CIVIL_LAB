@@ -5,7 +5,7 @@
     $data = $sql->fetch_assoc();
 ?>
 <div class="container">
-    <a href="?page=safty">上一頁</a>
+    <a href="?page=safty_overview">上一頁</a>
     <h2>現況檢查</h2>
     <div class="col">
         <div>

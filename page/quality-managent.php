@@ -46,7 +46,7 @@
             <tr>
                 <th>工程名稱</th>
                 <th>查驗日期/改善期限</th>
-                <th width="20%">狀態(*=已更新)<span style="float:right;"></span></th>
+                <th width="20%">狀態(*已更新)<span style="float:right;"></span></th>
                 <th>是否逾期</th>
                 <th>閱覽</th>
             </tr>

@@ -202,7 +202,7 @@
                 <?php
                     if ($data && ($_COOKIE['role'] == 1 || $_COOKIE['role'] == 3)) {
                         ?>
-                        <button type="button" onclick="upload()" class="button button-block" name="save" />確定更新</button>
+                        <button type="button" onclick="upload()" class="button button-block" name="save" />送出</button>
                         <?php
                     } else if (!$data) {
                         ?>

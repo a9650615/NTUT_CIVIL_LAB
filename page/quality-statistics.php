@@ -25,7 +25,7 @@
     $data_year_finish = mysqli_query($conn, "SELECT * FROM quality_list {$in_one_year} AND status=1");
     $data_year_outdate = mysqli_query($conn, "SELECT * FROM quality_list {$in_one_year} AND status!=1 AND check_date < now()");
 ?>
-<a href="?page=quality">上一頁</a>
+<a href="?page=quality">上一頁</a><br>
 <div class="col-sm-12 col-md-12 col-mm-12 container">
     <a href="?page=<?=$_GET['page']?>&year=<?=date('Y', $timestamp) - 1?>">上一年</a>
     <a href="?page=<?=$_GET['page']?>&year=<?=date('m', $timestamp)==1?date('Y', $timestamp)-1:date('Y', $timestamp)?>&month=<?=date('m', $timestamp)==1?12:date('m', $timestamp)-1?>">上一月</a>
