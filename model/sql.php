@@ -1,9 +1,9 @@
 <?php
-$user = 'root';
-$password = 'root';
+$user = 'admin';
+$password = '1234';
 $db = 'civil';
-$host = '127.0.0.1';
-$port = 3306;
+$host = '192.168.1.2';
+$port = 3307;
 // $socket = 'localhost:/Applications/MAMP/tmp/mysql/mysql.sock';
 
 $conn = mysqli_init();

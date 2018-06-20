@@ -6,7 +6,7 @@ $page = 'iso_list';
 
 switch ($_GET['action']) {
     case 'create':
-        $keys = array('project_name', 'order_id', 'contractor', 'state');
+        $keys = array('project_name', 'order_id', 'contractor');
         break;
     case 'update':
         $keys = array();

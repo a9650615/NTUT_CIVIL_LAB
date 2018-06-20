@@ -64,7 +64,7 @@
                     }
                     ?>
                     <tr>
-                        <td><a href="?page=<?=$_GET['page']?>&name=<?=$data['name']?>"><?=$data['name']?></a></td>
+                        <td><a href="?page=<?=$_GET['page']?>&name=<?=$data['name']?>&filter=<?=$_GET['filter']?>"><?=$data['name']?></a></td>
                         <td><span style="width:100px;"><?=$data['check_date']?></span>/<span style="width:100px;"><?=$data['resolve_date']?></span></td>
                         <td><?=$status?>
                         <?php

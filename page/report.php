@@ -1,8 +1,19 @@
 <?php include './component/header.php'; ?>
 <?php
     include './model/sql.php';
+    $sql_string = "";
+    if ((string) $_GET['filter'] != '' && (string) $_GET['name'] == '' ) {
+        $sql_string = $sql_string . " WHERE status='{$_GET['filter']}'";
+        if ($_GET['name']) {
+            $sql_string = $sql_string . " name='{$_GET['name']}'";
+        }
+    } else if ((string) $_GET['name'] != '' && (string) $_GET['filter'] == '') {
+        $sql_string = $sql_string . " WHERE name='{$_GET['name']}'";
+    } else if ((string) $_GET['name'] != '' && (string) $_GET['filter'] != '') {
+        $sql_string = $sql_string . " WHERE name='{$_GET['name']}' and status='{$_GET['filter']}'";
+    }
     $sql = mysqli_query($conn, "SELECT * FROM (SELECT order_id, ID as user_id FROM `user` WHERE ID={$_COOKIE['userId']}) u INNER JOIN quality_list ON quality_list.No = u.order_id 
-    ORDER BY ID DESC");
+    {$sql_string} ORDER BY ID DESC");
     $row_count = mysqli_num_rows($sql);
     $no_pass = 0;
     $out_date = 0;
@@ -13,6 +24,18 @@
 
 </div>
 <div class="alert alert-info" style="width: 80%; margin: auto; margin-top: 10px;" role="alert">
+    <form method="get" actions="?">
+        <input type="hidden" value="quality" name="page" />
+        <input type="hidden" value="<?=$_GET['name']?>" name="name" />
+        篩選 : 
+        <select name="filter">
+            <option value="">全部</option>
+            <option value="0" <?=$_GET['filter']=='0'?"selected":""?>>未改善</option>
+            <option value="1" <?=$_GET['filter']=='1'?"selected":""?>>已改善</option>
+            <option value="2" <?=$_GET['filter']=='2'?"selected":""?>>未合格</option>
+        </select>
+        <input type="submit" value="篩選" />
+    </form>
     共 <?=$row_count?> 筆資料
 </div>
 <table class="table" style="margin:auto;">
@@ -38,10 +61,10 @@
             }
             ?>
             <tr>
-                <td><?=$data['name']?></td>
+                <td><a href="?page=<?=$_GET['page']?>&name=<?=$data['name']?>&filter=<?=$_GET['filter']?>"><?=$data['name']?></a></td>
                 <td><span style="width:100px;"><?=$data['check_date']?></span>/<span style="width:100px;"><?=$data['resolve_date']?></span></td>
                 <td><?=$status?>
-                    <?
+                    <?php
                     if ($data['resolve_image'] != "" && ($data['status'] == 0 || $data['status'] == 2))
                         echo "<span style='color:red;'>*</span>";
                     ?>
@@ -70,7 +93,7 @@
                     ?>
                 </td>
             </tr>
-            <?
+            <?php
         }
     ?>
 </tbody>
