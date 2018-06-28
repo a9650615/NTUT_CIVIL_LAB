@@ -42,6 +42,39 @@
             else if ($_GET['page'] == 'update_iso_list'||$_GET['page'] == 'check_iso'||$_GET['page'] == 'view_iso') {
                 require_once './page/update-iso-list.php';
             }
+            else if ($_GET['page'] == 'safty') {
+                require_once './page/safty-list.php';
+            }
+            else if ($_GET['page'] == 'safty_overview') {
+                require_once './page/safty-overview.php';
+            }
+            else if ($_GET['page'] == 'safty_company') {
+                require_once './page/safty-company.php';
+            }
+            else if ($_GET['page'] == 'safty_company_detail') {
+                require_once './page/safty-company-detail.php';
+            }
+            else if ($_GET['page'] == 'safty_form') {
+                require_once './page/safty-form.php';
+            }
+            else if ($_GET['page'] == 'update_safty') {
+                require_once './page/update-safty.php';
+            }
+            else if ($_GET['page'] == 'select_iso_form') {
+                require_once './page/select-iso.php';
+            }
+            else if ($_GET['page'] == 'check_safty') {
+                require_once './page/check-safty.php';
+            }
+            else if ($_GET['page'] == 'safty_finish') {
+                require_once './page/safty-finish.php';
+            }
+            else if ($_GET['page'] == 'safty_detail') {
+                require_once './page/safty-detail.php';
+            }
+            else if ($_GET['page'] == 'safty_statistics') {
+                require_once './page/safty-statistics.php';
+            }
             else
                 require_once './page/index_panel.php';
         } 
