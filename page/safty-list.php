@@ -12,8 +12,8 @@
     <?php
         if ($_COOKIE['role']==5 || $_COOKIE['role']==$admin) {
             ?>
-            <a style="font-size: 25px;" href="?page=safty_form">新增安衛罰款</a>
-            <p align="center" style="font-size: 35px;">安衛罰款總覽</p>
+            <a style="font-size: 25px;" href="?page=safty_form">新增安衛表單</a>
+            <p align="center" style="font-size: 35px;">安衛缺失改善總覽</p>
             <?php
         }
         $row_count = 0;
@@ -40,12 +40,12 @@
         <table class="table" style="width: 100%;">
             <thead>
                 <tr>
-                    <td>工程名稱</td>
+                    <td width="16%">工程名稱</td>
                     <!-- <td>缺失廠商</td> -->
-                    <td>查驗日/改善日</td>
-                    <td>狀態</td>
-                    <td>是否逾期</td>
-                    <td>編輯</td>
+                    <td width="25%">查驗日期/<span style="color:#f65d51;" >改善日期</span></td>
+                    <td width="19%">狀態(*已更新)</td>
+                    <td width="15%">是否逾期</td>
+                    <td width="25%">編輯</td>
                 </tr>
             </thead>
             <tbody>
@@ -59,7 +59,7 @@
                     <tr>
                         <td><?=$data['missing_place']?></td>
                         <!-- <td><?=$data['missing_company']?></td> -->
-                        <td><?=$data['check_date']?>/<?=$data['resolve_date']?></td>
+                        <td><span><?=$data['check_date']?></span>/<span style="color:#f65d51;"><?=$data['resolve_date']?></span></td>
                         <td><?php 
                             $status = "<span style='color: red;'>未改善</span>";
                             if ($data['status'] == 1)
@@ -113,12 +113,14 @@
         <?php
             if ($_COOKIE['role'] != 5) {
                 ?>
-                合格率: <?=intval((($row_count - $no_pass)/$row_count)*100)?>%,改善效率: <?=max(0,intval((($row_count - $no_pass - $out_date)/$row_count)*100))?>%
+                合格率: <?=intval((($row_count - $no_pass)/$row_count)*100)?>%／改善效率: <?=max(0,intval((($row_count - $no_pass - $out_date)/$row_count)*100))?>%
                 <?php
             }
         ?>
         （<a href="?page=safty_finish">合格/改善效率</a>）(<a href="?page=safty_company">缺失廠商統計</a>) (<a href="?page=safty_overview">罰款總覽</a>)
         (<a href="?page=safty_statistics">月/季/年統計 </a>)
+        <br>合格率＝[(總件數－未合格件數)／總件數]*100%
+        <br>改善效率＝[(總件數－未合格件數－逾期件數)／總件數]*100%
     </div>
 </div>
 <?php require_once './component/footer.php'; ?>

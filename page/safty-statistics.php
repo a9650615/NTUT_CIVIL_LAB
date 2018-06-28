@@ -35,13 +35,13 @@
     $data_year_fine_outdate = mysqli_query($conn, "SELECT * FROM safty_list {$in_one_year} AND fine!=1 AND check_date < now()");
 ?>
 <a href="?page=safty">上一頁</a>
-<div class="col-sm-12 col-md-12 col-mm-12 container">
-    <a href="?page=<?=$_GET['page']?>&year=<?=date('Y', $timestamp) - 1?>">上一年</a>
-    <a href="?page=<?=$_GET['page']?>&year=<?=date('m', $timestamp)==1?date('Y', $timestamp)-1:date('Y', $timestamp)?>&month=<?=date('m', $timestamp)==1?12:date('m', $timestamp)-1?>">上一月</a>
-    <a href="?page=<?=$_GET['page']?>&year=<?=date('m', $timestamp)==12?date('Y', $timestamp)+1:date('Y', $timestamp)?>&month=<?=date('m', $timestamp)==12?1:date('m', $timestamp)+1?>">下一月</a>
+<div class="col-sm-12 col-md-12 col-mm-12" id="content-menu">
+    <a href="?page=<?=$_GET['page']?>&year=<?=date('Y', $timestamp) - 1?>">上一年</a> ||
+    <a href="?page=<?=$_GET['page']?>&year=<?=date('m', $timestamp)==1?date('Y', $timestamp)-1:date('Y', $timestamp)?>&month=<?=date('m', $timestamp)==1?12:date('m', $timestamp)-1?>">上一月</a> ||
+    <a href="?page=<?=$_GET['page']?>&year=<?=date('m', $timestamp)==12?date('Y', $timestamp)+1:date('Y', $timestamp)?>&month=<?=date('m', $timestamp)==12?1:date('m', $timestamp)+1?>">下一月</a> ||
     <a href="?page=<?=$_GET['page']?>&year=<?=date('Y', $timestamp) + 1?>">下一年</a>
-    <h2><?=$month?>月/<?=$season+1?>季/<?=$year?>年統計</h2>
-    <table class="table">
+    <h2><?=$month?>月 || <?=$season+1?>季 || <?=$year?>年統計</h2>
+    <table class="table" style="margin:auto;width: 100%;">
         <thead>
             <tr>
                 <td>時間長度</td>

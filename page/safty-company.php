@@ -7,10 +7,12 @@
     } else {
         $sql = mysqli_query($conn, "SELECT DISTINCT(missing_company), missing_place, case_id FROM safty_list order by ID desc");
     }
-?>
-<div class="container">
-    <a href="?page=safty">上一頁</a>
-    <table class="table" style="margin:auto;">
+?>  
+<br>
+<a href="?page=safty">上一頁</a>
+<div class="col-sm-12 col-md-12 col-mm-12" id="content-menu">
+  
+    <table class="table" style="margin:auto;width: 100%;">
         <thead>
             <tr>
                 <td>工程名稱</td>

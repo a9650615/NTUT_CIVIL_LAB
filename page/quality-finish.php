@@ -3,7 +3,7 @@
     include './model/sql.php';
     $sql = mysqli_query($conn, "SELECT DISTINCT(No) FROM quality_list order by ID desc");
 ?>
-<div class="container">
+<div class="col-sm-12 col-md-12 col-mm-12" id="content-menu">
     <p style="font-size: 35px" align="center">合格/改善效率</p><br>
     <a style="font-size: 25px;float: right;" href="?page=quality">上一頁</a>
     <br>

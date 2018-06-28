@@ -18,14 +18,13 @@
     $no_pass = 0;
     $out_date = 0;
 ?>
-<div>
+<div class="col-sm-12 col-md-12 col-mm-12" id="content-menu">
     <p align="center" style="font-size: 35px;">品質改善表單總覽</p>
     <br><br><a style="font-size: 25px" href="?page=create_quality">新增品質改善表</a>
-    <a href="?page=quality_statistics">品質月/季/年統計</a>
     <a  style="float:right;" href="/">上一頁</a>
     <br>
 
-    <div class="alert alert-info" style="width: 80%; margin: auto; margin-top: 10px;" role="alert">
+    <div class="alert alert-info" style="width: 100%; margin: auto; margin-top: 10px;" role="alert">
         <form method="get" actions="?">
             <input type="hidden" value="quality" name="page" />
             <input type="hidden" value="<?=$_GET['name']?>" name="name" />
@@ -39,16 +38,16 @@
             <input type="submit" value="篩選" />
         </form>
 
-        共 <?=$row_count?> 筆資料 ( <a href="?page=quality_finish">合格/改善效率</a> )
+        共 <?=$row_count?> 筆資料 ( <a href="?page=quality_finish">合格/改善效率 </a> || <a href="?page=quality_statistics">品質月/季/年統計</a> )
     </div>
-    <table class="table" style="margin:auto;">
+    <table  class="table" style="margin:auto;width: 100%;">
         <thead>
             <tr>
-                <th>工程名稱</th>
-                <th>查驗日期/改善期限</th>
-                <th width="20%">狀態(*已更新)<span style="float:right;"></span></th>
-                <th>是否逾期</th>
-                <th>閱覽</th>
+                <th width="25%">工程名稱</th>
+                <th width="25%" >查驗日期/<span style="color:#f65d51;" >改善期限</span></th>
+                <th width="17%">狀態(*已更新)<span style="float:right;"></span></th>
+                <th width="13%">是否逾期</th>
+                <th width="20%">編輯</th>
             </tr>
         </thead>
         <tbody>
@@ -65,7 +64,8 @@
                     ?>
                     <tr>
                         <td><a href="?page=<?=$_GET['page']?>&name=<?=$data['name']?>&filter=<?=$_GET['filter']?>"><?=$data['name']?></a></td>
-                        <td><span style="width:100px;"><?=$data['check_date']?></span>/<span style="width:100px;"><?=$data['resolve_date']?></span></td>
+                        <td style="word-break:break-all;"><span><?=$data['check_date']?> /
+                        </span><span style="color:#f65d51;" ><?=$data['resolve_date']?></span></td>
                         <td><?=$status?>
                         <?php
                             if ($data['resolve_image'] != "" && ($data['status'] == 0 || $data['status'] == 2))

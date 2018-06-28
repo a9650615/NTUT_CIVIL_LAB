@@ -32,8 +32,8 @@
         篩選 : 
         <select name="filter">
             <option value="">全部</option>
-            <option value="0" <?=$_GET['filter']=='0'?"selected":""?>>未改善</option>
-            <option value="1" <?=$_GET['filter']=='1'?"selected":""?>>已改善</option>
+            <option value="0" <?=$_GET['filter']=='0'?"selected":""?>>未付款</option>
+            <option value="1" <?=$_GET['filter']=='1'?"selected":""?>>已付款</option>
             <option value="2" <?=$_GET['filter']=='2'?"selected":""?>>未合格</option>
         </select>
         <input type="submit" value="篩選" />
@@ -95,7 +95,7 @@
                         ?>
                         </td>
                         <td><?=$fine['price']*$data['fine_people']?></td>
-                        <td><?=$data['has_pay']?'已付款':'未付款'?></td>
+                        <td><?=$data['has_pay']?'已付款':"<span style='color: red;'>未付款"?></td>
                         <td><?=$data['create_date']?></td>
                         <td>
                             <?php 

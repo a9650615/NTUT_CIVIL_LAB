@@ -11,6 +11,8 @@
     }
     $quest = mysqli_query($conn, "SELECT * FROM iso_data_sheet WHERE order_id = '{$_GET['order_id']}' ORDER BY list_id");
 ?>
+<br>
+<a href="?page=select_iso_form">上一頁</a>
 <div class="container">
     <br><p align="center" style="font-size: 35px;">新增ISO工務表單</p>
     <br><br><form method="post" action="/model/iso_form.php?action=create">
@@ -87,7 +89,6 @@
             ?>
         </table>
         <input type="submit" value="送出" />
-        <a href="?page=select_iso_form">上一頁</a>
     </form>
 </div>
 <?php include './component/footer.php'; ?>

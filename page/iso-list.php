@@ -67,9 +67,9 @@
                                         <td><?=$data['project_name']?>/<?=$data['order_id']?></td>
                                         <td><?php
                                             if ($data['status'] == 0)
-                                                echo '未完成';
+                                                echo '<span style="color:red">未完成</span>';
                                             else if ($data['status'] == 1)
-                                                echo '未審核';
+                                                echo '<span style="color:blue">未審核</span>';
                                             else if ($data['status'] == 2)
                                                 echo '審核完成';
                                             else if ($data['status'] == 3)
