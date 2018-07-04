@@ -8,12 +8,15 @@
     $sql = mysqli_query($conn, "SELECT * FROM safty_list {$search} WHERE fine='1' ORDER BY ID DESC");
 ?>
 <a href="/">上一頁</a>
+<p align="center" style="font-size: 35px;">安衛缺失改善總覽</p>
+<br>
 <div class="col-sm-12 col-md-12 col-mm-12" id="content-menu">
+
     <?php
         if ($_COOKIE['role']==5 || $_COOKIE['role']==$admin) {
             ?>
             <a style="font-size: 25px;" href="?page=safty_form">新增安衛表單</a>
-            <p align="center" style="font-size: 35px;">安衛缺失改善總覽</p>
+            
             <?php
         }
         $row_count = 0;

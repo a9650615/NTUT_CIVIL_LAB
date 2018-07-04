@@ -18,10 +18,12 @@
     $no_pass = 0;
     $out_date = 0;
 ?>
+    <a " href="?">上一頁</a>
+<p align="center" style="font-size: 35px;">品質改善表單總覽</p>
+<BR>
 <div class="col-sm-12 col-md-12 col-mm-12" id="content-menu">
-    <p align="center" style="font-size: 35px;">品質改善表單總覽</p>
-    <br><br><a style="font-size: 25px" href="?page=create_quality">新增品質改善表</a>
-    <a  style="float:right;" href="/">上一頁</a>
+<BR>
+    <a style="font-size: 25px" href="?page=create_quality">新增品質改善表</a>
     <br>
 
     <div class="alert alert-info" style="width: 100%; margin: auto; margin-top: 10px;" role="alert">

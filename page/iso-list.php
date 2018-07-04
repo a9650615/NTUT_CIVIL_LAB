@@ -26,10 +26,12 @@
            $ret ++;
     }
 ?>
-<div class="container">
+
     <a href="?" class="no-print">上一頁</a>
-    <div class="col-xs-12 col-sm-12 col-md-12">   
-          <div class="product_index">
+                        <p align="center" style="font-size: 35px;">ISO檢查表單總覽</p>
+                        <br>
+    <div class="col-sm-12 col-md-12 col-mm-12" id="content-menu">   
+<br>
 <?php
                 if ($_COOKIE['role'] == 3 || $_COOKIE['role'] == $admin) {
                     ?>
@@ -37,12 +39,7 @@
                     <?php
                 }
             ?>
-            <div class="col-sm-12 col-md-12 col-mm-12" id="content-menu">
                 <div class="menu">
-                    <div>
-                    <p align="center" style="font-size: 35px;">ISO檢查表單總覽</p>
-                    <br>
-                    </div>
                     <div style="margin: 15px 0;" class="alert alert-secondary" role="alert">
                         <a href="?page=iso_list">全</a>: <?=$tot?> 件 | 
                         <a href="?page=iso_list&filter=2">施工所主管已審核</a>: <?=$che?> 件 | 

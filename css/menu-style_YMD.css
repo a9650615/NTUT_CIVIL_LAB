@@ -20,7 +20,7 @@ h3 {font-size:0.8em;text-align:center;color:#8f8f8f;margin-top:3px; padding-top:
 h3 a { color:#747474;}
 
 @media screen and (min-width: 768px) {
-#content-menu {padding:10px;border:solid 10px #F2F2F2;background:#ffffff;font-size:18px;margin:0 auto;overflow:hidden;}
+#content-menu {padding:10px;border:solid 10px #F2F2F2;background:#ffffff;font-size:20px;margin:0 auto;overflow:hidden;}
 #content-menu h1 {font-family:Arial, Helvetica, sans-serif;font-size:15px; color:#535353;}
 #content-menu img {padding:5px;background:#f7f7f7;border:solid 1px #464646;margin:2px;}
 
