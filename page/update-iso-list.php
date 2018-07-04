@@ -124,7 +124,7 @@
                                     if (count($images[$data['list_id']])) {
                                         foreach ($images[$data['list_id']] as $key => $val) {
                                             ?>
-                                            <div style="min-width: 70px;"><a style="font-size: 14px;" href="upload_space/<?=$val?>" target="_new">查看圖片</a></div>
+                                            <div style="min-width: 70px;"><a style="font-size: 14px;" alt="<?=$val?>" href="javascript:window.open('upload_space/<?=$val?>')">查看圖片</a></div>
                                             <?php
                                         }
                                     }

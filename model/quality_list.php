@@ -78,7 +78,7 @@ if ($has_all_data && !empty($_GET['id']) && $_GET['action'] == 'update') {
     } else {
         // echo "Sorry, there was an error uploading your file.";
     }
-    $page = "update_quality&id={$_GET['id']}";
+    $page = "quality";
 }
 
 if ($_GET['action'] == 'check_status' && !empty($_GET['id'])) {
