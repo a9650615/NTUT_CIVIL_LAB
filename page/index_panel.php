@@ -49,7 +49,7 @@
                 }
             ?>
             <?php
-              if ($role == 3 || $role == 5 || $admin) {
+              if ($role == 1 || $role == 3 || $role == 5 || $admin) {
                 ?>
                 <div class="col-sm-4 col-md-4 col-mm-6 product_img" data-move-y="150px">
                   <a href="?page=safty">
