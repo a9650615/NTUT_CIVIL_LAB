@@ -6,7 +6,7 @@ $page = 'quality';
 
 switch ($_GET['action']) {
     case 'create':
-        $keys = array('no', 'name', 'order' , 'check_date', 'resolve_date', 'other', 'image', 'floor', 'now_status', 'feedback');
+        $keys = array('no', 'name', 'order' , 'check_date', 'resolve_date', 'other', 'image', 'floor', 'now_status');
         break;
     case 'edit':
         $keys = array('no', 'name', 'order' , 'check_date', 'resolve_date', 'floor', 'other', 'now_status', 'feedback');

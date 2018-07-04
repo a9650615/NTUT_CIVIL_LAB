@@ -45,12 +45,12 @@
                             </select></td>
                         </tr>
                         <tr>
-                            <td>查驗日期：<br><input value="<?=$data['check_date']?>" type="date" required name="check_date"></td>
+                            <td>查驗日期：<br><input value="<?=$data['check_date'] ?? date("Y-m-d")?>" type="date" required readonly name="check_date"></td>
                             <td>改善期限：<br><input value="<?=$data['resolve_date']?>" type="date" required name="resolve_date">前</td>
                         </tr>
                         <tr>
                             <td>查驗位置：<br><input type="text" value="<?=$data['floor']?>" required autocomplete="off" name="floor" />樓
-                            <br><input value="<?=$data['other']?>" type="text" autocomplete="off" name="other" />(其他位置備註)</td>
+                            <br><input value="<?=$data['other']?>" required type="text" autocomplete="off" name="other" />(其他位置備註)</td>
                             <td>
                                 缺失修正方式：<br>
                                 <select name="fix_type">
