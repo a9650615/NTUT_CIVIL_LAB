@@ -14,11 +14,12 @@
     }
     $sql_string = $sql_string . " ORDER BY ID DESC";
     $sql = mysqli_query($conn, $sql_string);
+    $case_sql = mysqli_query($conn, "SELECT * FROM case_list");
     $row_count = mysqli_num_rows($sql);
     $no_pass = 0;
     $out_date = 0;
 ?>
-    <a " href="?">上一頁</a>
+    <a href="?">上一頁</a>
 <p align="center" style="font-size: 35px;">品質改善表單總覽</p>
 <BR>
 <div class="col-sm-12 col-md-12 col-mm-12" id="content-menu">
@@ -29,13 +30,22 @@
     <div class="alert alert-info" style="width: 100%; margin: auto; margin-top: 10px;" role="alert">
         <form method="get" actions="?">
             <input type="hidden" value="quality" name="page" />
-            <input type="hidden" value="<?=$_GET['name']?>" name="name" />
             篩選 : 
             <select name="filter">
                 <option value="">全部</option>
                 <option value="0" <?=$_GET['filter']=='0'?"selected":""?>>未改善</option>
                 <option value="1" <?=$_GET['filter']=='1'?"selected":""?>>已改善</option>
                 <option value="2" <?=$_GET['filter']=='2'?"selected":""?>>未合格</option>
+            </select>
+            <select name="name">
+                <option value="">全部</option>
+                <?php
+                    while($case = $case_sql->fetch_assoc()) {
+                        ?>
+                        <option <?=($_GET['name'] == $case['order_name']? "selected" : "")?>><?=$case['order_name']?></option>
+                        <?php
+                    }
+                ?>
             </select>
             <input type="submit" value="篩選" />
         </form>

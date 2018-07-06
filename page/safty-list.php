@@ -2,10 +2,23 @@
 <?php
     include './model/sql.php';
     $search = '';
-    if (is_numeric($_GET['filter'])) {
-        $search = "AND status = '{$_GET['filter']}'";
+    // if (is_numeric($_GET['filter'])) {
+    //     $search = "AND status = '{$_GET['filter']}'";
+    // }
+    $sql_string = "SELECT * FROM safty_list";
+    if ((string) $_GET['filter'] != '' && (string) $_GET['case_id'] == '' ) {
+        $sql_string = $sql_string . " WHERE status='{$_GET['filter']}'";
+        if ($_GET['case_id']) {
+            $sql_string = $sql_string . " case_id='{$_GET['case_id']}'";
+        }
+    } else if ((string) $_GET['case_id'] != '' && (string) $_GET['filter'] == '') {
+        $sql_string = $sql_string . " WHERE case_id='{$_GET['case_id']}'";
+    } else if ((string) $_GET['case_id'] != '' && (string) $_GET['filter'] != '') {
+        $sql_string = $sql_string . " WHERE case_id='{$_GET['case_id']}' and status='{$_GET['filter']}'";
     }
-    $sql = mysqli_query($conn, "SELECT * FROM safty_list WHERE fine='1' {$search} ORDER BY ID DESC");
+    $sql_string = $sql_string . " ORDER BY ID DESC";
+    $sql = mysqli_query($conn, $sql_string);
+    $case_sql = mysqli_query($conn, "SELECT * FROM case_list");
 ?>
 <a href="/">上一頁</a>
 <p align="center" style="font-size: 35px;">安衛缺失改善總覽</p>
@@ -33,6 +46,16 @@
             <option value="0" <?=$_GET['filter']=='0'?"selected":""?>>未改善</option>
             <option value="1" <?=$_GET['filter']=='1'?"selected":""?>>已改善</option>
             <option value="2" <?=$_GET['filter']=='2'?"selected":""?>>未合格</option>
+        </select>
+        <select name="case_id">
+            <option value="">全部</option>
+            <?php
+                while($case = $case_sql->fetch_assoc()) {
+                    ?>
+                    <option value="<?=$case['order_id']?>" <?=($_GET['case_id'] == $case['order_id']? "selected" : "")?>><?=$case['order_name']?></option>
+                    <?php
+                }
+            ?>
         </select>
         <input type="submit" value="篩選" />
     </form>
