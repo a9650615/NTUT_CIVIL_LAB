@@ -36,6 +36,10 @@
     width: 264px;
 }
 
+.show-print {
+    display: none;
+}
+
 @media print
 {    
     .no-print, .no-print *
@@ -45,5 +49,9 @@
 
     a[href]:after {
         content: none !important;
+    }
+
+    .show-print {
+        display: block;
     }
 }

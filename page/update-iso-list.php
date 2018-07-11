@@ -103,14 +103,14 @@
                                 <label><input type="radio" value="1" name="state[<?=$data['list_id']?>]" <?=($_GET['page']=='check_iso'||$_GET['page']=='view_iso')?"disabled":""?> <?=(($value=="1"||$value=="-1")&&$info['status'] !== 3)?"checked":""?>>未通過</label>
                                 <label><input type="radio" value="0" name="state[<?=$data['list_id']?>]" <?=($_GET['page']=='check_iso'||$_GET['page']=='view_iso')?"disabled":""?> <?=($value=="0" || $info['status'] == 3)?"checked":""?>>無此項目</label>
                             </td>
-                            <td class="no-print">
+                            <td>
                             <?php
                                 if ($info['status'] == 0 || $info['status'] == 3 || $_GET['page'] == 'view_iso') {
                                         ?>
                                         <?php
                                             if ($_GET['page'] == 'update_iso_list') {
                                                 ?>
-                                                <label class="btn btn-default">
+                                                <label class="btn btn-default no-print">
                                                     上傳圖片
                                                     <input class="file_selecter" type="file" multiple name="image[<?=$data['list_id']?>][]" style="display: none;">
                                                 </label>
@@ -124,7 +124,8 @@
                                     if (count($images[$data['list_id']])) {
                                         foreach ($images[$data['list_id']] as $key => $val) {
                                             ?>
-                                            <div style="min-width: 70px;"><a style="font-size: 14px;" alt="<?=$val?>" href="javascript:window.open('upload_space/<?=$val?>')">查看圖片</a></div>
+                                            <div style="min-width: 70px;" class="no-print"><a style="font-size: 14px;" alt="<?=$val?>" href="javascript:window.open('upload_space/<?=$val?>')">查看圖片</a></div>
+                                            <img class="show-print" src="upload_space/<?=$val?>" style="width: 300px;" alt="">
                                             <?php
                                         }
                                     }
