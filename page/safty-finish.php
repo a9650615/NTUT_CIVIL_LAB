@@ -30,7 +30,7 @@
                         if ($dd['status'] == 1) {
                             $finish ++;
                         }
-                        if (strtotime($dd['resolve_date']) < time()) {
+                        if (strtotime($dd['resolve_date']) < time() && $dd['status'] != 1) {
                             $out_date ++;
                         }
                     }

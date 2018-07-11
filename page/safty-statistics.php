@@ -12,9 +12,9 @@
     // echo $in_one_month;
     $data_month_total = mysqli_query($conn, "SELECT * FROM safty_list {$in_one_month}");
     $data_month_finish = mysqli_query($conn, "SELECT * FROM safty_list {$in_one_month} AND status=1");
-    $data_month_outdate = mysqli_query($conn, "SELECT * FROM safty_list {$in_one_month} AND status!=1 AND check_date < now()");
+    $data_month_outdate = mysqli_query($conn, "SELECT * FROM safty_list {$in_one_month} AND status!=1 AND resolve_date < now()");
     $data_month_fine = mysqli_query($conn, "SELECT * FROM safty_list {$in_one_month} AND fine!=1");
-    $data_month_fine_outdate = mysqli_query($conn, "SELECT * FROM safty_list {$in_one_month} AND fine!=1 AND check_date < now()");
+    $data_month_fine_outdate = mysqli_query($conn, "SELECT * FROM safty_list {$in_one_month} AND fine!=1 AND resolve_date < now()");
     $season = 4 - intval((12-date('m', $timestamp)) / 3)-1;
     $season_start = date('Y', $timestamp)."-".($season*3+1)."-1";
     $season_end = date('Y', $timestamp)."-".($season*3+3)."-30";
@@ -23,16 +23,16 @@
     $in_one_season = "WHERE check_date BETWEEN '{$season_start}' AND '{$season_end}'";
     $data_season_total = mysqli_query($conn, "SELECT * FROM safty_list {$in_one_season}");
     $data_season_finish = mysqli_query($conn, "SELECT * FROM safty_list {$in_one_season} AND status=1");
-    $data_season_outdate = mysqli_query($conn, "SELECT * FROM safty_list {$in_one_season} AND status!=1 AND check_date < now()");
+    $data_season_outdate = mysqli_query($conn, "SELECT * FROM safty_list {$in_one_season} AND status!=1 AND resolve_date < now()");
     $data_season_fine = mysqli_query($conn, "SELECT * FROM safty_list {$in_one_season} AND fine!=1");
-    $data_season_fine_outdate = mysqli_query($conn, "SELECT * FROM safty_list {$in_one_season} AND fine!=1 AND check_date < now()");
+    $data_season_fine_outdate = mysqli_query($conn, "SELECT * FROM safty_list {$in_one_season} AND fine!=1 AND resolve_date < now()");
     
     $in_one_year = "WHERE YEAR(check_date) = YEAR('{$year}-{$month}-1')";
     $data_year_total = mysqli_query($conn, "SELECT * FROM safty_list {$in_one_year}");
     $data_year_finish = mysqli_query($conn, "SELECT * FROM safty_list {$in_one_year} AND status=1");
-    $data_year_outdate = mysqli_query($conn, "SELECT * FROM safty_list {$in_one_year} AND status!=1 AND check_date < now()");
+    $data_year_outdate = mysqli_query($conn, "SELECT * FROM safty_list {$in_one_year} AND status!=1 AND resolve_date < now()");
     $data_year_fine= mysqli_query($conn, "SELECT * FROM safty_list {$in_one_year} AND fine!=1");
-    $data_year_fine_outdate = mysqli_query($conn, "SELECT * FROM safty_list {$in_one_year} AND fine!=1 AND check_date < now()");
+    $data_year_fine_outdate = mysqli_query($conn, "SELECT * FROM safty_list {$in_one_year} AND fine!=1 AND resolve_date < now()");
 ?>
 <a href="?page=safty">上一頁</a>
 <div class="col-sm-12 col-md-12 col-mm-12" id="content-menu">
