@@ -250,6 +250,9 @@
             else if ($_GET['page'] == 'edit_case') {
                 require_once './page/create-case.php';
             }
+            else if ($_GET['page'] == 'contractor_edit') {
+                require_once './page/contractor_edit.php';
+            }
             else if ($_GET['page'] == 'iso_comment') {
                 require_once './page/iso-comment.php';
             }

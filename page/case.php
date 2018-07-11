@@ -22,14 +22,20 @@
         <tbody>
             <?php
                 while($data = $sql->fetch_assoc()) {
+                    $contractor_list = mysqli_query($conn, "SELECT * FROM contractor_list WHERE case_id='{$data['ID']}' ")
                     ?>
                     <tr>
                         <td><?=$data['order_id']?></td>
                         <td><?=$data['order_name']?></td>
                         <td><?=$data['supervisor']?></td>
                         <!-- <td><?=$data['checker']?></td> -->
-                        <td><?=$data['contractor']?></td>
+                        <td><?php
+                            while($con = $contractor_list->fetch_assoc()) {
+                                echo $con['name'].'<br>';
+                            }
+                        ?></td>
                         <td>
+                            <a href="?page=contractor_edit&id=<?=$data['ID']?>">承包商管理</a>
                             <a href="?page=edit_case&id=<?=$data['ID']?>">編輯</a>
                             <a href="/model/case.php?action=delete&id=<?=$data['ID']?>">刪除</a>
                         </td>

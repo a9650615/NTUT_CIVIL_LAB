@@ -26,10 +26,10 @@
                 <td>檢查人員</td>
                 <td><label><input type="text" name="checker" value="<?=$data['checker']?>"></label></td>
             </tr> -->
-            <tr>
+            <!-- <tr>
                 <td>承包商名稱</td>
                 <td><label><input type="text" name="contractor" value="<?=$data['contractor']?>"></label></td>
-            </tr>
+            </tr> -->
         </table>
         <input type="submit" value="<?=($_GET['id'])?"修改":"新增"?>" />
     </form>
