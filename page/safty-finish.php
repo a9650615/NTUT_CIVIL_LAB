@@ -15,11 +15,14 @@
                 <td>已完成</td>
                 <td>未合格/未改善</td>
                 <td>逾期</td>
+                <td>罰款件數</td>
             </tr>
             <?php
                 while ($data = $sql->fetch_assoc()) {
-                    $inner_sql = mysqli_query($conn, "SELECT * FROM safty_list {$search} WHERE fine='1' ORDER BY ID DESC");
+                    $inner_sql = mysqli_query($conn, "SELECT * FROM safty_list {$search} WHERE fine='1' AND missing_place='{$data['missing_place']}' ORDER BY ID DESC");
+                    $other_sql = mysqli_query($conn, "SELECT * FROM safty_list {$search} WHERE fine!='1' AND missing_place='{$data['missing_place']}' ORDER BY ID DESC");
                     $row_count = mysqli_num_rows($inner_sql);
+                    $other_count = mysqli_num_rows($other_sql);
                     $no_pass = 0;
                     $out_date = 0;
                     $finish = 0;
@@ -44,6 +47,7 @@
                         <td><?=$finish?></td>
                         <td><?=$no_pass?></td>
                         <td><?=$out_date?></td>
+                        <td><?=$other_count?></td>
                     </tr>
                     <?php
                 }
