@@ -38,6 +38,7 @@
                 <?php
             }
         ?>
+        <span style="float:right;">版本時間:<?=$ls['create_time']?></span>
         </div>
         <?php
             if ($info['status'] == 3) {
