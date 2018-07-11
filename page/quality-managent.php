@@ -16,7 +16,7 @@
     if ((string) $_GET['first'] != '') {
         $resort = "case when ID = {$_GET['first']} then 0 else 1 end,";
     }
-    $sql_string = $sql_string . " ORDER BY {$resort} ID DESC";
+    $sql_string = $sql_string . " ORDER BY {$resort} update_at DESC, ID DESC";
     $sql = mysqli_query($conn, $sql_string);
     $case_sql = mysqli_query($conn, "SELECT * FROM case_list");
     $row_count = mysqli_num_rows($sql);

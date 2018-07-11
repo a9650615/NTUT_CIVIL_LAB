@@ -16,7 +16,7 @@
     } else if ((string) $_GET['case_id'] != '' && (string) $_GET['filter'] != '') {
         $sql_string = $sql_string . " WHERE case_id='{$_GET['case_id']}' and status='{$_GET['filter']}'";
     }
-    $sql_string = $sql_string . " ORDER BY ID DESC";
+    $sql_string = $sql_string . " ORDER BY update_at DESC, ID DESC";
     $sql = mysqli_query($conn, $sql_string);
     $case_sql = mysqli_query($conn, "SELECT * FROM case_list");
 ?>
