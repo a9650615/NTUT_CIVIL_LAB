@@ -5,7 +5,7 @@
     if ($_GET['filter']) {
         $search = "WHERE status = '{$_GET['filter']}'";
     }
-    if ($_COOKIE['role'] == 3) {
+    if ($_COOKIE['role'] == 3 || $_COOKIE['role'] == 1) {
         $user_order_id = mysqli_query($conn, "SELECT * FROM user WHERE ID='{$_COOKIE['userId']}'")->fetch_assoc()['order_id'];
         $sql = mysqli_query($conn, "SELECT * FROM safty_list {$search} WHERE fine!='1' AND case_id='{$user_order_id}' ORDER BY ID DESC");
     } else {

@@ -5,7 +5,11 @@
     // if (is_numeric($_GET['filter'])) {
     //     $search = "AND status = '{$_GET['filter']}'";
     // }
+    $search = false;
     $sql_string = "SELECT * FROM safty_list";
+    if ((string) $_GET['filter'] != '' || (string) $_GET['case_id'] != '' ) {
+        $search = true;
+    }
     if ((string) $_GET['filter'] != '' && (string) $_GET['case_id'] == '' ) {
         $sql_string = $sql_string . " WHERE status='{$_GET['filter']}'";
         if ($_GET['case_id']) {
@@ -16,7 +20,16 @@
     } else if ((string) $_GET['case_id'] != '' && (string) $_GET['filter'] != '') {
         $sql_string = $sql_string . " WHERE case_id='{$_GET['case_id']}' and status='{$_GET['filter']}'";
     }
-    $sql_string = $sql_string . " ORDER BY update_at DESC, ID DESC";
+
+    if ($_COOKIE['role'] == 1 || $_COOKIE['role'] == 3) { 
+        $user_case = mysqli_query($conn, "SELECT order_id FROM user WHERE ID='{$_COOKIE['userId']}'")->fetch_assoc()['order_id']; 
+        if ($search) {
+            $case_limit = " AND case_id='{$user_case}'"; 
+        } else {
+            $case_limit = " WHERE case_id='{$user_case}'"; 
+        }
+    } 
+    $sql_string = $sql_string . $case_limit . " ORDER BY update_at DESC, ID DESC";
     $sql = mysqli_query($conn, $sql_string);
     $case_sql = mysqli_query($conn, "SELECT * FROM case_list");
 ?>
