@@ -88,7 +88,7 @@ if ($_GET['action'] == 'check_status' && !empty($_GET['id'])) {
         $status = 2;
     }
     $sql = mysqli_query($conn, "UPDATE quality_list SET status='{$status}' WHERE ID='{$_GET['id']}'");
-    $page = "quality";
+    $page = "quality&first={$_GET['id']}";
 }
 
 if ($_GET['action'] == 'delete' && $_GET['id']) {

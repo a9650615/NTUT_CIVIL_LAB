@@ -12,7 +12,11 @@
     } else if ((string) $_GET['name'] != '' && (string) $_GET['filter'] != '') {
         $sql_string = $sql_string . " WHERE name='{$_GET['name']}' and status='{$_GET['filter']}'";
     }
-    $sql_string = $sql_string . " ORDER BY ID DESC";
+    $resort = "";
+    if ((string) $_GET['first'] != '') {
+        $resort = "case when ID = {$_GET['first']} then 0 else 1 end,";
+    }
+    $sql_string = $sql_string . " ORDER BY {$resort} ID DESC";
     $sql = mysqli_query($conn, $sql_string);
     $case_sql = mysqli_query($conn, "SELECT * FROM case_list");
     $row_count = mysqli_num_rows($sql);
