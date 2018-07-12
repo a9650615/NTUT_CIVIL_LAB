@@ -10,8 +10,10 @@
     $value_data = mysqli_query($conn, "SELECT * FROM iso_select_list WHERE order_list = '{$_GET['id']}' and history_id='{$now_version}' ORDER BY list_id");
     $select_data = [];
     $comment_data = [];
+    $checked_data = [];
     $images = [];
     while ($sel_d = $value_data->fetch_assoc()) {
+        $checked_data[$sel_d['list_id']] = $sel_d['is_checked'];
         $select_data[$sel_d['list_id']] = $sel_d['value'];
         $comment_data[$sel_d['list_id']] = $sel_d['comment'];
         $images[$sel_d['list_id']] = explode(',',  $sel_d['image'], -1);
@@ -91,16 +93,21 @@
                 ?>
             </tbody>
         </table>
-        <form method="post" action="/model/iso_form.php?action=update&id=<?=$_GET['id']?>&order_id=<?=$info['order_id']?>" enctype="multipart/form-data">
+        <form method="post" action="/model/iso_form.php?action=<?=($_GET['page']=='check_iso'?'check_iso':'update')?>&id=<?=$_GET['id']?>&order_id=<?=$info['order_id']?>" enctype="multipart/form-data">
             <table class="New">
                 <?php
+                    $total_count = 0;
                     while($data = $quest->fetch_assoc()) {
                         $value = $select_data[$data['list_id']];
                         $comment = $comment_data[$data['list_id']];
+                        $total_count ++;
                         if (!is_numeric($value)) $value = "-1";
                         ?>
                         <tr>
-                            <td><?=$data['list_id']?></td>
+                            <td>
+                                <?=$data['list_id']?>
+                                <input type="checkbox" name="checked[<?=$data['list_id']?>]" <?=($_GET['page']!=='check_iso'?'onclick="return false;"':"")?> <?=$checked_data[$data['list_id']] == 1? "checked":""?>/>
+                            </td>
                             <td style="word-wrap:break-word;"><?=$data['check_item']?></td>
                             <td>
                                 <label><input type="radio" value="2" name="state[<?=$data['list_id']?>]" <?=($_GET['page']=='check_iso'||$_GET['page']=='view_iso')?"disabled":""?> <?=($value=="2"&&$info['status'] !== 3)?"checked":""?>>通過</label>
@@ -199,24 +206,45 @@
                 }
                 if (($_COOKIE['role'] == 1||$_COOKIE['role']==4) && $info['status'] == 1) {
                     ?>
+                    <div>
+                        <div id="common_comment" >
+                            綜合評語：<br>
+                            <textarea name="comment"></textarea>
+                        </div>
+                        <div>
+                            其他備註／若為未合格請輸入原因：<br>
+                            <textarea name="other"></textarea>
+                        </div>
+                        <input type="hidden" name="max_check" />
+                    </div>
                     <div style="margin: 15px 0;" class="alert alert-secondary" id="check_iso" role="alert">
                         審核狀態
-                        <a data-data="2" data-id="<?=$_GET['id']?>" href="#" class="btn btn-primary">通過</a>
-                        <a data-data="3" data-id="<?=$_GET['id']?>" href="#" class="btn btn-danger">未合格</a>
+                        <input type="submit" id="checker" value="未通過" class="btn btn-danger" />
+                        <!-- <a data-data="2" data-id="<?=$_GET['id']?>" href="#" class="btn btn-primary">通過</a>
+                        <a data-data="3" data-id="<?=$_GET['id']?>" href="#" class="btn btn-danger">未合格</a> -->
                         <a href="?page=iso_list" style="float: right; padding: 5px;">回上一頁</a>
                     </div>
                     <script>
-                        $(document).on('click','#check_iso > a', function(e) {
-                            e.preventDefault();
-                            let id = $(this).attr('data-id')
-                            let data = $(this).attr('data-data')
-                            console.log(data, id)
-                            $('#comment_form').show().attr('action', `/model/iso_form.php?action=check_iso&data=${data}&id=${id}`)
-                            if (data == 3)
-                                $('#common_comment').hide()
-                            else 
-                                $('#common_comment').show()
+                        let totalCount = <?=$total_count?>;
+                        $('input[name="max_check"]').val(totalCount);
+                        $('input[name^="checked"]').change(() => {
+                            if (totalCount == $('input[name^="checked"]:checked').size()) {
+                                $('#checker').removeClass('btn-danger').addClass('btn-primary').val('通過')
+                            } else {
+                                $('#checker').removeClass('btn-primary').addClass('btn-danger').val('未通過')
+                            }
                         })
+                        // $(document).on('click','#check_iso > a', function(e) {
+                        //     e.preventDefault();
+                        //     let id = $(this).attr('data-id')
+                        //     let data = $(this).attr('data-data')
+                        //     console.log(data, id)
+                        //     $('#comment_form').show().attr('action', `/model/iso_form.php?action=check_iso&data=${data}&id=${id}`)
+                        //     if (data == 3)
+                        //         $('#common_comment').hide()
+                        //     else 
+                        //         $('#common_comment').show()
+                        // })
                     </script>
                     <?php
                 }
@@ -233,14 +261,6 @@
             ?>
         </form>
         <form method="post" id="comment_form" style="display: none;">
-            <div id="common_comment" >
-                綜合評語：<br>
-                <textarea name="comment"></textarea>
-            </div>
-            <div>
-                其他備註／若為未合格請輸入原因：<br>
-                <textarea name="other"></textarea>
-            </div>
             <input value="送出" type="submit" >
         </form>
         <style>

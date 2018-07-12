@@ -95,9 +95,26 @@ if ($_GET['action'] == 'update') {
 }
 
 if ($_GET['action'] == 'check_iso') {
-    mysqli_query($conn, "UPDATE iso_list SET `status`='{$_GET['data']}}' WHERE ID ='{$_GET['id']}' ");
+    $is_passed = 2;
+    $last = mysqli_query($conn, "SELECT max(order_count) as count FROM iso_list_history WHERE follow_id='{$_GET['id']}'")->fetch_assoc();
+    $max = $_POST['max_check'];
+    // foreach ($_POST['checked'] as $key => $checked) {
+    //     $max = $key;
+    // }
+    for($key = 1; $key <= $max; $key++) {
+        $pass = ($_POST['checked'][$key] ?"1":"0");
+        if ($pass != '1') {
+            $is_passed = 3;
+        }
+        mysqli_query($conn, "UPDATE iso_select_list SET `is_checked`='{$pass}' WHERE list_id='{$key}' and order_list='{$_GET['id']}' and history_id='{$last['count']}' ");
+    }
+    mysqli_query($conn, "UPDATE iso_list SET `status`='{$is_passed}' WHERE ID ='{$_GET['id']}' ");
     $last = mysqli_query($conn, "SELECT max(order_count) as count FROM iso_list_history WHERE follow_id='{$_GET['id']}'")->fetch_assoc();
     mysqli_query($conn, "UPDATE iso_list_history SET `checker`='{$_COOKIE['userId']}', `comment`='{$_POST['comment']}', `other`='{$_POST['other']}' WHERE follow_id ='{$_GET['id']}' and order_count='{$last['count']}' ");
+    if ($is_passed == 3) {
+        $page = "check_iso&id={$_GET['id']}";
+    }
+    // mysqli_query($conn, "UPDATE iso_list SET `status`='{$_GET['data']}}' WHERE ID ='{$_GET['id']}' ");
 }
 
 if ($_GET['action'] == 'delete') {
