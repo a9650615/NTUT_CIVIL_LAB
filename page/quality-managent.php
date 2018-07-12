@@ -90,7 +90,7 @@
                         </td>
                         <td>
                             <?php
-                                if (strtotime($data['resolve_date']) < time()) {
+                                if (strtotime($data['resolve_date']) < time()&&$data['status']!=1) {
                                     echo '是';
                                     // if ($data['status'] != 1)
                                         $out_date ++;
