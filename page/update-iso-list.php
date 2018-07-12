@@ -9,9 +9,11 @@
     $ls = mysqli_query($conn, "SELECT * FROM iso_list_history WHERE follow_id='{$_GET['id']}' and order_count='{$now_version}'")->fetch_assoc();
     $value_data = mysqli_query($conn, "SELECT * FROM iso_select_list WHERE order_list = '{$_GET['id']}' and history_id='{$now_version}' ORDER BY list_id");
     $select_data = [];
+    $comment_data = [];
     $images = [];
     while ($sel_d = $value_data->fetch_assoc()) {
         $select_data[$sel_d['list_id']] = $sel_d['value'];
+        $comment_data[$sel_d['list_id']] = $sel_d['comment'];
         $images[$sel_d['list_id']] = explode(',',  $sel_d['image'], -1);
     }
 ?>
@@ -38,8 +40,8 @@
                 <?php
             }
         ?>
-        <span style="float:right;">版本時間:<?=$ls['create_time']?></span>
         </div>
+        <span style="float:right;">版本時間:<?=$ls['create_time']?></span>
         <?php
             if ($info['status'] == 3) {
                 ?>
@@ -94,6 +96,7 @@
                 <?php
                     while($data = $quest->fetch_assoc()) {
                         $value = $select_data[$data['list_id']];
+                        $comment = $comment_data[$data['list_id']];
                         if (!is_numeric($value)) $value = "-1";
                         ?>
                         <tr>
@@ -111,6 +114,7 @@
                                         <?php
                                             if ($_GET['page'] == 'update_iso_list') {
                                                 ?>
+                                                <input type="text" style="width: 150px;" autocomplete="off" name="comment[<?=$data['list_id']?>]" value="<?=$comment?>" />
                                                 <label class="btn btn-default no-print">
                                                     上傳圖片
                                                     <input class="file_selecter" type="file" multiple name="image[<?=$data['list_id']?>][]" style="display: none;">
@@ -121,6 +125,11 @@
                                         ?>
                                         <?php
                                         
+                                    }
+                                    if ($comment_data[$data['list_id']]) {
+                                        ?>
+                                        <span><?=$comment_data[$data['list_id']]?></span>
+                                        <?php
                                     }
                                     if (count($images[$data['list_id']])) {
                                         foreach ($images[$data['list_id']] as $key => $val) {

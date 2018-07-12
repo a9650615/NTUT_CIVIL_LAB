@@ -58,6 +58,7 @@ if ($_GET['action'] == 'update') {
     $max = $max_succ['m'];
     $total_count = 0;
     foreach ($_POST['state'] as $key => $value) {
+        $comment = $_POST['comment'][$key];
         $file_name = $_FILES['image']['name'];
         $file_tmp = $_FILES['image']['tmp_name'];
         $image_name_list = array();
@@ -77,13 +78,13 @@ if ($_GET['action'] == 'update') {
         $image = implode(',', $image_name_list);
         if ($value=="2"||$value=="0") $total_count++;
         if ($count == 0 || $d['status'] == 3) {
-            mysqli_query($conn, "INSERT INTO iso_select_list(`list_id`, `order_list`, `value`, `history_id`, `image`) VALUES('{$key}','{$_GET['id']}','{$value}', '{$id}', '{$image}')");
+            mysqli_query($conn, "INSERT INTO iso_select_list(`list_id`, `order_list`, `value`, `comment`, `history_id`, `image`) VALUES('{$key}','{$_GET['id']}','{$value}', '{$comment}', '{$id}', '{$image}')");
         } else {
             $join = '';
             if (count($image_name_list)) {
                 $join = ", `image`='{$image},'";
             }
-            mysqli_query($conn, "UPDATE iso_select_list SET `value`='{$value}'{$join} WHERE list_id='{$key}' and order_list='{$_GET['id']}' and history_id='{$id}' ");
+            mysqli_query($conn, "UPDATE iso_select_list SET `value`='{$value}', `comment`='{$comment}'{$join} WHERE list_id='{$key}' and order_list='{$_GET['id']}' and history_id='{$id}' ");
         }
     }
     if ($total_count >= $max) {
