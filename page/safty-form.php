@@ -2,7 +2,7 @@
 <?php
     include './model/sql.php';
     $sql_case_name = mysqli_query($conn, "SELECT `order_name`,`order_id`,`ID` FROM case_list");
-    $sql_case_contractor = mysqli_query($conn, "SELECT `contractor` FROM case_list");
+    // $sql_case_contractor = mysqli_query($conn, "SELECT `contractor` FROM case_list");
     $data_sql = mysqli_query($conn, "SELECT * FROM safty_list WHERE ID='{$_GET['id']}'");
     $next_id = mysqli_query($conn, "SELECT max(ID) FROM safty_list")->fetch_assoc();
     $d = $data_sql->fetch_assoc();
@@ -10,9 +10,9 @@
     $user_order = mysqli_query($conn, "SELECT * FROM user WHERE ID='{$_COOKIE['userId']}'")->fetch_assoc();
     if ($_COOKIE['role'] == $admin || $_COOKIE['role'] == 5) {
         //SELECT DISTINCT(case_list.contractor),B.* FROM case_list RIGHT JOIN case_list AS B ON B.contractor = case_list.contractor 
-        $case_contractor = mysqli_query($conn, "SELECT DISTINCT(contractor) FROM case_list");
+        $case_contractor = mysqli_query($conn, "SELECT DISTINCT(contractor_list.name) FROM case_list INNER JOIN contractor_list ON case_list.ID = contractor_list.case_id ");
     } else {
-        $case_contractor = mysqli_query($conn, "SELECT DISTINCT(contractor) FROM case_list WHERE order_id='{$user_order['order_id']}'");
+        $case_contractor = mysqli_query($conn, "SELECT DISTINCT(contractor_list.name) FROM case_list INNER JOIN contractor_list ON case_list.ID = contractor_list.case_id WHERE order_id='{$user_order['order_id']}' ");
     }
 ?>
 <div class="container">
@@ -40,8 +40,9 @@
 
                         <?php 
                             while($data = $case_contractor->fetch_assoc()) {
+                                print_r($data)
                                 ?>
-                                <option <?=($data['contractor']==$d['missing_company']?"selected":"")?>><?=$data['contractor']?></option>
+                                <option <?=($data['name']==$d['missing_company']?"selected":"")?>><?=$data['name']?></option>
                                 <?php
                             }
                         ?>
