@@ -66,7 +66,8 @@
                     <span ><?=$data['check_date']?></span>/
                     <span style="color:#f65d51;"><?=$data['resolve_date']?></span>
                 </td>
-                <td><?=$status?>
+                <td>
+                    <?=$status?>
                     <?php
                     if ($data['resolve_image'] != "" && ($data['status'] == 0 || $data['status'] == 2))
                         echo "<span style='color:red;'>*</span>";
@@ -90,7 +91,7 @@
                         if ($data['status'] != 1)
                         {
                             ?>
-                            <a href="?page=update_quality&id=<?=$data['ID']?>">更新</a>
+                            <a href="?page=update_quality&id=<?=$data['ID']?>">回覆</a>
                             <?
                         }
                     ?>

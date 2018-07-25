@@ -12,17 +12,33 @@
     }
     if ($data) {
         ?>
-            <form action="/model/safty.php?action=update&id=<?=$_GET['id']?>" method="post" enctype="multipart/form-data">
+
+<a href="?page=safty"><span >上一頁</span></a>
+<p align="center" style="font-size: 35px;">回覆安全衛生表單</p> 
+<br>           
+        <form action="/model/safty.php?action=update&id=<?=$_GET['id']?>" method="post" enctype="multipart/form-data">
                 <table class="table" width="width:100%;">
                     <tr>
-                        <td style="min-width:200px;">
+                        <td>
                             工程名稱: <?=$data['missing_place']?><br>
-                            缺失廠商: <?=$data['missing_company']?>
+                            缺失廠商: <?=$data['missing_company']?><br>
+                            查驗位置:<?=$data['check_place']?><br>
+                            罰款項目:                         
+                            <?require_once './model/fine_list.php';
+                                $fine = array();
+                                foreach ($FINE_LIST as $key => $val) {
+                                    if ($data['fine'] == $key) {
+                                        $fine = $val;
+                                        echo $val['text'];
+                                        break; }} ?>  <br>
+                            現況說明：<?=$data['other']?>                           
                         </td>
+                    </tr>
+                    <tr>
                         <td>
                             現況照片:
                             <div style="position:relative;">
-                                <img onerror="this.style='display:none'"  src="upload_space/safty_<?=$_GET['id']?>_create.png?a=<?=rand()?>" style="max-width:100%; position:absolute;width:100%; height:100%;" />
+                                <img onerror="this.style='display:none'"  src="upload_space/safty_<?=$_GET['id']?>_create.png?a=<?=rand()?>" style=" position:absolute;width:100%; height:100%;" />
                                 <?php
                                     if ($data['image']) {
                                         ?>
@@ -38,12 +54,9 @@
                             </div>
                         </td>
                     </tr>
+
                     <tr>
-                        <td>
-                            查驗位置:<?=$data['check_place']?>
-                            <br>
-                            罰款項目: <?=$data['fine']?>
-                        </td>
+
                         <td>
                             更新照片：
                             <div style="position:relative;">
@@ -65,12 +78,6 @@
                             <input type="file" name="image" onchange="openFile(event)" required/>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            現況說明：<?=$data['other']?>
-                        </td>
-                        <td></td>
-                    </tr>
                 </table>
                 <?php
     }
@@ -91,7 +98,7 @@
                     <?php
                 }
                 ?>
-            <a href="?page=safty"><span style="float: right;" >回上一頁</span></a>
+
         </form>
         
         <script>

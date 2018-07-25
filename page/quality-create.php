@@ -8,18 +8,18 @@
     }
     $case_sql = mysqli_query($conn, "SELECT * FROM case_list");
 ?>
+<br>
+<a href="?page=quality"><span>上一頁</span></a>
+<p align="center" style="font-size: 35px;">建立品質改善表單</p> 
 <div class="container">    
     <div class="row">
         <!--md=電腦 mm=手機 共12格 -->
       <div class="col-xs-12 col-sm-12 col-md-12">
         <form id="quality_form" action="/model/quality_list.php?action=<?=($_GET['id'])?"edit":"create"?>&id=<?=$_GET['id']?>" method="post" enctype="multipart/form-data">
-            <div class="product_index">
-                <table class="New">
-                    <tbody>
+            <div align="center" class="product_index">
+                <table  class="New">
+                    <tbody >
                         <tr>
-                            <td>工程編號：<br/>
-                            <input autocomplete="off" name="no" id="no" required type="text" value="<?=$data['No']?>" />
-                            </td>
                             <td>
                                 工程名稱：<!--秀出資料庫內容 -->
                                 <!-- <input autocomplete="off" name="name" required type="text" value="<?=$data['name']?>" /> -->
@@ -33,33 +33,46 @@
                                     }
                                 ?>
                                 </select>
+
+                            <br>
+                            工程編號：
+                            <input style="border:none; background-color: transparent;" autocomplete="off" name="no" id="no" required value="<?=$data['No']?>" />
+
+                                
                             </td>
                         </tr>
                         <tr>
-                            <td>本單編號：<!--想自動輸出--><input autocomplete="off" name="order" id="order_id" readonly required type="text" value="<?=$_GET['id']?$data['order_id']:uniqid(rand())?>" /><!-- 顯示mysql row+1 --></td>
-                            <td>改善確認：<br/>
+                            <td>本單編號：<!--想自動輸出--><input style="border:none; background-color: transparent;" autocomplete="off" name="order" id="order_id" readonly required type="text" value="<?=$_GET['id']?$data['order_id']:uniqid(rand())?>" /><!-- 顯示mysql row+1 -->
+                            <br/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>查驗日期：<input style="border:none; background-color: transparent;" value="<?=$data['check_date'] ?? date("Y-m-d")?>" type="date" required readonly name="check_date">
+                            <br>改善期限：<input value="<?=$data['resolve_date']?>" type="date" required name="resolve_date">前
+                            <br/>
+                            <br>
+                            改善確認：
                             <select name="status">
                                 <option value="0" <?=($data['status']=='0')?"selected":""?>>未改善</option>
                                 <option value="1" <?=($data['status']=='1')?"selected":""?>>已改善</option>
                                 <option value="2" <?=($data['status']=='2')?"selected":""?>>未合格</option>
-                            </select></td>
+                            </select>
+
+                        </td>
                         </tr>
                         <tr>
-                            <td>查驗日期：<br><input value="<?=$data['check_date'] ?? date("Y-m-d")?>" type="date" required readonly name="check_date"></td>
-                            <td>改善期限：<br><input value="<?=$data['resolve_date']?>" type="date" required name="resolve_date">前</td>
-                        </tr>
-                        <tr>
-                            <td>查驗位置：<br><input type="text" value="<?=$data['floor']?>" required autocomplete="off" name="floor" />樓
-                            <br><input value="<?=$data['other']?>" required type="text" autocomplete="off" name="other" />(其他位置備註)</td>
-                            <td>
-                                缺失修正方式：<br>
+                            <td><br>查驗位置：<br><input type="text" value="<?=$data['floor']?>" required autocomplete="off" name="floor" />樓
+                            <br><input value="<?=$data['other']?>" required type="text" autocomplete="off" name="other" />(其他位置備註)
+                            <br><br>
+                                缺失修正方式：
                                 <select name="fix_type">
                                     <option>紀錄照片</option>
                                 </select>
                             </td>
                         <tr>
-                            <td>現況說明：<br><textarea rows="3" required name="now_status" cols="25"><?=$data['now_status']?></textarea></td>
-                            <td>改善建議：<br><textarea rows="3"  name="feedback" cols="25"><?=$data['feedback']?></textarea></td>
+                            <td>現況說明：<br><textarea rows="3" required name="now_status" cols="25"><?=$data['now_status']?></textarea>
+                                <br>
+                                改善建議：<br><textarea rows="3"  name="feedback" cols="25"><?=$data['feedback']?></textarea></td>
                         </tr>
                         <tr>
                             <td>施工現況<!--插入圖片-->
@@ -184,9 +197,9 @@
             </div>
             <br>
             <div style="font-size:25px;" class="col-sm-4 col-md-12 col-mm-12"> 
-                <button type="button" onclick="upload()" class="button button-block" />確定送出</button>
+                <br>
+                <button type="button" onclick="upload()" class="button button-block" />送出</button>
                 <input type="submit" id="sub" style="display: none;"/>
-                <a href="?page=quality"><span style="float: right;" >回上一頁</span>
             </div>
         </form>
       </div>

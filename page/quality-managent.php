@@ -79,12 +79,14 @@
                     }
                     ?>
                     <tr>
-                        <td><a href="?page=<?=$_GET['page']?>&name=<?=$data['name']?>&filter=<?=$_GET['filter']?>"><?=$data['name']?></a></td>
+                        <td><a href="?page=<?=$_GET['page']?>&name=<?=$data['name']?>&filter=<?=$_GET['filter']?>"><?=$data['name']?></a>
+                        </td>
                         <td style="word-break:break-all;"><span><?=$data['check_date']?> /
-                        </span><span style="color:#f65d51;" ><?=$data['resolve_date']?></span></td>
+                        </span><span style="color:#f65d51;" ><?=$data['resolve_date']?></span>
+                        </td>
                         <td><?=$status?>
                         <?php
-                            if ($data['resolve_image'] != "" && ($data['status'] == 0 || $data['status'] == 2))
+                            if ($data['resolve_image'] != "" && ($data['status'] == 0 ))
                                 echo "<span style='color:red;'>*</span><a href='?page=check_status&id={$data['ID']}'>檢查</a>";
                         ?>
                         </td>

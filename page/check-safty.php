@@ -5,8 +5,9 @@
     $data = $sql->fetch_assoc();
 ?>
 <div class="container">
-    <a href="?page=safty_overview">上一頁</a>
-    <h2>現況檢查</h2>
+    <a href="?page=safty">上一頁</a>
+    <p align="center" style="font-size: 35px;">現況檢查</p>
+    <br>
     <div class="col">
         <div>
             查驗位置 ： <?=$data['check_place']?>
@@ -18,7 +19,15 @@
             缺失廠商 ： <?=$data['missing_company']?>
         </div>
         <div>
-            罰款項目 ： <?=$data['fine']?>
+            罰款項目 ： 
+                <?php require_once './model/fine_list.php';
+                    $fine = array();
+                    foreach ($FINE_LIST as $key => $val) {
+                        if ($data['fine'] == $key) {
+                        $fine = $val;
+                        echo $val['text'];
+                        break;}}
+                ?>
         </div>
         <div>
             <?php
@@ -32,7 +41,7 @@
         </div>
         <div class="row">
             <div class="col-sm-12 col-md-6">
-                <div>施工現況 ： </div>
+                <div>工地現況 ： </div>
                 <div style="position:relative;">
                     <canvas id="drawing" style="position:absolute; left: 0; height: 0; width:100%; height:100%;z-index:5;"></canvas>
                     <img onerror="this.style='display:none'" id="update_img" src="upload_space/safty_<?=$_GET['id']?>_create.png?a=<?=rand()?>" style="max-width:100%; position:absolute;width:100%; height:100%;" />
@@ -57,7 +66,6 @@
                 <a href="model/safty.php?action=check_status&data=success&id=<?=$_GET['id']?>" class="btn btn-primary">確認改善</a>
                 <a href="model/safty.php?action=check_status&data=cancel&id=<?=$_GET['id']?>" class="btn btn-danger">
                 未合格</a>
-                <a href="?page=safty" style="float: right; padding: 5px;">回上一頁</a>
             </div>
             <?php
          }

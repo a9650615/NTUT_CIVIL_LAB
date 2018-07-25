@@ -4,7 +4,8 @@
     $sql = mysqli_query($conn, "SELECT DISTINCT(missing_place) FROM safty_list order by ID desc");
 ?>
 <br>
-<a href="?page=safty">上一頁</a>
+<a style="font-size: 25px;" href="?page=safty">上一頁</a>
+<p style="font-size: 35px" align="center">合格/改善效率</p><br>
 <div class="col-sm-12 col-md-12 col-mm-12" id="content-menu">
     
     <table class="table" style="margin:auto;width: 100%">

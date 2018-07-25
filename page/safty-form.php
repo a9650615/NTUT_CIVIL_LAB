@@ -8,20 +8,20 @@
     $d = $data_sql->fetch_assoc();
     $id = $next_id['max(ID)'];
     $user_order = mysqli_query($conn, "SELECT * FROM user WHERE ID='{$_COOKIE['userId']}'")->fetch_assoc();
-    if ($_COOKIE['role'] == $admin || $_COOKIE['role'] == 5) {
+    if ($_COOKIE['role'] == $admin ) {
         //SELECT DISTINCT(case_list.contractor),B.* FROM case_list RIGHT JOIN case_list AS B ON B.contractor = case_list.contractor 
         $case_contractor = mysqli_query($conn, "SELECT DISTINCT(contractor_list.name) FROM case_list INNER JOIN contractor_list ON case_list.ID = contractor_list.case_id ");
     } else {
         $case_contractor = mysqli_query($conn, "SELECT DISTINCT(contractor_list.name) FROM case_list INNER JOIN contractor_list ON case_list.ID = contractor_list.case_id WHERE order_id='{$user_order['order_id']}' ");
     }
 ?>
-<div class="container">
     <a  href="?page=safty">上一頁</a>
     <p align="center" style="font-size: 35px;">建立安全衛生表單</p>
+<div class="container">
     <br>
 
     <form action="/model/safty.php?action=<?=($_GET['id']?"update_data&id={$_GET['id']}":"create")?>" method="post" enctype="multipart/form-data">
-        <table class="table">
+        <table class="table col-sm-12 col-md-12 col-mm-12">
             <tr>
                 <td>
                     工程名稱：<select name="missing_place" required>
@@ -36,6 +36,8 @@
                             }
                         ?>
                     </select><br>
+                    工程編號：<input name="case_id" style="border:none; background-color: transparent;" id="case_id" readonly value="<?=$caseId/*.'-'.*/?>" />
+                    <br>
                     缺失廠商：<select name="missing_company" required>
 
                         <?php 
@@ -47,35 +49,31 @@
                             }
                         ?>
                     </select>
-                </td>
-                <td>
+
                     <script>
                         $('select[name=missing_place]').bind('change', function() {
                             if ($(this).find(':selected').attr('data-id'))
                                 // <?=$_GET['id']?$_GET['id']:($id+1)?>-
                                 $('#case_id').val(`${$(this).find(':selected').attr('data-id')}`)
                         })
-                    </script>
-                    工程編號：<input name="case_id" style="border:none; background-color: transparent;" id="case_id" readonly value="<?=$caseId/*.'-'.*/?>" />
+                    </script><br>
                 </td>
             </tr>
             <tr>
                 <td>
                     查驗位置：
-                    <br>
                     <input type="text" name="check_place" required value="<?=$d['check_place']?>"/>
-                    <br>
-                    <br>
                 </td>
                 <td>
-                    <label>
+
                         查驗日期：
-                        <input type="date" name="check_date" value="<?=$d['check_date']?>"/>
-                    </label>
-                    <label>
+                        <input type="date"style="border:none; background-color: transparent;" value="<?=$d['check_date'] ?? date("Y-m-d")?>" required readonly name="check_date">
+
+                    <br>
+
                         改善期限：
                         <input type="date" name="resolve_date" value="<?=$d['resolve_date']?>"/>
-                    </label>
+
                     <br>
                     <?php
                         if ($_GET['id']) {
@@ -124,7 +122,7 @@
                                 <img onerror="this.style='display:none'" src="upload_space/safty_<?=$_GET['id']?>_create.png?a=<?=rand()?>" style="max-width:100%; position:absolute;width:100%; height:100%;" />
                                 <img src="upload_space/<?=$d['image']?>" style="max-width:100%;" />
                             </div>
-                            工地現況：<input type="file" name="missing_image" onchange="openFile(event)" <?=($_GET['id'?"":"required"])?>/>
+                            <input type="file" name="missing_image" onchange="openFile(event)" <?=($_GET['id'?"":"required"])?>/>
                             <div style="position:relative;">
                                 <canvas id="drawing" style="position:absolute; left: 0; height: 0; width:100%; height:100%;z-index:5;"></canvas>
                                 <img onerror="this.style='display:none'" id="update_img" src="upload_space/safty_<?=$_GET['id']?>_update.png?a=<?=rand()?>" style="max-width:100%; position:absolute;width:100%; height:100%;" />
@@ -159,7 +157,8 @@
                         ?>
                     </select>
                     <span id="other">
-                        罰款金額 <input id="fine_price" style="border:none;border-bottom:1px solid;,background:transparent;width:auto;min-width:30px;" readonly > 元, <input id="people" name="fine_people" type="number" min="1" value="<?=$d['fine_people']||1?>" style="border:none;border-bottom:1px solid;,background:transparent;width:40px;" > 人, 共 <a id="total_fine_price"></a> 元 
+                    <br>
+                        罰款金額 <input id="fine_price" style="border:none;border-bottom:1px solid;,background:transparent;width:auto;max-width:50px;" readonly > 元, <input id="people" name="fine_people" type="number" min="1" value="<?=$d['fine_people']||1?>" style="border:none;border-bottom:1px solid;,background:transparent;max-width:40px;" > 人, 共 <label id="total_fine_price"></label> 元  
                     <?php
                         if ($_GET['id'] != '') {
                             ?>

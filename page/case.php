@@ -3,11 +3,16 @@
     include './model/sql.php';
     $sql = mysqli_query($conn, "SELECT * FROM case_list ORDER BY ID desc");
 ?>
-<div class="container">
-    
-    <a style="font-size: 35px" href="?page=create_case">新增工程資料</a>
-    <br>
-    <table class="Table" align="center">
+
+<a  href="/">上一頁</a>
+<p align="center" style="font-size: 35px;">工程資料總覽</p>
+
+<BR>
+<div  class="col-sm-12 col-md-12 col-mm-12" id="content-menu">
+
+<br>
+    <a style="font-size: 25px" href="?page=create_case">新增工程資料</a>
+    <table class="table" align="center">
         <br><br>
         <thead>
         <tr>
@@ -35,8 +40,10 @@
                             }
                         ?></td>
                         <td>
-                            <a href="?page=contractor_edit&id=<?=$data['ID']?>">承包商管理</a>
-                            <a href="?page=edit_case&id=<?=$data['ID']?>">編輯</a>
+                            <a href="?page=contractor_edit&id=<?=$data['ID']?>">編輯承包商</a>
+                            <br>
+                            <a href="?page=edit_case&id=<?=$data['ID']?>">編輯工程資料</a>
+                            <br>
                             <a href="/model/case.php?action=delete&id=<?=$data['ID']?>">刪除</a>
                         </td>
                     </tr>
@@ -45,6 +52,5 @@
             ?>
         </tbody>
     </table>
-    <a  href="/">上一頁</a>
 </div>
 <?php include './component/footer.php'; ?>

@@ -10,6 +10,8 @@
 ?>  
 <br>
 <a href="?page=safty">上一頁</a>
+<p align="center" style="font-size: 35px;">廠商缺失統計</p>
+<br>
 <div class="col-sm-12 col-md-12 col-mm-12" id="content-menu">
   
     <table class="table" style="margin:auto;width: 100%;">

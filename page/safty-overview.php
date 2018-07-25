@@ -13,8 +13,10 @@
     }
 ?>
 <a href="/?page=safty">上一頁</a>
-<div class="col-sm-12 col-md-12 col-mm-12" id="content-menu">
 <p align="center" style="font-size: 35px;">安衛罰款總覽</p>
+<br>
+<div class="col-sm-12 col-md-12 col-mm-12" id="content-menu">
+
     <?php
         /*if ($_COOKIE['role']==5 || $_COOKIE['role']==$admin) {
             ?>
@@ -116,7 +118,7 @@
                                     echo "<span style='color:red;'>*</span><a href='?page=check_safty&id={$data['ID']}'>檢查</a>";
                                 if (($data['status'] == 0 || $data['status'] == 2 || $data['status']==3)&&$_COOKIE['role']==3) {
                                     ?>
-                                    <a href="?page=update_safty&id=<?=$data['ID']?>">更新圖片</a>
+                                    <a href="?page=update_safty&id=<?=$data['ID']?>">回覆</a>
                                     <?php
                                 }
                             ?>

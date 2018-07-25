@@ -21,13 +21,13 @@ h3 a { color:#747474;}
 
 @media screen and (min-width: 768px) {
 #content-menu {padding:10px;border:solid 10px #F2F2F2;background:#ffffff;font-size:20px;margin:0 auto;overflow:hidden;}
-#content-menu h1 {font-family:Arial, Helvetica, sans-serif;font-size:15px; color:#535353;}
+#content-menu h1 {font-family:Arial, Helvetica, sans-serif;font-size:18px; color:#535353;}
 #content-menu img {padding:5px;background:#f7f7f7;border:solid 1px #464646;margin:2px;}
 
 }
 
 @media screen and (max-width: 768px) {
 #content-menu {padding:10px;border:solid 5px #F2F2F2;background:#ffffff;font-size:15px;margin:0 auto;overflow:hidden;}
-#content-menu h1 {font-family:Arial, Helvetica, sans-serif;font-size:15px; color:#535353;}
+#content-menu h1 {font-family:Arial, Helvetica, sans-serif;font-size:13px; color:#535353;}
 #content-menu img {padding:5px;background:#f7f7f7;border:solid 1px #464646;margin:2px;}
 }

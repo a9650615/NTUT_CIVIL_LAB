@@ -70,7 +70,7 @@
                                             else if ($data['status'] == 2)
                                                 echo '審核完成';
                                             else if ($data['status'] == 3)
-                                                echo '未通過';
+                                                echo '<span style="color:red">未合格*</span>';
                                         ?></td>
                                         <td><?=date("Y-m-d",strtotime($data['create_date']))?></td>
                                         <td class="no-print"><?php 

@@ -13,52 +13,63 @@
     }
     if ($data) {
         ?>
+<a href="?page=quality"><span >上一頁</span></a>
+<br><br>
+      <div class="col-xs-12 col-sm-12 col-md-12">
         <table class="New">
             <tbody>
                 <tr>
-                    <td style="width: 50%;">工程編號：<?=$data['No']?><br/>
+                    <td >
+                        工程名稱：<?=$data['name']?><br/><br/>
+                        工程編號：<?=$data['No']?><br/>
                     </td>
+                </tr>
+                <tr>
                     <td>
-                        工程名稱：<?=$data['name']?><!--秀出資料庫內容 -->
-                    </td>
-                </tr>
-                <tr>
-                    <td>本單編號：<?=$data['order_id']?><!--想自動輸出-->
-                    <br/><!-- 顯示mysql row+1 --></td>
-                    <td>改善確認：
-                    <?php
-                        if ($data['status'] == 0) {
-                            echo "未改善";
-                        } else if ($data['status'] == 1) {
-                            echo "已改善";
-                        } else {
-                            echo "未合格";
-                        }
-                    ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td>查驗日期：<?=$data['check_date']?></td>
-                    <td>改善期限：<?=$data['resolve_date']?><br>前</td>
-                </tr>
-                <tr>
-                    <td>查驗位置：<?=$data['floor']?>樓
-                    <br>(其他位置備註)<?=$data['other']?></td>
+                        本單編號：<?=$data['order_id']?><br/><!--想自動輸出-->
+                    <!-- 顯示mysql row+1 --></td>
                     <td>
+
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        查驗日期：<?=$data['check_date']?><br/><br/>
+                        改善期限：<?=$data['resolve_date']?>前<br/><br/>
+
+                        改善確認：
+                            <?php
+                                if ($data['status'] == 0) {
+                                    echo "未改善";
+                                } else if ($data['status'] == 1) {
+                                    echo "已改善";
+                                } else {
+                                    echo "未合格";
+                                }
+                            ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        查驗位置：<?=$data['floor']?>樓<br/><br/>
+                        其他位置備註：<?=$data['other']?><br/><br/>
                         缺失修正方式：<?=$data['fix_type']?>
                     </td>
                 <tr>
-                    <td>現況說明：<?=$data['now_status']?></td>
-                    <td>改善建議：<?=$data['feedback']?></td>
+                    <td>
+                        現況說明：<?=$data['now_status']?><br/><br/>
+                        改善建議：<?=$data['feedback']?>                           
+                    </td>
                 </tr>
                 <tr>
-                    <td>施工現況<!--插入圖片-->
+                    <td>
+                        施工現況<!--插入圖片-->
                         <div style="position:relative;">
                             <img onerror="this.style='display:none'" src="upload_space/<?=$data['order_id']?>_create.png" style="max-width:100%; position:absolute;width:100%; height:100%;" />
                             <img onerror="this.style='display:none'" src="upload_space/<?=$data['now_image']?>" style="max-width:100%;" />
                         </div>
-                    </td>
-                    <td>
+
                     <?php
                         if ($_COOKIE['role'] == 1 || $_COOKIE['role'] == 3) {
                             ?>
@@ -196,8 +207,9 @@
     }
 ?>
             </div>
-            <br>
+            <br><br>
             <div style="font-size:25px;" class="col-sm-12 col-md-12 col-mm-12">
+                <br>
                 <input type="submit" id="sub" style="display: none;"/>
                 <?php
                     if ($data && ($_COOKIE['role'] == 1 || $_COOKIE['role'] == 3)) {
@@ -210,7 +222,6 @@
                         <?php
                     }
                 ?>
-                <a href="?page=quality"><span style="float: right;" >回上一頁</span>
             </div>
         </form>
       </div>

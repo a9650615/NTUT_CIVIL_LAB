@@ -7,7 +7,10 @@
         $data = $sql->fetch_assoc();
     }
 ?>
-<div class="container">
+<a  href="?page=case">上一頁</a>
+<p align="center" style="font-size: 35px;">建立/修改工程資料</p>
+<br>
+<div class="col-sm-12 col-md-12 col-mm-12" id="content-menu">
     <form method="post" action="/model/case.php?action=<?=($_GET['id'])?"update&id={$_GET['id']}":"create"?>">
         <table class="table">
             <tr>
@@ -26,8 +29,8 @@
                 <td>檢查人員</td>
                 <td><label><input type="text" name="checker" value="<?=$data['checker']?>"></label></td>
             </tr> -->
-            <!-- <tr>
-                <td>承包商名稱</td>
+           <tr>
+            <!--     <td>承包商名稱</td>
                 <td><label><input type="text" name="contractor" value="<?=$data['contractor']?>"></label></td>
             </tr> -->
         </table>

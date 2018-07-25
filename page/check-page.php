@@ -5,8 +5,10 @@
     $data = $sql->fetch_assoc();
 ?>
 <div class="container">
-    <p style="font-size: 35px" align="center">表單判讀</p>
-    <a href="?page=quality" style="float: right; padding: 5px;font-size: 25px">回上一頁</a>
+    <a href="?page=quality" style="padding: 5px;font-size: 25px">上一頁</a>
+    <p style="font-size: 35px" align="center">品質改善表單判讀</p>
+
+    <br><br>
     <div class="col">
         <div>
             工程編號 ： <?=$data['No']?>
