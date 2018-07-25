@@ -15,6 +15,8 @@
                 <td>合格率/改善效率</td>
                 <td>已完成</td>
                 <td>未合格/未改善</td>
+                <td>逾期</td>
+                <td>總件數</td>
             </tr>
             <?php
                 while ($data = $sql->fetch_assoc()) {
@@ -25,6 +27,7 @@
                     $no_pass = 0;
                     $out_date = 0;
                     $resolve = 0;
+                    $total = 0;
                     while ($dd = $inner_sql -> fetch_assoc()) {
                         if ($dd['status'] != 1) {
                             $no_pass ++;
@@ -32,9 +35,10 @@
                         if ($dd['status'] == 1) {
                             $resolve ++;
                         }
-                        if (strtotime($dd['resolve_date']) < time()) {
+                        if (strtotime($dd['resolve_date']) < time() && $dd['status'] != 1) {
                             $out_date ++;
                         }
+                        $total ++;
                     }
                     ?>
                     <tr>
@@ -42,6 +46,8 @@
                         <td><?=intval((($row_count - $no_pass)/$row_count)*100)?>%/<?=max(0,intval((($row_count - $no_pass - $out_date)/$row_count)*100))?>%</td>
                         <td><?=$resolve?></td>
                         <td><?="{$no_pass}/{$out_date}"?></td>
+                        <td><?="{$out_date}"?></td>
+                        <td><?="{$total}"?></td>
                     </tr>
                     <?php
                 }
