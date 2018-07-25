@@ -29,6 +29,11 @@
             $case_limit = " WHERE case_id='{$user_case}'"; 
         }
     } 
+    if ($case_limit || $search) {
+        $case_limit = $case_limit."AND fine='1'";
+    } else {
+        $case_limit = " WHERE fine='1'";
+    }
     $sql_string = $sql_string . $case_limit . " ORDER BY update_at DESC, ID DESC";
     $sql = mysqli_query($conn, $sql_string);
     $case_sql = mysqli_query($conn, "SELECT * FROM case_list");

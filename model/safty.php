@@ -95,7 +95,11 @@ if ($_GET['action']=='delete') {
 }
 
 if ($_GET['action'] == 'check_has_pay') {
-    $sql = mysqli_query($conn, "UPDATE safty_list SET `has_pay`='{$_GET['data']}' WHERE ID='{$_GET['id']}'");
+    $status = '';
+    if ($_GET['data'] == '1') {
+        $status = ", `status`='1'";
+    }
+    $sql = mysqli_query($conn, "UPDATE safty_list SET `has_pay`='{$_GET['data']}'{$status} WHERE ID='{$_GET['id']}'");
     $page='safty_overview';
 }
 

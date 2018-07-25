@@ -15,7 +15,7 @@
         $case_contractor = mysqli_query($conn, "SELECT DISTINCT(contractor_list.name) FROM case_list INNER JOIN contractor_list ON case_list.ID = contractor_list.case_id WHERE order_id='{$user_order['order_id']}' ");
     }
 ?>
-    <a  href="?page=safty">上一頁</a>
+    <a href="?page=<?=($d['fine']!=='1'?'safty_overview':'safty')?>">上一頁</a>
     <p align="center" style="font-size: 35px;">建立安全衛生表單</p>
 <div class="container">
     <br>
@@ -164,25 +164,22 @@
                             ?>
                         <div style="margin: 15px 0;" class="alert alert-secondary" role="alert">
                             <?php
-                                if ($d['status']==1) {
+                                if ($d['status']==0) {
                                     ?>
                                     是否付款
                                     <a href="/model/safty.php?action=check_has_pay&data=1&id=<?=$_GET['id']?>" class="btn btn-primary">已付款</a>
                                     <a href="/model/safty.php?action=check_has_pay&adata=0&id=<?=$_GET['id']?>" class="btn btn-danger">仍未付款</a>
                                     <?php
-                                } else {
-                                    ?>
-                                    是否改善
-                                    <a href="#" id="has_fix" class="btn btn-primary">已改善</a>
-                                    <script>
-                                        $('#has_fix').click(() => {
-                                            $('select[name=status]').val(1)
-                                            upload()
-                                        })
-                                    </script>
-                                    <?php
                                 }
                             ?>
+                            <!-- 是否改善
+                            <a href="#" id="has_fix" class="btn btn-primary">已改善</a>
+                            <script>
+                                $('#has_fix').click(() => {
+                                    $('select[name=status]').val(1)
+                                    upload()
+                                })
+                            </script> -->
                         </div>
                             <?php
                         }
