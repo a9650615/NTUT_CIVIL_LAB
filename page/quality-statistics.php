@@ -8,8 +8,8 @@
     } else {
         $timestamp = time();
     }
-    $need_show_all = [2, 4, 5];
-    $need_show_own = [1, 3];
+    $need_show_all = [2, 4];
+    $need_show_own = [1, 3, 5];
     $role_limit = "";
     if (in_array($_COOKIE['role'], $need_show_own)) {
         $own_case_sql = mysqli_query($conn, "SELECT * FROM user WHERE ID='{$_COOKIE['userId']}' ")->fetch_assoc();
