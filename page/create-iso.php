@@ -5,9 +5,10 @@
     $user_order = mysqli_query($conn, "SELECT * FROM user WHERE ID='{$_COOKIE['userId']}'")->fetch_assoc();
     if ($_COOKIE['role'] == $admin) {
         //SELECT DISTINCT(case_list.contractor),B.* FROM case_list RIGHT JOIN case_list AS B ON B.contractor = case_list.contractor 
-        $case_contractor = mysqli_query($conn, "SELECT DISTINCT(contractor_list.name) FROM case_list INNER JOIN contractor_list ON case_list.ID = contractor_list.case_id");
+        // $case_contractor = mysqli_query($conn, "SELECT DISTINCT(contractor_list.name) FROM case_list INNER JOIN contractor_list ON case_list.ID = contractor_list.case_id");
+        $case_contractor = mysqli_query($conn, "SELECT * FROM contractor_list");
     } else {
-        $case_contractor = mysqli_query($conn, "SELECT DISTINCT(contractor_list.name) FROM case_list INNER JOIN contractor_list ON case_list.ID = contractor_list.case_id WHERE order_id='{$user_order['order_id']}' ");
+        $case_contractor = mysqli_query($conn, "SELECT DISTINCT(contractor_list.name), contractor_list.* FROM case_list INNER JOIN contractor_list ON case_list.ID = contractor_list.case_id WHERE order_id='{$user_order['order_id']}' ");
     }
     $quest = mysqli_query($conn, "SELECT * FROM iso_data_sheet WHERE order_id = '{$_GET['order_id']}' ORDER BY list_id");
 ?>
@@ -42,12 +43,12 @@
                             if ($_COOKIE['role'] == $admin)
                                 while($data = $case_sql -> fetch_assoc()) {
                                     ?>
-                                    <option value="<?=$data['order_id']?>"><?=$data['order_name']?></option>
+                                    <option data-case-id="<?=$data['ID']?>" value="<?=$data['order_id']?>"><?=$data['order_name']?></option>
                                     <?php
                                 }
                             else {
                                 ?>
-                                <option value="<?=$one_case['order_id']?>"><?=$one_case['order_name']?></option>
+                                <option data-case-id="<?=$data['ID']?>" value="<?=$one_case['order_id']?>"><?=$one_case['order_name']?></option>
                                 <?php
                             }
                             ?>
@@ -56,18 +57,34 @@
                 </tr>
                 <tr>
                     <td>
-                        承包商 :
-                        <select  name="contractor" require>
-
+                        <select id="pre_select_company" style="display: none;">
                         <?php 
                             while($data = $case_contractor->fetch_assoc()) {
-                                // print_r($data)
                                 ?>
-                                <option <?=($data['name']==$d['contractor']?"selected":"")?>><?=$data['name']?></option>
+                                <option data-case-id="<?=$data['case_id']?>" <?=($data['name']==$d['missing_company']?"selected":"")?>><?=$data['name']?></option>
                                 <?php
                             }
                         ?>
                         </select>
+                        承包商 :
+                        <select name="contractor" require>
+                        </select>
+                        <script>
+                        function showNowOption() {
+                            $('select[name=contractor]').html('')
+                            $('#pre_select_company > option').each((index, element) => {
+                                let case_id = $('select[name=project_name] > option:selected').attr('data-case-id') || '<?=$one_case['ID']?>';
+                                console.log(case_id, $(element).attr('data-case-id'))
+                                if ($(element).attr('data-case-id') == case_id) {
+                                    $(element).clone().appendTo('select[name=contractor]')
+                                }
+                            })
+                        }
+                        showNowOption()
+                        $('select[name=project_name]').bind('change', function() {
+                            showNowOption()
+                        })
+                        </script>
                         <!-- <input type="text" name="contractor" autocomplete="off" /> -->
                     </td>
                     <td>
