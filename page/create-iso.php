@@ -14,7 +14,7 @@
 <br>
 <a href="?page=select_iso_form">上一頁</a>
 
-    <br><p align="center" style="font-size: 35px;">新增ISO工務表單</p>
+    <br><p align="center" style="font-size: 35px;">新增 <?=$_GET['name']?$_GET['name']:'ISO'?> 工務表單</p>
     <br>
 <div class="container">
     <div class="row">
