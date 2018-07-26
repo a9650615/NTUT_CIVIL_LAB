@@ -44,7 +44,7 @@
                 <?php
             } 
         ?>
-            <span style="float:right;">此版本為第<?if ($now_version > 0) echo $now_version+1?>版</span>            
+            <span style="float:right;">此版本為第<?if ($now_version >= 0) echo $now_version+1?>版</span>            
         </div>
         <span style="float:right;">版本時間:<?=$ls['create_time']?></span>
         <?php
@@ -79,7 +79,7 @@
                     </td>
                 </tr>
                 <?php
-                    if ($info['status'] != 3) {
+                    if ($info['status'] != 3 && $info['status'] != 1) {
                         ?>
                         <tr>
                             <td>
