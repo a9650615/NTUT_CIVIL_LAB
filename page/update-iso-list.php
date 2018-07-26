@@ -65,7 +65,10 @@
                     </td>
                     <td>
                         工程名稱 :
-                        <?=$info['project_name']?>
+                        <?php
+                            $case = mysqli_query($conn, "SELECT * FROM case_list WHERE order_id='{$info['project_name']}'")->fetch_assoc();
+                            echo $case['order_name'];
+                        ?>
                     </td>
                 </tr>
                 <tr>

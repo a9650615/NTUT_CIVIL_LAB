@@ -42,12 +42,12 @@
                             if ($_COOKIE['role'] == $admin)
                                 while($data = $case_sql -> fetch_assoc()) {
                                     ?>
-                                    <option value="<?=$data['order_name']?>"><?=$data['order_name']?></option>
+                                    <option value="<?=$data['order_id']?>"><?=$data['order_name']?></option>
                                     <?php
                                 }
                             else {
                                 ?>
-                                <option value="<?=$one_case['order_name']?>"><?=$one_case['order_name']?></option>
+                                <option value="<?=$one_case['order_id']?>"><?=$one_case['order_name']?></option>
                                 <?php
                             }
                             ?>
@@ -61,7 +61,7 @@
 
                         <?php 
                             while($data = $case_contractor->fetch_assoc()) {
-                                print_r($data)
+                                // print_r($data)
                                 ?>
                                 <option <?=($data['name']==$d['contractor']?"selected":"")?>><?=$data['name']?></option>
                                 <?php
