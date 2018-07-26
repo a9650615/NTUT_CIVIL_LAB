@@ -79,7 +79,7 @@
                     </td>
                 </tr>
                 <?php
-                    if ($info['status'] != 3 && $info['status'] != 1) {
+                    if (($info['status'] != 3 || $_GET['page'] == 'view_iso') && ($info['status'] != 1 || $_GET['page'] == 'view_iso')) {
                         ?>
                         <tr>
                             <td>
