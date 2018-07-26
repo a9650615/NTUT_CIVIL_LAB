@@ -1,7 +1,6 @@
 <?php require_once './component/header.php'; ?>
 <?php
     include './model/sql.php';
-    $sql_case_name = mysqli_query($conn, "SELECT `order_name`,`order_id`,`ID` FROM case_list");
     // $sql_case_contractor = mysqli_query($conn, "SELECT `contractor` FROM case_list");
     $data_sql = mysqli_query($conn, "SELECT * FROM safty_list WHERE ID='{$_GET['id']}'");
     $next_id = mysqli_query($conn, "SELECT max(ID) FROM safty_list")->fetch_assoc();
@@ -10,9 +9,12 @@
     $user_order = mysqli_query($conn, "SELECT * FROM user WHERE ID='{$_COOKIE['userId']}'")->fetch_assoc();
     if ($_COOKIE['role'] == $admin ) {
         //SELECT DISTINCT(case_list.contractor),B.* FROM case_list RIGHT JOIN case_list AS B ON B.contractor = case_list.contractor 
-        $case_contractor = mysqli_query($conn, "SELECT DISTINCT(contractor_list.name) FROM case_list INNER JOIN contractor_list ON case_list.ID = contractor_list.case_id ");
+        $sql_case_name = mysqli_query($conn, "SELECT `order_name`,`order_id`,`ID` FROM case_list");
+        // $case_contractor = mysqli_query($conn, "SELECT DISTINCT(contractor_list.name) FROM case_list INNER JOIN contractor_list ON case_list.ID = contractor_list.case_id ");
+        $case_contractor = mysqli_query($conn, "SELECT * FROM contractor_list");
     } else {
-        $case_contractor = mysqli_query($conn, "SELECT DISTINCT(contractor_list.name) FROM case_list INNER JOIN contractor_list ON case_list.ID = contractor_list.case_id WHERE order_id='{$user_order['order_id']}' ");
+        $sql_case_name = mysqli_query($conn, "SELECT `order_name`,`order_id`,`ID` FROM case_list WHERE order_id='{$user_order['order_id']}'");
+        $case_contractor = mysqli_query($conn, "SELECT DISTINCT(contractor_list.name), contractor_list.* FROM case_list INNER JOIN contractor_list ON case_list.ID = contractor_list.case_id WHERE order_id='{$user_order['order_id']}' ");
     }
 ?>
     <a href="?page=<?=($d['fine']!=='1'?'safty_overview':'safty')?>">上一頁</a>
@@ -31,30 +33,40 @@
                             while ($data = $sql_case_name->fetch_assoc()) {
                                 if ($data['order_name']==$d['missing_place']) $caseId = $data['order_id'];
                                 ?>
-                                <option data-id="<?=$data['order_id']?>" <?=($data['order_name']==$d['missing_place']?"selected":"")?>><?=$data['order_name']?></option>
+                                <option case-id="<?=$data['ID']?>" data-id="<?=$data['order_id']?>" <?=($data['order_name']==$d['missing_place']?"selected":"")?>><?=$data['order_name']?></option>
                                 <?php
                             }
                         ?>
                     </select><br>
                     工程編號：<input name="case_id" style="border:none; background-color: transparent;" id="case_id" readonly value="<?=$caseId/*.'-'.*/?>" />
                     <br>
+                    <select id="pre_select_company" style="display: none;">
+                    <?php 
+                        while($data = $case_contractor->fetch_assoc()) {
+                            ?>
+                            <option data-case-id="<?=$data['case_id']?>" <?=($data['name']==$d['missing_company']?"selected":"")?>><?=$data['name']?></option>
+                            <?php
+                        }
+                    ?>
+                    </select>
                     缺失廠商：<select name="missing_company" required>
-
-                        <?php 
-                            while($data = $case_contractor->fetch_assoc()) {
-                                print_r($data)
-                                ?>
-                                <option <?=($data['name']==$d['missing_company']?"selected":"")?>><?=$data['name']?></option>
-                                <?php
-                            }
-                        ?>
                     </select>
 
                     <script>
+                        function showNowOption() {
+                            $('select[name=missing_company]').html('')
+                            $('#pre_select_company > option').each((index, element) => {
+                                if ($(element).attr('data-case-id') === $('select[name=missing_place] > option:selected').attr('case-id')) {
+                                    $(element).clone().appendTo('select[name=missing_company]')
+                                }
+                            })
+                        }
+                        showNowOption()
                         $('select[name=missing_place]').bind('change', function() {
                             if ($(this).find(':selected').attr('data-id'))
                                 // <?=$_GET['id']?$_GET['id']:($id+1)?>-
                                 $('#case_id').val(`${$(this).find(':selected').attr('data-id')}`)
+                                showNowOption()
                         })
                     </script><br>
                 </td>
