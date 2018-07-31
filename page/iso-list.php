@@ -4,18 +4,18 @@
     $filter = strlen($_GET['filter']) > 0 ? " AND status='{$_GET['filter']}'" : "";
     if ($_COOKIE['role'] ==$admin) {
         $filter = (strlen($_GET['filter']) > 0 ? "WHERE status='{$_GET['filter']}'" : "");
-        $sql_string = "SELECT * FROM iso_list {$filter} ORDER BY update_date DESC, ID DESC";
+        $sql_string = "SELECT * FROM iso_list {$filter} INNER JOIN case_list ON iso_list.project_name = case_list.order_id ORDER BY update_date DESC, iso_list.ID DESC";
         $sql_str2 = "SELECT * FROM iso_list ORDER BY ID DESC";
     } else if ($_COOKIE['role'] == 1) {
         $my_order_id = mysqli_query($conn, "SELECT order_id FROM user WHERE ID='{$_COOKIE['userId']}'")->fetch_assoc();
         // echo $my_order_id['order_id'];
-        $sql_string = "SELECT * FROM iso_list WHERE project_name='{$my_order_id['order_id']}' {$filter} ORDER BY update_date DESC, ID DESC";
+        $sql_string = "SELECT * FROM iso_list WHERE project_name='{$my_order_id['order_id']}' {$filter} INNER JOIN case_list ON iso_list.project_name = case_list.order_id ORDER BY update_date DESC, iso_list.ID DESC";
         $sql_str2 = "SELECT * FROM iso_list WHERE project_name='{$my_order_id['order_id']}' ORDER BY ID DESC";
     } else {
         $sql_string = "SELECT * FROM iso_list WHERE user='{$_COOKIE['userId']}' {$filter} ORDER BY update_date DESC, ID DESC";
         $sql_str2 = "SELECT * FROM iso_list WHERE user='{$_COOKIE['userId']}' ORDER BY ID DESC";
     }
-    $sql = mysqli_query($conn, $sql_string);
+    $sql = mysqli_query($conn, $sql_string) or die(mysqli_error($conn));
     $sql2 = mysqli_query($conn, $sql_str2);
     $tot = 0;
     $che = 0;
@@ -66,7 +66,7 @@
                                 while($data = $sql->fetch_assoc()) {
                                     ?>
                                     <tr>
-                                        <td><?=$data['project_name']?>/<?=$data['order_id']?></td>
+                                        <td><?=$data['order_name']?>/<?=$data['order_id']?></td>
                                         <td><?php
                                             if ($data['status'] == 0)
                                                 echo '<span style="color:red">未完成</span>';
