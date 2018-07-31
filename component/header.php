@@ -37,6 +37,12 @@
   </head>
 <body>
 
+  <?php
+    require_once './model/sql.php';
+    $sql = mysqli_query($conn, "SELECT * FROM user WHERE ID='{$_COOKIE['userId']}'");
+    $data = $sql->fetch_assoc();
+?>
+
 <header>
     <!-- Fixed navbar -->
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -53,13 +59,89 @@
 
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-nav-c">
-            <li class="dropdown"><a href="index.php">應用雛形系統</a>
+            <li class="dropdown"><a href="index.php">應用雛型系統</a>
               <a href="javascript:;" id="app_menudown" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-menu-down btn-xs"></span></a>
                 <ul class="dropdown-menu nav_small" role="menu">
-                  <li><a href="?page=iso_list">ISO工務表單</a></li>
-                  <li><a href="?page=safty">安衛查驗表</a></li>
-                  <li><a href="?page=quality">品質改善表</a></li>
-                  <li><a href="?page=case">工程資料</a></li>
+                  <li>            
+                    <?php
+                      $role = $_COOKIE['role'];
+                      if ( $role == 1) {
+                          ?>
+                          <p style="color:black;font-size: 20px" ><?=$data['name']?> 施工所主管， 您好</p>
+                          <?php 
+                      }?>
+
+                      <?php
+                      $role = $_COOKIE['role'];
+                      if ( $role == 2) {
+                          ?>
+                          <p style="color:black;font-size: 20px" ><?=$data['name']?> 品質稽核， 您好</p>
+                          <?php
+                      }?>
+
+                      <?php
+                      $role = $_COOKIE['role'];
+                      if ( $role == 3) {
+                          ?>
+                          <p style="color:black;font-size: 20px" ><?=$data['name']?> 現場工程師， 您好</p>
+                          <?php
+                      }?>
+
+                      <?php
+                      $role = $_COOKIE['role'];
+                      $admin = $role == 4;
+                      if ( $role == 4) {
+                          ?>
+                          <p style="color:black;font-size: 20px" ><?=$data['name']?> 經理/公司主管， 您好</p>
+                          <?php
+                      }?>
+
+                      <?php
+                      $role = $_COOKIE['role'];
+                      if ( $role == 5) {
+                          ?>
+                          <p style="color:black;font-size: 20px" ><?=$data['name']?> 安衛稽核， 您好</p>
+                          <?php
+                      }?>         
+                  </li>
+
+                  <br>
+
+                  <?php
+                    $role = $_COOKIE['role'];
+                    if ( $role == 1 || $role == 3 || $admin) {
+                        ?>
+                      <li><a href="?page=iso_list">ISO工務表單</a></li>
+                        <?php
+                      }?>
+
+                   <?php
+                    $role = $_COOKIE['role'];
+                    if ( $role == 1 || $role == 3 || $role == 5 || $admin) {
+                        ?>
+                        <li><a href="?page=safty">安衛查驗表</a></li>
+                        <?php
+                      }?> 
+
+                   <?php
+                    $role = $_COOKIE['role'];
+                    if ($role == 1 || $role == 3|| $role == 2 || $admin) {
+                        ?>
+                        <li><a href="?page=quality">品質改善表</a></li>
+                        <?php
+                      }?> 
+
+                   <?php
+                    $role = $_COOKIE['role']; 
+                    $admin = $role == 4;
+                    if ($admin) {
+                        ?>
+                        <li><a href="?page=case">工程資料</a></li>
+                        <?php
+                      }?>
+
+                        <li><a href="?page=user" >個人資料管理</a></li>
+
                 </ul>
             </li>      
           </ul>

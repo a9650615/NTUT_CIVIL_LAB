@@ -66,30 +66,35 @@
                     <td>
                         施工現況<!--插入圖片-->
                         <div style="position:relative;">
-                            <img onerror="this.style='display:none'" src="upload_space/<?=$data['order_id']?>_create.png" style="max-width:100%; position:absolute;width:100%; height:100%;" />
-                            <img onerror="this.style='display:none'" src="upload_space/<?=$data['now_image']?>" style="max-width:100%;" />
+                            <img onerror="this.style='display:none'" src="upload_space/<?=$data['order_id']?>_create.png" style="max-width:50%; position:absolute;width:50%; height:60%;" />
+                            <img onerror="this.style='display:none'" src="upload_space/<?=$data['now_image']?>" style="max-width:50%;" />
                         </div>
 
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                     <?php
                         if ($_COOKIE['role'] == 1 || $_COOKIE['role'] == 3) {
                             ?>
                             修正狀況:
                             <div style="position:relative;">
-                                <canvas id="drawing" style="position:absolute; left: 0; height: 0; width:100%; height:100%;z-index:5;"></canvas>
-                                <img onerror="this.style='display:none'" id="update_img" src="upload_space/<?=$data['order_id']?>_update.png?a=<?=rand()?>" style="max-width:100%; position:absolute;width:100%; height:100%;" />
+                                <canvas id="drawing" style="position:absolute; left: 0; height: 0; width:70%; height:40%;z-index:5;"></canvas>
+                                <img onerror="this.style='display:none'" id="update_img" src="upload_space/<?=$data['order_id']?>_update.png?a=<?=rand()?>" style="max-width:70%; position:absolute;width:70%; height:40%;" />
                                 <?php
                                     if ($data['resolve_image']) {
                                         ?>
-                                        <img id="output" src="upload_space/<?=$data['resolve_image']?>" style="max-width:100%;" />
+                                        <img id="output" src="upload_space/<?=$data['resolve_image']?>" style="max-width:80%;" />
                                         <?php
                                     }
                                     else {
                                         ?>
-                                        <img id="output" style="max-width:100%;" />
+                                        <img id="output" style="max-width:70%;" />
                                         <?php
                                     }
                                 ?>
                             </div>
+
                             <input type="file" name="image" onchange="openFile(event)" accept="image/*" />
                             <script type="text/javascript">
                                     let canvas = document.getElementById('drawing');

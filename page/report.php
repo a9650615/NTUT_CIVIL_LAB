@@ -36,7 +36,7 @@
         </select>
         <input type="submit" value="篩選" />
     </form>
-    共 <?=$row_count?> 筆資料 ( <a href="?page=quality_finish">合格/改善效率</a> )
+    共 <?=$row_count?> 筆資料 ( <a href="?page=quality_finish">合格/改善效率</a> || <a href="?page=quality_statistics">品質月/季/年統計</a> )
 </div>
 <table class="table" style="margin:auto;width: 100%;">
 <thead>
@@ -95,6 +95,7 @@
                             <?
                         }
                     ?>
+                <a href="?page=quality_view&id=<?=$data['ID']?>">閱覽</a>
                 </td>
             </tr>
             <?php

@@ -149,7 +149,7 @@
                                 }
                             ?>
                             <?php
-                                if (($data['status'] == 0 || $data['status'] == 2 || $data['status']==3)&&($_COOKIE['role']==3 || $_COOKIE['role']==$admin)) {
+                                if (($data['status'] == 0 || $data['status'] == 2 )&&($_COOKIE['role']==3 || $_COOKIE['role']==$admin)) {
                                     ?>
                                     <a href="?page=update_safty&id=<?=$data['ID']?>">回覆</a>
                                     <?php

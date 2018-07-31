@@ -77,15 +77,15 @@
                         <tr>
                             <td>施工現況<!--插入圖片-->
                                 <div style="position:relative;">
-                                    <canvas id="drawing" style="position:absolute; left: 0; height: 0; width:100%; height:100%;"></canvas>
+                                    <canvas id="drawing" style="position:absolute; left: 0; height: 0; width:70%; height:80%;"></canvas>
                                     <?php
                                         if ($data['now_image']) {
                                             ?>
-                                            <img id="output" required width="100%" src="upload_space/<?=$data['now_image']?>" />
+                                            <img id="output" required width="70%" src="upload_space/<?=$data['now_image']?>" />
                                             <?php
                                         } else {
                                             ?>
-                                            <img id="output" required width="100%" style="display:none" />
+                                            <img id="output" required width="70%" style="display:none" />
                                             <?php
                                         }
                                     ?>

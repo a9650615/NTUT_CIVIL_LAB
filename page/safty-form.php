@@ -7,7 +7,7 @@
     $d = $data_sql->fetch_assoc();
     $id = $next_id['max(ID)'];
     $user_order = mysqli_query($conn, "SELECT * FROM user WHERE ID='{$_COOKIE['userId']}'")->fetch_assoc();
-    if ($_COOKIE['role'] == $admin ) {
+    if ($_COOKIE['role'] == 5 || $_COOKIE['role'] == 4 ) {
         //SELECT DISTINCT(case_list.contractor),B.* FROM case_list RIGHT JOIN case_list AS B ON B.contractor = case_list.contractor 
         $sql_case_name = mysqli_query($conn, "SELECT `order_name`,`order_id`,`ID` FROM case_list");
         // $case_contractor = mysqli_query($conn, "SELECT DISTINCT(contractor_list.name) FROM case_list INNER JOIN contractor_list ON case_list.ID = contractor_list.case_id ");
@@ -111,17 +111,17 @@
                         if (!$_GET['id']) {
                             ?>
                             <div style="position:relative;">
-                                <canvas id="drawing" style="position:absolute; left: 0; height: 0; width:100%; height:100%;z-index:5;"></canvas>
-                                <img onerror="this.style='display:none'" id="update_img" src="upload_space/<?=$data['order_id']?>_update.png?a=<?=rand()?>" style="max-width:100%; position:absolute;width:100%; height:100%;" />
+                                <canvas id="drawing" style="position:absolute; left: 0; height: 0; width:70%; height:70%;z-index:5;"></canvas>
+                                <img onerror="this.style='display:none'" id="update_img" src="upload_space/<?=$data['order_id']?>_update.png?a=<?=rand()?>" style="max-width:70%; position:absolute;width:70%; height:70%;" />
                                 <?php
                                     if ($d['image']) {
                                         ?>
-                                        <img id="output" src="upload_space/<?=$d['image']?>" style="max-width:100%;" />
+                                        <img id="output" src="upload_space/<?=$d['image']?>" style="max-width:70%;" />
                                         <?php
                                     }
                                     else {
                                         ?>
-                                        <img id="output" style="max-width:100%;" />
+                                        <img id="output" style="max-width:70%;" />
                                         <?php
                                     }
                                 ?>

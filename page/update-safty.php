@@ -13,7 +13,7 @@
     if ($data) {
         ?>
 
-<a href="?page=safty"><span >上一頁</span></a>
+<a href="?page=<?=($d['fine']!=='1'?'safty_overview':'safty')?>"><span >上一頁</span></a>
 <p align="center" style="font-size: 35px;">回覆安全衛生表單</p> 
 <br>           
         <form action="/model/safty.php?action=update&id=<?=$_GET['id']?>" method="post" enctype="multipart/form-data">
@@ -38,16 +38,16 @@
                         <td>
                             現況照片:
                             <div style="position:relative;">
-                                <img onerror="this.style='display:none'"  src="upload_space/safty_<?=$_GET['id']?>_create.png?a=<?=rand()?>" style=" position:absolute;width:100%; height:100%;" />
+                                <img onerror="this.style='display:none'"  src="upload_space/safty_<?=$_GET['id']?>_create.png?a=<?=rand()?>" style=" position:absolute;width:50%; height:50%;" />
                                 <?php
                                     if ($data['image']) {
                                         ?>
-                                        <img src="upload_space/<?=$data['image']?>" style="max-width:100%;" />
+                                        <img src="upload_space/<?=$data['image']?>" style="max-width:50%;" />
                                         <?php
                                     }
                                     else {
                                         ?>
-                                        <img style="max-width:100%;" />
+                                        <img style="max-width:50%;" />
                                         <?php
                                     }
                                 ?>
@@ -60,17 +60,17 @@
                         <td>
                             更新照片：
                             <div style="position:relative;">
-                                <canvas id="drawing" style="position:absolute; left: 0; height: 0; width:100%; height:100%;z-index:5;"></canvas>
-                                <img onerror="this.style='display:none'" id="update_img" src="upload_space/safty_<?=$_GET['id']?>_update.png?a=<?=rand()?>" style="max-width:100%; position:absolute;width:100%; height:100%;" />
+                                <canvas id="drawing" style="position:absolute; left: 0; height: 0; width:60%; height:60%;z-index:5;"></canvas>
+                                <img onerror="this.style='display:none'" id="update_img" src="upload_space/safty_<?=$_GET['id']?>_update.png?a=<?=rand()?>" style="max-width:60%; position:absolute;width:60%; height:60%;" />
                                 <?php
                                     if ($data['resolve_image']) {
                                         ?>
-                                        <img id="output" src="upload_space/<?=$data['resolve_image']?>" style="max-width:100%;" />
+                                        <img id="output" src="upload_space/<?=$data['resolve_image']?>" style="max-width:60%;" />
                                         <?php
                                     }
                                     else {
                                         ?>
-                                        <img id="output" style="max-width:100%;" />
+                                        <img id="output" style="max-width:60%;" />
                                         <?php
                                     }
                                 ?>

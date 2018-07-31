@@ -43,10 +43,10 @@
     <table class="table ">
         <thead>
             <tr>
-                <td>時間長度</td>
+                <td>時間</td>
                 <td>總件數</td>
-                <td>完成數</td>
-                <td>過期數</td>
+                <td>完成件數</td>
+                <td>過期件數</td>
             </tr>
         </thead>
         <tbody>

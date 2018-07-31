@@ -98,60 +98,61 @@ footer{ text-align:center; background-color: #5CBFAF; color:#000; padding:30px 0
       .index_left_nav,.footer_nav{display:none; }
 
 
-table.Table {
-  font-family: "Arial Black", Gadget, sans-serif;
-  /*邊框*/
-  border: 0px solid #000000;
-  background: #E5E5E5;
-  width: 100%;
-  height: 80%;
-  text-align: center;
-  border-radius: 15px;
-  border-collapse: collapse;}
-table.Table td, table.Table th {
-  /*邊框*/
-  border: 0px solid #000000;
-  padding: 5px 5px;}
-  /*內容字大小*/
-table.Table tbody td {
-  /*font-size: 25px;}*/
-  /*次行顏色*/
-table.Table tr:nth-child(even) {
-background: #ffffff;}
-table.Table thead {
-background: #000000b8;
-border-bottom: 5px solid #444444;}
-table.Table thead th {
-  font-size: 30px;
-  font-weight: bold;
-  color: #FFFFFF;
-  text-align: center;}
-table.Table tfoot {
-  font-size: 15px;
-  width: 100%
-  font-weight: normal;
-  color: #FFFFFF;
-  background: #D0E4F5;
-  border-top: 4px solid #444444;}
-table.Table tfoot td {
-  font-size: 20px;}
-table.Table tfoot .links {
-  text-align: center
-    width: 85%;}
-table.Table tfoot .links a{
-  display: inline-block;
-  background: #116DA4;
-  color: #FFFFFF;
-  padding: 10px 10px;
-  border-radius: 5px;}
+  table.Table {
+    font-family: "Arial Black", Gadget, sans-serif;
+    /*邊框*/
+    border: 0px solid #000000;
+    background: #E5E5E5;
+    width: 100%;
+    height: 80%;
+    text-align: center;
+    border-radius: 15px;
+    border-collapse: collapse;}
+  table.Table td, table.Table th {
+    /*邊框*/
+    border: 0px solid #000000;
+    padding: 5px 5px;}
+    /*內容字大小*/
+  table.Table tbody td {
+    /*font-size: 25px;}*/
+    /*次行顏色*/
+  table.Table tr:nth-child(even) {
+  background: #ffffff;}
+  table.Table thead {
+  background: #000000b8;
+  border-bottom: 5px solid #444444;}
+  table.Table thead th {
+    font-size: 30px;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;}
+  table.Table tfoot {
+    font-size: 15px;
+    width: 100%
+    font-weight: normal;
+    color: #FFFFFF;
+    background: #D0E4F5;
+    border-top: 4px solid #444444;}
+  table.Table tfoot td {
+    font-size: 20px;}
+  table.Table tfoot .links {
+    text-align: center
+      width: 85%;}
+  table.Table tfoot .links a{
+    display: inline-block;
+    background: #116DA4;
+    color: #FFFFFF;
+    padding: 10px 10px;
+    border-radius: 5px;}
 
-.isofont{
-   font-size: 23px;} 
+  .isofont{
+     font-size: 23px;} 
 }
 
 
 /*小屏幕*/
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) 
+{
       .navbar{}
       .navbar-default .navbar-brand {color: #FBC2C2;}
       .navbar-default .navbar-brand:hover,
@@ -233,8 +234,7 @@ table.Table tfoot .links a{
       .footer_nav{background-color: #fafafa;}
       footer{ margin-bottom:50px; padding-left: 8px; padding-right: 8px;}
 
-      .isofont{
-      font-size: 13px;}
+      .isofont{font-size: 13px;}
 
 
       table.Table {
@@ -253,7 +253,7 @@ table.Table tfoot .links a{
         padding: 5px 5px;}
         /*內容字大小*/
       table.Table tbody td {
-        /*font-size: 18px;}*/
+        /*font-size: 18px;*/}
         /*次行顏色*/
       table.Table tr:nth-child(even) {
       background: #ffffff;}
@@ -283,6 +283,7 @@ table.Table tfoot .links a{
         color: #FFFFFF;
         padding: 10px 10px;
         border-radius: 5px;}
+
 }
 
 @media screen and (max-width: 767px) {
