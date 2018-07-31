@@ -13,7 +13,7 @@
     if ($data) {
         ?>
 
-<a href="?page=<?=($d['fine']!=='1'?'safty_overview':'safty')?>"><span >上一頁</span></a>
+<a href="?page=<?=($data['fine']!=='1'?'safty_overview':'safty')?>"><span >上一頁</span></a>
 <p align="center" style="font-size: 35px;">回覆安全衛生表單</p> 
 <br>           
         <form action="/model/safty.php?action=update&id=<?=$_GET['id']?>" method="post" enctype="multipart/form-data">

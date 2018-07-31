@@ -87,7 +87,8 @@ if ($_GET['action'] == 'check_status') {
     if ($_GET['data']=='success') {
         $data = 1;
     }
-    $sql = mysqli_query($conn, "UPDATE safty_list SET `status`='{$data}' WHERE ID='{$_GET['id']}'");
+    $date = date("Y-m-d");
+    $sql = mysqli_query($conn, "UPDATE safty_list SET `status`='{$data}', `valid_date`='{$date}' WHERE ID='{$_GET['id']}'");
 }
 
 if ($_GET['action']=='delete') {

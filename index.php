@@ -135,6 +135,9 @@
             else if ($_GET['page'] == 'quality') {
                 require_once './page/report.php';
             }
+            else if ($_GET['page'] == 'quality_statistics') {
+                require_once './page/quality-statistics.php';
+            }
             else if ($_GET['page'] == 'quality_finish') {
                 require_once './page/quality-finish.php';
             }

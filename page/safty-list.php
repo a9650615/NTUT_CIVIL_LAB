@@ -132,7 +132,7 @@
                             echo $status;
                         ?></td>
                         <td>
-                            <?=((strtotime($data['resolve_date']) < time()&&$data['status']!=1)?"是":"否")?>
+                            <?=(strtotime($data['resolve_date']) < strtotime($data['valid_date']))?"是":"否"?>
                         </td>
                         <td>
                             <?php 
