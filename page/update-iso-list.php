@@ -8,15 +8,25 @@
     $now_version = isset($_GET['version'])?$_GET['version']:$last['count'];
     $ls = mysqli_query($conn, "SELECT * FROM iso_list_history WHERE follow_id='{$_GET['id']}' and order_count='{$now_version}'")->fetch_assoc();
     $value_data = mysqli_query($conn, "SELECT * FROM iso_select_list WHERE order_list = '{$_GET['id']}' and history_id='{$now_version}' ORDER BY list_id");
+    $last_version = $now_version - 1;
+    $last_value_data = mysqli_query($conn, "SELECT * FROM iso_select_list WHERE order_list = '{$_GET['id']}' and history_id='{$last_version}' ORDER BY list_id");
     $select_data = [];
     $comment_data = [];
     $checked_data = [];
     $images = [];
+    $check_mode = ($_COOKIE['role'] == 1||$_COOKIE['role']==4) && $info['status'] == 1;
     while ($sel_d = $value_data->fetch_assoc()) {
-        $checked_data[$sel_d['list_id']] = $sel_d['is_checked'];
         $select_data[$sel_d['list_id']] = $sel_d['value'];
         $comment_data[$sel_d['list_id']] = $sel_d['comment'];
         $images[$sel_d['list_id']] = explode(',',  $sel_d['image'], -1);
+        if (!$check_mode) {
+            $checked_data[$sel_d['list_id']] = $sel_d['is_checked'];
+        }
+    }
+    while ($sel_d = $last_value_data->fetch_assoc()) {
+        if ($check_mode) {
+            $checked_data[$sel_d['list_id']] = $sel_d['is_checked'];
+        }
     }
 ?>
 <div class="container  ">
@@ -215,7 +225,7 @@
                     <input type="submit" value="送出" >
                     <?php
                 }
-                if (($_COOKIE['role'] == 1||$_COOKIE['role']==4) && $info['status'] == 1) {
+                if ($check_mode) {
                     ?>
                     <div>
                         <br>
