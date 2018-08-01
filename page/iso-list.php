@@ -9,11 +9,12 @@
     } else if ($_COOKIE['role'] == 1) {
         $my_order_id = mysqli_query($conn, "SELECT order_id FROM user WHERE ID='{$_COOKIE['userId']}'")->fetch_assoc();
         // echo $my_order_id['order_id'];
-        $sql_string = "SELECT *, iso_list.ID FROM iso_list WHERE project_name='{$my_order_id['order_id']}' {$filter} INNER JOIN case_list ON iso_list.project_name = case_list.order_id ORDER BY update_date DESC, iso_list.ID DESC";
+        $sql_string = "SELECT *, iso_list.ID FROM iso_list INNER JOIN case_list ON iso_list.project_name = case_list.order_id WHERE project_name='{$my_order_id['order_id']}' {$filter} ORDER BY update_date DESC, iso_list.ID DESC";
         $sql_str2 = "SELECT * FROM iso_list WHERE project_name='{$my_order_id['order_id']}' ORDER BY ID DESC";
     } else {
-        $sql_string = "SELECT *, iso_list.ID FROM iso_list INNER JOIN case_list ON iso_list.project_name = case_list.order_id WHERE user='{$_COOKIE['userId']}' {$filter} ORDER BY update_date DESC, iso_list.ID DESC";
-        $sql_str2 = "SELECT * FROM iso_list WHERE user='{$_COOKIE['userId']}' ORDER BY ID DESC";
+        $my_order_id = mysqli_query($conn, "SELECT order_id FROM user WHERE ID='{$_COOKIE['userId']}'")->fetch_assoc();
+        $sql_string = "SELECT *, iso_list.ID FROM iso_list INNER JOIN case_list ON iso_list.project_name = case_list.order_id WHERE project_name='{$my_order_id['order_id']}' AND user='{$_COOKIE['userId']}' {$filter} ORDER BY update_date DESC, iso_list.ID DESC";
+        $sql_str2 = "SELECT * FROM iso_list WHERE project_name='{$my_order_id['order_id']}' AND user='{$_COOKIE['userId']}' ORDER BY ID DESC";
     }
     $sql = mysqli_query($conn, $sql_string) or die(mysqli_error($conn));
     $sql2 = mysqli_query($conn, $sql_str2);
