@@ -22,9 +22,10 @@
                         <td>
                             工程名稱: <?=$data['missing_place']?><br>
                             缺失廠商: <?=$data['missing_company']?><br>
-                            查驗位置:<?=$data['check_place']?><br>
+                            查驗位置: <?=$data['check_place']?><br>
                             罰款項目:                         
-                            <?require_once './model/fine_list.php';
+                            <?php 
+                                require_once './model/fine_list.php';
                                 $fine = array();
                                 foreach ($FINE_LIST as $key => $val) {
                                     if ($data['fine'] == $key) {

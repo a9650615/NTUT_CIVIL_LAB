@@ -176,11 +176,11 @@
                             ?>
                         <div style="margin: 15px 0;" class="alert alert-secondary" role="alert">
                             <?php
-                                if ($d['status']==0) {
+                                if ($d['status']==0 || $d['status']==3) {
                                     ?>
                                     是否付款
                                     <a href="/model/safty.php?action=check_has_pay&data=1&id=<?=$_GET['id']?>" class="btn btn-primary">已付款</a>
-                                    <a href="/model/safty.php?action=check_has_pay&adata=0&id=<?=$_GET['id']?>" class="btn btn-danger">仍未付款</a>
+                                    <a href="/model/safty.php?action=check_has_pay&data=0&id=<?=$_GET['id']?>" class="btn btn-danger">仍未付款</a>
                                     <?php
                                 }
                             ?>

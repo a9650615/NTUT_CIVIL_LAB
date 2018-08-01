@@ -99,6 +99,8 @@ if ($_GET['action'] == 'check_has_pay') {
     $status = '';
     if ($_GET['data'] == '1') {
         $status = ", `status`='1'";
+    } else {
+        $status = ", `status`='0'";
     }
     $sql = mysqli_query($conn, "UPDATE safty_list SET `has_pay`='{$_GET['data']}'{$status} WHERE ID='{$_GET['id']}'");
     $page='safty_overview';

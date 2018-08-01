@@ -97,7 +97,17 @@
                         ?>
                         </td>
                         <td><?=$fine['price']*$data['fine_people']?></td>
-                        <td><?=$data['has_pay']?'已付款':"<span style='color: red;'>未付款"?></td>
+                        <td><?php
+                            if ($data['has_pay']) {
+                                echo '已付款';
+                            } else {
+                                if ($data['status'] == 3 && $data['resolve_image'] != '') {
+                                    echo "審核中";
+                                } else {
+                                    echo "<span style='color: red;'>未付款</span>";
+                                }
+                            }
+                        ?></td>
                         <td><?=$data['create_date']?></td>
                         <td>
                             <?php 
@@ -116,7 +126,7 @@
                             <?php
                                 if ($data['resolve_image'] != "" && ($data['status'] == 3 || $data['status'] == 2) && $_COOKIE['role'] == 5)
                                     echo "<span style='color:red;'>*</span><a href='?page=check_safty&id={$data['ID']}'>檢查</a>";
-                                if (($data['status'] == 0 || $data['status'] == 2 || $data['status']==3)&&$_COOKIE['role']==3) {
+                                if (($data['status'] == 0 || $data['status'] == 2)&&$_COOKIE['role']==3) {
                                     ?>
                                     <a href="?page=update_safty&id=<?=$data['ID']?>">回覆</a>
                                     <?php
