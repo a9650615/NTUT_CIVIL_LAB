@@ -72,8 +72,8 @@
                         <script>
                         function showNowOption() {
                             $('select[name=contractor]').html('')
+                            let case_id = <?=($_COOKIE['role'] != $admin)?$one_case['ID']:'null'?> || $('select[name=project_name] > option:selected').attr('data-case-id');
                             $('#pre_select_company > option').each((index, element) => {
-                                let case_id = $('select[name=project_name] > option:selected').attr('data-case-id') || '<?=$one_case['ID']?>';
                                 console.log(case_id, $(element).attr('data-case-id'))
                                 if ($(element).attr('data-case-id') == case_id) {
                                     $(element).clone().appendTo('select[name=contractor]')

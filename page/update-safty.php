@@ -60,7 +60,7 @@
                         <td>
                             更新照片：
                             <div style="position:relative;">
-                                <canvas id="drawing" style="position:absolute; left: 0; height: 0; width:60%; height:60%;z-index:5;"></canvas>
+                                <canvas id="drawing" style="position:absolute; left: 0; height: 0; z-index:5;"></canvas>
                                 <img onerror="this.style='display:none'" id="update_img" src="upload_space/safty_<?=$_GET['id']?>_update.png?a=<?=rand()?>" style="max-width:60%; position:absolute;width:60%; height:60%;" />
                                 <?php
                                     if ($data['resolve_image']) {
@@ -115,11 +115,15 @@
                     }
                 $('#output').load(() => {
                     canvas.width = $('#output').width()
+                    canvas.style.width = $('#output').width()+'px'
+                    canvas.style.height = document.getElementById('output').clientHeight+'px';
                     canvas.height = document.getElementById('output').clientHeight;
                 })
                 $(document).ready(() => {
                     canvas.width = $('#output').width()
                     canvas.height = document.getElementById('output').clientHeight;
+                    canvas.style.width = $('#output').width()+'px'
+                    canvas.style.height = document.getElementById('output').clientHeight+'px';
                 })
                 // Set up mouse events for drawing
                 let drawing = false;
