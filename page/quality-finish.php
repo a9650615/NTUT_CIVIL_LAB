@@ -35,7 +35,7 @@
                         if ($dd['status'] == 1) {
                             $resolve ++;
                         }
-                        if (strtotime($dd['resolve_date']) < time() && $dd['status'] != 1) {
+                        if (strtotime($dd['resolve_date']) < time()) {
                             $out_date ++;
                         }
                         $total ++;
@@ -43,7 +43,7 @@
                     ?>
                     <tr>
                         <td><a href="?page=quailty_detail&no=<?=$data['No']?>"><?=$case_data['order_name']?></a></td>
-                        <td><?=intval((($row_count - $no_pass)/$row_count)*100)?>%/<?=max(0,intval((($row_count - $no_pass - $out_date)/$row_count)*100))?>%</td>
+                        <td><?=intval((($total - $no_pass)/$total)*100)?>%/<?=max(0,intval((($total - $no_pass - $out_date)/$total)*100))?>%</td>
                         <td><?=$resolve?></td>
                         <td><?="{$no_pass}/{$out_date}"?></td>
                         <td><?="{$out_date}"?></td>
