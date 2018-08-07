@@ -22,6 +22,7 @@
     $row_count = mysqli_num_rows($sql);
     $no_pass = 0;
     $out_date = 0;
+    $all_years = mysqli_query($conn, "SELECT DISTINCT year(check_date) as `year` FROM quality_list");
 ?>
     <a href="?">上一頁</a>
 <p align="center" style="font-size: 35px;">品質改善表單總覽</p>
@@ -35,6 +36,26 @@
         <form method="get" actions="?">
             <input type="hidden" value="quality" name="page" />
             篩選 : 
+            <select>
+                <option value="">年</option>
+                <?php
+                    while($years = $all_years -> fetch_assoc()) {
+                        ?>
+                        <option value="<?=$years['year']?>" ><?=$years['year']?>年</option>
+                        <?php
+                    }
+                ?>
+            </select>
+            <select>
+                <option value="">月</option>
+                <?php
+                    for($month = 1; $month <= 12; $month ++) {
+                        ?>
+                        <option value=<?=$month?>><?=$month?>月</option>
+                        <?php
+                    }
+                ?>
+            </select>
             <select name="filter">
                 <option value="">全部</option>
                 <option value="0" <?=$_GET['filter']=='0'?"selected":""?>>未改善</option>

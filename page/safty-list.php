@@ -37,6 +37,7 @@
     $sql_string = $sql_string . $case_limit . " ORDER BY update_at DESC, ID DESC";
     $sql = mysqli_query($conn, $sql_string);
     $case_sql = mysqli_query($conn, "SELECT * FROM case_list");
+    $all_years = mysqli_query($conn, "SELECT DISTINCT year(create_date) as `year` FROM safty_list");
 ?>
 <a href="/">上一頁</a>
 <p align="center" style="font-size: 35px;">安衛缺失改善總覽</p>
@@ -59,6 +60,26 @@
         <br>
         <input type="hidden" value="<?=$_GET['page']?>" name="page" />
         篩選 : 
+        <select>
+            <option value="">年</option>
+            <?php
+                while($years = $all_years -> fetch_assoc()) {
+                    ?>
+                    <option value="<?=$years['year']?>" ><?=$years['year']?>年</option>
+                    <?php
+                }
+            ?>
+        </select>
+        <select>
+            <option value="">月</option>
+            <?php
+                for($month = 1; $month <= 12; $month ++) {
+                    ?>
+                    <option value=<?=$month?>><?=$month?>月</option>
+                    <?php
+                }
+            ?>
+        </select>
         <select name="filter">
             <option value="">全部</option>
             <option value="0" <?=$_GET['filter']=='0'?"selected":""?>>未改善</option>
