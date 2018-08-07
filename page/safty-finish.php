@@ -27,6 +27,7 @@
                     $no_pass = 0;
                     $out_date = 0;
                     $finish = 0;
+                    $total = 0;
                     while ($dd = $inner_sql -> fetch_assoc()) {
                         if ($dd['status'] != 1) {
                             $no_pass ++;
@@ -34,16 +35,36 @@
                         if ($dd['status'] == 1) {
                             $finish ++;
                         }
-                        if (strtotime($dd['resolve_date']) < time() && $dd['status'] != 1) {
+                        if (strtotime($dd['resolve_date']) < time()) {
                             $out_date ++;
                         }
+                        // if ($dd['status'] != 1) {
+                        //     $no_pass ++;
+                        // }
+                        $total ++;
+                    }
+
+                    while ($dd = $other_sql -> fetch_assoc()) {
+                        if ($dd['status'] != 1) {
+                            $no_pass ++;
+                        }
+                        if ($dd['status'] == 1) {
+                            $finish ++;
+                        }
+                        if (strtotime($dd['resolve_date']) < time()) {
+                            $out_date ++;
+                        }
+                        // if ($dd['status'] != 1) {
+                        //     $no_pass ++;
+                        // }
+                        $total ++;
                     }
                     ?>
                     <tr>
                         <td><a href="?page=safty_detail&no=<?=$data['missing_place']?>"><?=$data['missing_place']?></a></td>
-                        <td><?=intval((($row_count - $no_pass)/$row_count)*100)?>% / 
+                        <td><?=intval((($total - $no_pass)/$total)*100)?>% / 
                             <span style="color:#f65d51;" >
-                                <?=max(0,intval((($row_count - $no_pass - $out_date)/$row_count)*100))?>%
+                                <?=max(0,intval((($total - $no_pass - $out_date)/$total)*100))?>%
                             </span></td>
                         <td><?=$finish?></td>
                         <td><?=$no_pass?></td>
