@@ -4,11 +4,13 @@
     $sql = mysqli_query($conn, "SELECT * FROM iso_list WHERE ID = '{$_GET['id']}'");
     $info = $sql->fetch_assoc();
     $quest = mysqli_query($conn, "SELECT * FROM iso_data_sheet WHERE order_id = '{$info['order_id']}' ORDER BY list_id");
-    $last = mysqli_query($conn, "SELECT max(order_count) as count FROM iso_list_history WHERE follow_id='{$_GET['id']}'")->fetch_assoc();
-    $now_version = isset($_GET['version'])?$_GET['version']:$last['count'];
+    $last = mysqli_query($conn, "SELECT max(order_count) as count FROM iso_list_history WHERE follow_id='{$_GET['id']}' AND checker!='0'")->fetch_assoc();
+    $select_last = mysqli_query($conn, "SELECT max(order_count) as count FROM iso_list_history WHERE follow_id='{$_GET['id']}'")->fetch_assoc();
+    $now_version = isset($_GET['version'])?$_GET['version']:$select_last['count'];
     $ls = mysqli_query($conn, "SELECT * FROM iso_list_history WHERE follow_id='{$_GET['id']}' and order_count='{$now_version}'")->fetch_assoc();
-    $value_data = mysqli_query($conn, "SELECT * FROM iso_select_list WHERE order_list = '{$_GET['id']}' and history_id='{$now_version}' ORDER BY list_id");
     $last_version = $now_version - 1;
+    $check_data = mysqli_query($conn, "SELECT * FROM iso_select_list WHERE order_list = '{$_GET['id']}' and history_id='{$last['count']}' ORDER BY list_id");
+    $value_data = mysqli_query($conn, "SELECT * FROM iso_select_list WHERE order_list = '{$_GET['id']}' and history_id='{$now_version}' ORDER BY list_id");
     $last_value_data = mysqli_query($conn, "SELECT * FROM iso_select_list WHERE order_list = '{$_GET['id']}' and history_id='{$last_version}' ORDER BY list_id");
     $select_data = [];
     $comment_data = [];
@@ -16,14 +18,24 @@
     $images = [];
     $check_mode = ($_COOKIE['role'] == 1||$_COOKIE['role']==4) && $info['status'] == 1;
     while ($sel_d = $value_data->fetch_assoc()) {
+        $che_data = $check_data->fetch_assoc();
         $select_data[$sel_d['list_id']] = $sel_d['value'];
         $comment_data[$sel_d['list_id']] = $sel_d['comment'];
         $images[$sel_d['list_id']] = explode(',',  $sel_d['image'], -1);
         if (!$check_mode) {
-            $checked_data[$sel_d['list_id']] = $sel_d['is_checked'];
+            if ($_GET['page'] == 'view_iso') {
+                $checked_data[$che_data['list_id']] = $sel_d['is_checked'];
+            } else {
+                $checked_data[$che_data['list_id']] = $che_data['is_checked'];
+            }
         }
     }
     while ($sel_d = $last_value_data->fetch_assoc()) {
+        if (!is_numeric($select_data[$che_data['list_id']])) {
+            $select_data[$che_data['list_id']] = $che_data['value'];
+            $comment_data[$che_data['list_id']] = $che_data['comment'];
+            $images[$che_data['list_id']] = explode(',',  $che_data['image'], -1);
+        }
         if ($check_mode) {
             $checked_data[$sel_d['list_id']] = $sel_d['is_checked'];
         }
@@ -41,7 +53,7 @@
             // }
             if ($now_version > 0) {
                 ?>
-                <a href="?page=<?="{$_GET['page']}&id={$_GET['id']}&version=".($now_version-1)?>">第 <?=($now_version)?> 版</a>
+                <a href="?page=<?="{$_GET['page']}&id={$_GET['id']}&version=".($now_version-1)?>">第 <?=($now_version-1)?> 版</a>
                 <?php
             }
             if ($now_version < $last['count'] - 1) {
@@ -54,7 +66,7 @@
                 <?php
             } 
         ?>
-            <span style="float:right;">此版本為第<?if ($now_version >= 0) echo $now_version+1?>版</span>            
+            <span style="float:right;">此版本為第<?if ($now_version >= 0) echo $now_version?>版</span>            
         </div>
         <span style="float:right;">版本時間:<?=$ls['create_time']?></span>
         <?php
@@ -124,14 +136,25 @@
                             <td>
                                 <?=$data['list_id']?>
                                 <input type="checkbox" name="checked[<?=$data['list_id']?>]" 
-                                <?=($_GET['page']!=='check_iso'?'onclick="return false;"':"")?> 
+                                <?=($_GET['page']!=='check_iso'||$info['status'] == 3?'onclick="return false;"':"")?> 
                                 <?=$checked_data[$data['list_id']] == 1? "checked":""?>/>
                             </td>
                             <td class="col-mm-5 col-md-7 " style="word-wrap:break-word;"><?=$data['check_item']?></td>
                             <td class="  col-mm-5 col-md-2" >
-                                <input type="radio" value="2" name="state[<?=$data['list_id']?>]" <?=($_GET['page']=='check_iso'||$_GET['page']=='view_iso')?"disabled":""?> <?=($value=="2"&&$info['status'] !== 3)?"checked":""?>>通過<br>
-                                <input type="radio" value="1" name="state[<?=$data['list_id']?>]" <?=($_GET['page']=='check_iso'||$_GET['page']=='view_iso')?"disabled":""?> <?=(($value=="1"||$value=="-1")&&$info['status'] !== 3)?"checked":""?>>未通過<br>
-                                <input type="radio" value="0" name="state[<?=$data['list_id']?>]" <?=($_GET['page']=='check_iso'||$_GET['page']=='view_iso')?"disabled":""?> <?=($value=="0" || $info['status'] == 3)?"checked":""?>>無此項目
+                                <?php
+                                    if ($checked_data[$data['list_id']] == 1) {
+                                        ?>
+                                        <input type="radio" value="2" disabled='disabled' <?=($value=="2"&&$info['status'] !== 3)?"checked":""?>>通過<br>
+                                        <input type="radio" value="1" disabled='disabled' <?=(($value=="1"||$value=="-1")&&$info['status'] !== 3)?"checked":""?>>未通過<br>
+                                        <input type="radio" value="0" disabled='disabled' <?=($value=="0" || ($info['status'] == 3 && $value== "-1"))?"checked":""?>>無此項目
+                                        <?php
+                                    }
+                                ?>
+                                <div style="<?=($checked_data[$data['list_id']] == 1?"display: none;":"")?>">
+                                    <input type="radio" value="2" name="state[<?=$data['list_id']?>]" <?=($_GET['page']=='check_iso'||$_GET['page']=='view_iso')?"disabled":""?> <?=($value=="2"&&$info['status'] !== 3)?"checked":""?>>通過<br>
+                                    <input type="radio" value="1" name="state[<?=$data['list_id']?>]" <?=($_GET['page']=='check_iso'||$_GET['page']=='view_iso')?"disabled":""?> <?=(($value=="1"||$value=="-1")&&$info['status'] !== 3)?"checked":""?>>未通過<br>
+                                    <input type="radio" value="0" name="state[<?=$data['list_id']?>]" <?=($_GET['page']=='check_iso'||$_GET['page']=='view_iso')?"disabled":""?> <?=($value=="0" || ($info['status'] == 3 && $value== "-1"))?"checked":""?>>無此項目
+                                </div>
                             </td>
                             <td class=" col-mm-2 col-md-3">
                             <?php
