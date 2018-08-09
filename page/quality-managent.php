@@ -2,21 +2,43 @@
 <?php
     include './model/sql.php';
     $sql_string = "SELECT * FROM quality_list";
+    if ((string) $_GET['filter'] != '' || (string) $_GET['name'] != '' ) {
+        $search = true;
+    }
     if ((string) $_GET['filter'] != '' && (string) $_GET['name'] == '' ) {
         $sql_string = $sql_string . " WHERE status='{$_GET['filter']}'";
         if ($_GET['name']) {
-            $sql_string = $sql_string . " name='{$_GET['name']}'";
+            $sql_string = $sql_string . " No='{$_GET['name']}'";
         }
     } else if ((string) $_GET['name'] != '' && (string) $_GET['filter'] == '') {
-        $sql_string = $sql_string . " WHERE name='{$_GET['name']}'";
+        $sql_string = $sql_string . " WHERE No='{$_GET['name']}'";
     } else if ((string) $_GET['name'] != '' && (string) $_GET['filter'] != '') {
-        $sql_string = $sql_string . " WHERE name='{$_GET['name']}' and status='{$_GET['filter']}'";
+        $sql_string = $sql_string . " WHERE No='{$_GET['name']}' and status='{$_GET['filter']}'";
     }
+
+    if ($_GET['year'] != '' || $_GET['month'] != '') {
+        $limit = [];
+        if ($_GET['year']!='') {
+            array_push($limit, "year(check_date) = '{$_GET['year']}'");
+        }
+        if ($_GET['month']!='') {
+            array_push($limit, "month(check_date) = '{$_GET['month']}'");
+        }
+        $catstring = implode(" AND ", $limit);
+        if ($search) {
+            $sql_string = $sql_string." AND ".$catstring;
+        } else {
+            $sql_string = $sql_string." WHERE ".$catstring;
+        }
+        $search = true;
+    }
+
     $resort = "";
     if ((string) $_GET['first'] != '') {
         $resort = "case when ID = {$_GET['first']} then 0 else 1 end,";
     }
     $sql_string = $sql_string . " ORDER BY {$resort} update_at DESC, ID DESC";
+    // echo $sql_string;
     $sql = mysqli_query($conn, $sql_string);
     $case_sql = mysqli_query($conn, "SELECT * FROM case_list");
     $row_count = mysqli_num_rows($sql);
@@ -36,22 +58,22 @@
         <form method="get" actions="?">
             <input type="hidden" value="quality" name="page" />
             篩選 : 
-            <select>
+            <select name="year">
                 <option value="">年</option>
                 <?php
                     while($years = $all_years -> fetch_assoc()) {
                         ?>
-                        <option value="<?=$years['year']?>" ><?=$years['year']?>年</option>
+                        <option <?=$_GET['year']==$years['year']?'selected':''?> value="<?=$years['year']?>" ><?=$years['year']?>年</option>
                         <?php
                     }
                 ?>
             </select>
-            <select>
+            <select name="month">
                 <option value="">月</option>
                 <?php
                     for($month = 1; $month <= 12; $month ++) {
                         ?>
-                        <option value=<?=$month?>><?=$month?>月</option>
+                        <option <?=$_GET['month']==$month?'selected':''?>  value=<?=$month?>><?=$month?>月</option>
                         <?php
                     }
                 ?>
@@ -67,7 +89,7 @@
                 <?php
                     while($case = $case_sql->fetch_assoc()) {
                         ?>
-                        <option <?=($_GET['name'] == $case['order_name']? "selected" : "")?>><?=$case['order_name']?></option>
+                        <option value="<?=$case['order_id']?>" <?=($_GET['name'] == $case['order_id']? "selected" : "")?>><?=$case['order_name']?></option>
                         <?php
                     }
                 ?>
