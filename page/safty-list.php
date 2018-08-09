@@ -21,6 +21,23 @@
         $sql_string = $sql_string . " WHERE case_id='{$_GET['case_id']}' and status='{$_GET['filter']}'";
     }
 
+    if ($_GET['year'] != '' || $_GET['month'] != '') {
+        $limit = [];
+        if ($_GET['year']!='') {
+            array_push($limit, "year(create_date) = '{$_GET['year']}'");
+        }
+        if ($_GET['month']!='') {
+            array_push($limit, "month(create_date) = '{$_GET['month']}'");
+        }
+        $catstring = implode(" AND ", $limit);
+        if ($search) {
+            $sql_string = $sql_string." AND ".$catstring;
+        } else {
+            $sql_string = $sql_string." WHERE ".$catstring;
+        }
+        $search = true;
+    }
+
     if ($_COOKIE['role'] == 1 || $_COOKIE['role'] == 3) { 
         $user_case = mysqli_query($conn, "SELECT order_id FROM user WHERE ID='{$_COOKIE['userId']}'")->fetch_assoc()['order_id']; 
         if ($search) {
@@ -35,6 +52,7 @@
         $case_limit = " WHERE fine='1'";
     }
     $sql_string = $sql_string . $case_limit . " ORDER BY update_at DESC, ID DESC";
+    // echo $sql_string;
     $sql = mysqli_query($conn, $sql_string);
     $case_sql = mysqli_query($conn, "SELECT * FROM case_list");
     $all_years = mysqli_query($conn, "SELECT DISTINCT year(create_date) as `year` FROM safty_list");
@@ -60,22 +78,22 @@
         <br>
         <input type="hidden" value="<?=$_GET['page']?>" name="page" />
         篩選 : 
-        <select>
+        <select name="year">
             <option value="">年</option>
             <?php
                 while($years = $all_years -> fetch_assoc()) {
                     ?>
-                    <option value="<?=$years['year']?>" ><?=$years['year']?>年</option>
+                    <option <?=$_GET['year']==$years['year']?'selected':''?> value="<?=$years['year']?>" ><?=$years['year']?>年</option>
                     <?php
                 }
             ?>
         </select>
-        <select>
+        <select name="month">
             <option value="">月</option>
             <?php
                 for($month = 1; $month <= 12; $month ++) {
                     ?>
-                    <option value=<?=$month?>><?=$month?>月</option>
+                    <option <?=$_GET['month']==$month?'selected':''?> value=<?=$month?>><?=$month?>月</option>
                     <?php
                 }
             ?>
@@ -85,6 +103,7 @@
             <option value="0" <?=$_GET['filter']=='0'?"selected":""?>>未改善</option>
             <option value="1" <?=$_GET['filter']=='1'?"selected":""?>>已改善</option>
             <option value="2" <?=$_GET['filter']=='2'?"selected":""?>>未合格</option>
+            <option value="3" <?=$_GET['filter']=='3'?"selected":""?>>審核中</option>
         </select>
         <select name="case_id">
             <option value="">全部</option>
@@ -141,12 +160,12 @@
                                     }
 
 
-                                    else if ($data['status'] == 3 && ($_COOKIE['role'] == 1|| $_COOKIE['role']==3)) {
-                                        $status = "<span style='color:red;'>審核中</span>";
-                                    }
-
+                                    
                                     else if ($data['resolve_image'] != "" && ($data['status'] == 3 ) && $_COOKIE['role'] == 5) {
                                         $status = "<span style='color:red;'>審核中*</span><a href='?page=check_safty&id={$data['ID']}'>檢查</a>";
+                                    }
+                                    else if ($data['status'] == 3) {
+                                        $status = "<span style='color:red;'>審核中</span>";
                                     }
 
                             }
