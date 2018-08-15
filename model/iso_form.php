@@ -23,7 +23,7 @@ foreach ($keys as $key) {
 if ($_GET['action'] == 'create') {
     if ($has_all_data) {
         $date = date('Y-m-d');
-        $sql = "INSERT INTO iso_list (`project_name`, `order_id`, `contractor`, `floor`, `status`, `user`) VALUES('{$_POST['project_name']}', '{$_POST['order_id']}', '{$_POST['contractor']}', '{$_POST['floor']}', '0', '{$_COOKIE['userId']}')";
+        $sql = "INSERT INTO iso_list (`project_name`, `order_id`, `form_name`, `contractor`, `floor`, `status`, `user`) VALUES('{$_POST['project_name']}', '{$_POST['order_id']}', '{$_POST['form_name']}', '{$_POST['contractor']}', '{$_POST['floor']}', '0', '{$_COOKIE['userId']}')";
         if ($data = mysqli_query($conn, $sql)) {
             $id = $conn->insert_id;
             mysqli_query($conn, "INSERT INTO iso_list_history(`list_id`, `follow_id`, `order_count`, `other`) VALUES('{$conn->insert_id}', '{$conn->insert_id}', '0', '{$_POST['other']}')");

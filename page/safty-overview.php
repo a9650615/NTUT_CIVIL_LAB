@@ -125,7 +125,7 @@
                             ?>
                             <?php
                                 if ($data['resolve_image'] != "" && ($data['status'] == 3 || $data['status'] == 2) && $_COOKIE['role'] == 5)
-                                    echo "<span style='color:red;'>*</span><a href='?page=check_safty&id={$data['ID']}'>檢查</a>";
+                                    echo "<span style='color:red;'>*</span><a href='?page=safty_form&id={$data['ID']}'>檢查</a>";
                                 if (($data['status'] == 0 || $data['status'] == 2)&&$_COOKIE['role']==3) {
                                     ?>
                                     <a href="?page=update_safty&id=<?=$data['ID']?>">回覆</a>

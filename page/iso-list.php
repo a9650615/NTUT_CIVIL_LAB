@@ -67,7 +67,7 @@
                                 while($data = $sql->fetch_assoc()) {
                                     ?>
                                     <tr>
-                                        <td><?=$data['order_name']?>/<?=$data['order_id']?></td>
+                                        <td><?=$data['order_name']?>/<?=$data['form_name']?></td>
                                         <td><?php
                                             if ($data['status'] == 0)
                                                 echo '<span style="color:red">未完成</span>';

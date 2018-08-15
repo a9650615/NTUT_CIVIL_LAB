@@ -23,6 +23,7 @@
       <div id="content-menu" class=" col-xs-12 col-mm-12 col-md-12">
     <br>
     <form method="post" action="/model/iso_form.php?action=create">
+        <input type="hidden" name="form_name" value="<?=$_GET['name']?>" />
         <table class="table" >
             <tbody>
                 <tr>
