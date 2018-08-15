@@ -6,14 +6,22 @@
         $search = true;
     }
     if ((string) $_GET['filter'] != '' && (string) $_GET['name'] == '' ) {
-        $sql_string = $sql_string . " WHERE status='{$_GET['filter']}'";
+        if ($_GET['filter'] == 'expired') {
+            $sql_string = $sql_string . " WHERE `resolve_date` < CURRENT_DATE()";
+        } else {
+            $sql_string = $sql_string . " WHERE status='{$_GET['filter']}'";
+        }
         if ($_GET['name']) {
             $sql_string = $sql_string . " No='{$_GET['name']}'";
         }
     } else if ((string) $_GET['name'] != '' && (string) $_GET['filter'] == '') {
         $sql_string = $sql_string . " WHERE No='{$_GET['name']}'";
     } else if ((string) $_GET['name'] != '' && (string) $_GET['filter'] != '') {
-        $sql_string = $sql_string . " WHERE No='{$_GET['name']}' and status='{$_GET['filter']}'";
+        if ($_GET['filter'] == 'expired') {
+            $sql_string = $sql_string . " WHERE No='{$_GET['name']}' and `resolve_date` < CURRENT_DATE()";
+        } else {
+            $sql_string = $sql_string . " WHERE No='{$_GET['name']}' and status='{$_GET['filter']}'";
+        }
     }
 
     if ($_GET['year'] != '' || $_GET['month'] != '') {
@@ -51,7 +59,13 @@
 <BR>
 <div class="col-sm-12 col-md-12 col-mm-12" id="content-menu">
 <BR>
-    <a style="font-size: 25px" href="?page=create_quality">新增品質改善表</a>
+    <?php
+        if ($_GET['role'] != 1 && $_GET['role'] != 3) {
+            ?>
+            <a style="font-size: 25px" href="?page=create_quality">新增品質改善表</a>
+            <?php
+        }
+    ?>
     <br>
 
     <div class="alert alert-info" style="width: 100%; margin: auto; margin-top: 10px;" role="alert">
@@ -83,6 +97,7 @@
                 <option value="0" <?=$_GET['filter']=='0'?"selected":""?>>未改善</option>
                 <option value="1" <?=$_GET['filter']=='1'?"selected":""?>>已改善</option>
                 <option value="2" <?=$_GET['filter']=='2'?"selected":""?>>未合格</option>
+                <option value="expired" <?=$_GET['filter']=='expired'?"selected":""?>>逾期</option>
             </select>
             <select name="name">
                 <option value="">全部</option>
@@ -163,5 +178,9 @@
             ?>
         </tbody>
     </table>
+    <div class="alert alert-info" style="width: 100%; margin: auto; margin-top: 10px;" role="alert">
+    合格率 : <?=intval((($row_count - $no_pass)/$row_count)*100)?>% | [(總件數－未合格及未改善件數)／總件數]*100%<br>
+    改善效率 : <?=max(0,intval((($row_count - $no_pass - $out_date)/$row_count)*100))?>% |  改善效率＝[(總件數－未合格及未改善件數－逾期件數)／總件數]*100%
+    </div>
 </div>
 <?php include './component/footer.php'; ?>
