@@ -56,6 +56,6 @@
     </table>
 </div>
 <br>
-    <p style="font-size: 20px" align="center">合格率＝[(總件數－未合格件數)／總件數]*100%</p><br>
-    <p style="font-size: 20px" align="center">改善效率＝[(總件數－未合格件數－逾期件數)／總件數]*100%</p><br>
+    <p style="font-size: 20px" align="center">合格率＝[(總件數－未合格及未改善件數)／總件數]*100%</p><br>
+    <p style="font-size: 20px" align="center">改善效率＝[(總件數－未合格及未改善件數－逾期件數)／總件數]*100%</p><br>
 <?php include './component/footer.php'; ?>

@@ -23,7 +23,7 @@
     <br>
 
     <form action="/model/safty.php?action=<?=($_GET['id']?"update_data&id={$_GET['id']}":"create")?>" method="post" enctype="multipart/form-data">
-        <table class="table col-sm-12 col-md-12 col-mm-12">
+        <table class="New col-sm-12 col-md-12 col-mm-12">
             <tr>
                 <td>
                     工程名稱：<select name="missing_place" required>
@@ -75,8 +75,9 @@
                 <td>
                     查驗位置：
                     <input type="text" name="check_place" required value="<?=$d['check_place']?>"/>
-                </td>
-                <td>
+                    
+                    <br>
+
 
                         查驗日期：
                         <input type="date"style="border:none; background-color: transparent;" value="<?=$d['check_date'] ?? date("Y-m-d")?>" required readonly name="check_date">
@@ -84,7 +85,7 @@
                     <br>
 
                         改善期限：
-                        <input type="date" name="resolve_date" value="<?=$d['resolve_date']?>"/>
+                        <input type="date" name="resolve_date" value="<?=$d['resolve_date']?>"/>前
 
                     <br>
                     <?php
@@ -104,60 +105,7 @@
             </tr>
             <tr>
                 <td>
-                    現況說明：
-                    <textarea style="vertical-align:text-top;" rows="2" cols="20" name="other"><?=$d['other']?></textarea>
-                    <br>
-                    <?php 
-                        if (!$_GET['id']) {
-                            ?>
-                            <div style="position:relative;">
-                                <canvas id="drawing" style="position:absolute; left: 0; height: 0; width:70%; height:70%;z-index:5;"></canvas>
-                                <img onerror="this.style='display:none'" id="update_img" src="upload_space/<?=$data['order_id']?>_update.png?a=<?=rand()?>" style="max-width:70%; position:absolute;width:70%; height:70%;" />
-                                <?php
-                                    if ($d['image']) {
-                                        ?>
-                                        <img id="output" src="upload_space/<?=$d['image']?>" style="max-width:70%;" />
-                                        <?php
-                                    }
-                                    else {
-                                        ?>
-                                        <img id="output" style="max-width:70%;" />
-                                        <?php
-                                    }
-                                ?>
-                            </div>
-                            工地現況：<input type="file" name="missing_image" onchange="openFile(event)" <?=($_GET['id'?"":"required"])?>/>
-                            <?php
-                        } else {
-                            ?>
-                            <div style="position:relative;">
-                                <img onerror="this.style='display:none'" src="upload_space/safty_<?=$_GET['id']?>_create.png?a=<?=rand()?>" style="max-width:100%; position:absolute;width:100%; height:100%;" />
-                                <img src="upload_space/<?=$d['image']?>" style="max-width:100%;" />
-                            </div>
-                            <input type="file" name="missing_image" onchange="openFile(event)" <?=($_GET['id'?"":"required"])?>/>
-                            <div style="position:relative;">
-                                <canvas id="drawing" style="position:absolute; left: 0; height: 0; width:100%; height:100%;z-index:5;"></canvas>
-                                <img onerror="this.style='display:none'" id="update_img" src="upload_space/safty_<?=$_GET['id']?>_update.png?a=<?=rand()?>" style="max-width:100%; position:absolute;width:100%; height:100%;" />
-                                <?php
-                                    if ($d['resolve_image']) {
-                                        ?>
-                                        <img id="output" src="upload_space/<?=$d['resolve_image']?>" style="max-width:100%;" />
-                                        <?php
-                                    }
-                                    else {
-                                        ?>
-                                        <img id="output" style="max-width:100%;" />
-                                        <?php
-                                    }
-                                ?>
-                            </div>
-                            <?php
-                        }
-                    ?>
-                </td>
-                <td>
                     罰款項目：
-                    <br>
                     <select name="fine" style="max-width:300px;" required>
                         <?php
                             require_once './model/fine_list.php';
@@ -229,13 +177,72 @@
                         })
                     </script>
                 </td>
+
+            </tr>
+            <tr>
+                <td>
+                    現況說明：
+                    <textarea style="vertical-align:text-top;" rows="2" cols="20" name="other"><?=$d['other']?></textarea>
+                    <br>
+                </td>
+            </tr>
+            <tr>
+                <td>                    
+                    <?php 
+                        if (!$_GET['id']) {
+                            ?>
+                            <div style="position:relative;">
+                                <canvas id="drawing" style="position:absolute; left: 0; height: 0; width:100%; height:100%;z-index:5;"></canvas>
+                                <img onerror="this.style='display:none'" id="update_img" src="upload_space/<?=$data['order_id']?>_update.png?a=<?=rand()?>" style="max-width:70%; position:absolute;width:70%; height:70%;" />
+                                <?php
+                                    if ($d['image']) {
+                                        ?>
+                                        <img id="output" src="upload_space/<?=$d['image']?>" style="max-width:70%;" />
+                                        <?php
+                                    }
+                                    else {
+                                        ?>
+                                        <img id="output" style="max-width:70%;" />
+                                        <?php
+                                    }
+                                ?>
+                            </div>
+                            工地現況：<input type="file" name="missing_image" onchange="openFile(event)" <?=($_GET['id'?"":"required"])?>/>
+                            <?php
+                        } else {
+                            ?>
+                            <div style="position:relative;">
+                                <img onerror="this.style='display:none'" src="upload_space/safty_<?=$_GET['id']?>_create.png?a=<?=rand()?>" style="max-width:100%; position:absolute;width:100%; height:100%;" />
+                                <img src="upload_space/<?=$d['image']?>" style="max-width:100%;" />
+                            </div>
+                            <input type="file" name="missing_image" onchange="openFile(event)" <?=($_GET['id'?"":"required"])?>/>
+                            <div style="position:relative;">
+                                <canvas id="drawing" style="position:absolute; left: 0; height: 0; width:100%; height:100%;z-index:5;"></canvas>
+                                <img onerror="this.style='display:none'" id="update_img" src="upload_space/safty_<?=$_GET['id']?>_update.png?a=<?=rand()?>" style="max-width:100%; position:absolute;width:100%; height:100%;" />
+                                <?php
+                                    if ($d['resolve_image']) {
+                                        ?>
+                                        <img id="output" src="upload_space/<?=$d['resolve_image']?>" style="max-width:100%;" />
+                                        <?php
+                                    }
+                                    else {
+                                        ?>
+                                        <img id="output" style="max-width:100%;" />
+                                        <?php
+                                    }
+                                ?>
+                            </div>
+                            <?php
+                        }
+                    ?>
+                </td>
             </tr>
         </table>
         <input value="送出" type="button" onclick="upload()"/>
         <input value="送出" id="sub" type="submit" style="display:none;" />
         <script>
-              let move = false;
-              let canvas = document.getElementById('drawing');
+                let move = false;
+                let canvas = document.getElementById('drawing');
                 let ctx = canvas.getContext('2d');
                     function openFile(event){
                         var input = event.target; //取得上傳檔案
@@ -248,6 +255,8 @@
                     }
                 $('#output').load(() => {
                     canvas.width = $('#output').width()
+                    canvas.style.width = $('#output').width()+'px'
+                    canvas.style.height = document.getElementById('output').clientHeight+'px';
                     canvas.height = document.getElementById('output').clientHeight;
                 })
                 $(document).ready(() => {

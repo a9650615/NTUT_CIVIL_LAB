@@ -136,7 +136,7 @@
                         <td>
                             <?php
                                 if (strtotime($data['resolve_date']) < time()) {
-                                    echo '是';
+                                    ?><span style="color:#f65d51;" >是</span><?;
                                     // if ($data['status'] != 1)
                                         $out_date ++;
                                 }

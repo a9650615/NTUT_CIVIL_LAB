@@ -141,6 +141,7 @@
                       }?>
 
                         <li><a href="?page=user" >個人資料管理</a></li>
+                        <li><a href="?page=logout" title="登出">登出</a></li>
 
                 </ul>
             </li>      

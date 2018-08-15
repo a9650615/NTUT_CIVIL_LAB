@@ -213,8 +213,8 @@
         ?>
         （<a href="?page=safty_finish">合格/改善效率</a>）(<a href="?page=safty_company">缺失廠商統計</a>) (<a href="?page=safty_overview">罰款總覽</a>)
         (<a href="?page=safty_statistics">月/季/年統計 </a>)
-        <br>合格率＝[(總件數－未合格件數)／總件數]*100%
-        <br>改善效率＝[(總件數－未合格件數－逾期件數)／總件數]*100%
+        <br>合格率＝[(總件數－未合格及未改善件數)／總件數]*100%
+        <br>改善效率＝[(總件數－未合格及未改善件數－逾期件數)／總件數]*100%
     </div>
 </div>
 <?php require_once './component/footer.php'; ?>

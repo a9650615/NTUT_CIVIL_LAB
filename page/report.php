@@ -104,8 +104,8 @@
 </tbody>
 </table>
 <div class="alert alert-info" style="width: 100%; margin: auto; margin-top: 10px;" role="alert">
-    合格率 : <?=intval((($row_count - $no_pass)/$row_count)*100)?>% | [(總件數－未合格件數)／總件數]*100%<br>
-    改善效率 : <?=max(0,intval((($row_count - $no_pass - $out_date)/$row_count)*100))?>% |  改善效率＝[(總件數－未合格件數－逾期件數)／總件數]*100%
+    合格率 : <?=intval((($row_count - $no_pass)/$row_count)*100)?>% | [(總件數－未合格及未改善件數)／總件數]*100%<br>
+    改善效率 : <?=max(0,intval((($row_count - $no_pass - $out_date)/$row_count)*100))?>% |  改善效率＝[(總件數－未合格及未改善件數－逾期件數)／總件數]*100%
 </div>
 </div>
 <?php include './component/footer.php'; ?>
