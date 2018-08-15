@@ -11,14 +11,22 @@
         $search = true;
     }
     if ((string) $_GET['filter'] != '' && (string) $_GET['case_id'] == '' ) {
-        $sql_string = $sql_string . " WHERE status='{$_GET['filter']}'";
+        if ($_GET['filter'] == 'expired') {
+            $sql_string = $sql_string . " WHERE `resolve_date` < `valid_date`";
+        } else {
+            $sql_string = $sql_string . " WHERE status='{$_GET['filter']}'";
+        }
         if ($_GET['case_id']) {
             $sql_string = $sql_string . " case_id='{$_GET['case_id']}'";
         }
     } else if ((string) $_GET['case_id'] != '' && (string) $_GET['filter'] == '') {
         $sql_string = $sql_string . " WHERE case_id='{$_GET['case_id']}'";
     } else if ((string) $_GET['case_id'] != '' && (string) $_GET['filter'] != '') {
-        $sql_string = $sql_string . " WHERE case_id='{$_GET['case_id']}' and status='{$_GET['filter']}'";
+        if ($_GET['filter'] == 'expired') {
+            $sql_string = $sql_string . " WHERE case_id='{$_GET['case_id']}' and `resolve_date` < `valid_date`";
+        } else {
+            $sql_string = $sql_string . " WHERE case_id='{$_GET['case_id']}' and status='{$_GET['filter']}'";
+        }
     }
 
     if ($_GET['year'] != '' || $_GET['month'] != '') {
@@ -104,6 +112,7 @@
             <option value="1" <?=$_GET['filter']=='1'?"selected":""?>>已改善</option>
             <option value="2" <?=$_GET['filter']=='2'?"selected":""?>>未合格</option>
             <option value="3" <?=$_GET['filter']=='3'?"selected":""?>>審核中</option>
+            <option value="expired" <?=$_GET['filter']=='expired'?"selected":""?>>逾期</option>
         </select>
         <select name="case_id">
             <option value="">全部</option>

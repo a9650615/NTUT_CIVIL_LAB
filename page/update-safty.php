@@ -32,7 +32,7 @@
                                         $fine = $val;
                                         echo $val['text'];
                                         break; }} ?>  <br>
-                            現況說明：<?=$data['other']?>                           
+                            現況說明：<?=$data['other']?>
                         </td>
                     </tr>
                     <tr>
