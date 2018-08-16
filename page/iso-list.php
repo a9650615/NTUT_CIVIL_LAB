@@ -3,8 +3,8 @@
     include './model/sql.php';
     $filter = strlen($_GET['filter']) > 0 ? " AND status='{$_GET['filter']}'" : "";
     if ($_COOKIE['role'] ==$admin) {
-        $filter = (strlen($_GET['filter']) > 0 ? "WHERE status='{$_GET['filter']}'" : "");
-        $sql_string = "SELECT *, iso_list.ID FROM iso_list {$filter} INNER JOIN case_list ON iso_list.project_name = case_list.order_id ORDER BY update_date DESC, iso_list.ID DESC";
+        $filter = (strlen($_GET['filter']) > 0 ? "WHERE iso_list.status='{$_GET['filter']}'" : "");
+        $sql_string = "SELECT *, iso_list.ID,iso_list.status,iso_list.project_name FROM iso_list INNER JOIN case_list ON iso_list.project_name = case_list.order_id {$filter} ORDER BY update_date DESC, iso_list.ID DESC";
         $sql_str2 = "SELECT * FROM iso_list ORDER BY ID DESC";
     } else if ($_COOKIE['role'] == 1) {
         $my_order_id = mysqli_query($conn, "SELECT order_id FROM user WHERE ID='{$_COOKIE['userId']}'")->fetch_assoc();
