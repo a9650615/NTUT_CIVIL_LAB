@@ -16,27 +16,35 @@
                 <td>已完成</td>
                 <td>未合格/未改善</td>
                 <td>逾期</td>
-                <td>罰款件數</td>
+                <td>總件數</td>
             </tr>
             <?php
                 while ($data = $sql->fetch_assoc()) {
                     $inner_sql = mysqli_query($conn, "SELECT * FROM safty_list {$search} WHERE fine='1' AND missing_place='{$data['missing_place']}' ORDER BY ID DESC");
-                    $other_sql = mysqli_query($conn, "SELECT * FROM safty_list {$search} WHERE fine!='1' AND missing_place='{$data['missing_place']}' ORDER BY ID DESC");
+                    // $other_sql = mysqli_query($conn, "SELECT * FROM safty_list {$search} WHERE fine!='1' AND missing_place='{$data['missing_place']}' ORDER BY ID DESC");
                     $row_count = mysqli_num_rows($inner_sql);
                     $other_count = mysqli_num_rows($other_sql);
                     $no_pass = 0;
                     $out_date = 0;
                     $finish = 0;
                     $total = 0;
+                    $no_fixed = 0;
+                    $need_pay = 0;
                     while ($dd = $inner_sql -> fetch_assoc()) {
-                        if ($dd['status'] != 1) {
-                            $no_pass ++;
-                        }
                         if ($dd['status'] == 1) {
                             $finish ++;
                         }
-                        if (strtotime($dd['resolve_date']) < time()) {
+                        else if ($dd['resolve_image'] != "" && $dd['status'] == 2) {
+                            $no_pass ++;
+                        } else {
+                            $no_fixed ++;
+                        }
+                        // if (strtotime($dd['resolve_date']) < time()) {
+                        if (strtotime($dd['check_date']) > strtotime($dd['resolve_date'])) {                            
                             $out_date ++;
+                        }
+                        if ($dd['fine'] == 1) {
+                            $need_pay ++;
                         }
                         // if ($dd['status'] != 1) {
                         //     $no_pass ++;
@@ -44,32 +52,32 @@
                         $total ++;
                     }
 
-                    while ($dd = $other_sql -> fetch_assoc()) {
-                        if ($dd['status'] != 1) {
-                            $no_pass ++;
-                        }
-                        if ($dd['status'] == 1) {
-                            $finish ++;
-                        }
-                        if (strtotime($dd['resolve_date']) < time()) {
-                            $out_date ++;
-                        }
-                        // if ($dd['status'] != 1) {
-                        //     $no_pass ++;
-                        // }
-                        $total ++;
-                    }
+                    // while ($dd = $other_sql -> fetch_assoc()) {
+                    //     if ($dd['status'] != 1) {
+                    //         $no_pass ++;
+                    //     }
+                    //     if ($dd['status'] == 1) {
+                    //         $finish ++;
+                    //     }
+                    //     if (strtotime($dd['resolve_date']) < time()) {
+                    //         $out_date ++;
+                    //     }
+                    //     // if ($dd['status'] != 1) {
+                    //     //     $no_pass ++;
+                    //     // }
+                    //     $total ++;
+                    // }
                     ?>
                     <tr>
                         <td><a href="?page=safty_detail&no=<?=$data['missing_place']?>"><?=$data['missing_place']?></a></td>
-                        <td><?=intval((($total - $no_pass)/$total)*100)?>% / 
+                        <td><?=intval((($total - $no_pass - $no_fixed)/$total)*100)?>% / 
                             <span style="color:#f65d51;" >
-                                <?=max(0,intval((($total - $no_pass - $out_date)/$total)*100))?>%
+                                <?=max(0,intval((($total - $no_pass - $out_date - $no_fixed)/$total)*100))?>%
                             </span></td>
                         <td><?=$finish?></td>
-                        <td><?=$no_pass?></td>
+                        <td><?=$no_pass?>/<?=$no_fixed?></td>
                         <td><?=$out_date?></td>
-                        <td><?=$other_count?></td>
+                        <td><?=$total?></td>
                     </tr>
                     <?php
                 }

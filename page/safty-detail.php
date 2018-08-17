@@ -1,7 +1,7 @@
 <?php include './component/header.php'; ?>
 <?php
     include './model/sql.php';
-    $sql = mysqli_query($conn, "SELECT * FROM safty_list WHERE missing_place='{$_GET['no']}' order by ID desc");
+    $sql = mysqli_query($conn, "SELECT * FROM safty_list WHERE fine='1' AND missing_place='{$_GET['no']}' order by ID desc");
     $row_count = mysqli_num_rows($sql);
     $out_date = 0;
     $no_pass = 0;
