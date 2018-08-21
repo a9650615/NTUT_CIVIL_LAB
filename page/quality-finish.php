@@ -28,12 +28,15 @@
                     $out_date = 0;
                     $resolve = 0;
                     $total = 0;
+                    $no_fixed = 0;
                     while ($dd = $inner_sql -> fetch_assoc()) {
-                        if ($dd['status'] != 1) {
+                        if ($dd['status'] == 2) {
                             $no_pass ++;
                         }
-                        if ($dd['status'] == 1) {
+                        else if ($dd['status'] == 1) {
                             $resolve ++;
+                        } else {
+                            $no_fixed ++;
                         }
                         if (strtotime($dd['resolve_date']) < time()) {
                             $out_date ++;
@@ -43,9 +46,9 @@
                     ?>
                     <tr>
                         <td><a href="?page=quailty_detail&no=<?=$data['No']?>"><?=$case_data['order_name']?></a></td>
-                        <td><?=intval((($total - $no_pass)/$total)*100)?>%/<?=max(0,intval((($total - $no_pass - $out_date)/$total)*100))?>%</td>
+                        <td><?=intval((($total - $no_pass - $no_fixed)/$total)*100)?>%/<?=max(0,intval((($total - $no_pass - $no_fixed - $out_date)/$total)*100))?>%</td>
                         <td><?=$resolve?></td>
-                        <td><?="{$no_pass}/{$out_date}"?></td>
+                        <td><?="{$no_pass}/{$no_fixed}"?></td>
                         <td><?="{$out_date}"?></td>
                         <td><?="{$total}"?></td>
                     </tr>

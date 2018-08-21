@@ -1,15 +1,16 @@
 {
-  "short_name": "www",
-  "name": "asdwdasdad",
+  "short_name": "福住建設測試雛型",
+  "name": "福住建設測試雛型",
   "icons": [
     {
-      "src":"",
-      "sizes": "",
-      "type": ""
+      "src":"icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
     }
   ],
+  "orientation": "portrait",
   "start_url": "/?",
-  "background_color": "",
-  "Theme_color": "",
+  "scope": "/",
+  "background_color": "#ffffff",
   "display": "standalone"
 }
